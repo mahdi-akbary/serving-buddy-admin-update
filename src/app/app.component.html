@@ -1,0 +1,17 @@
+<mat-drawer-container class="container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side"
+              [opened]="!isClosed"
+              (closedStart)="isClosed = true"
+              (openedStart)="isClosed = false">
+    <h2>Inside drawer</h2>
+  </mat-drawer>
+
+  <div class="sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      Toggle sidenav
+    </button>
+    <br>
+    <h1>status: {{isClosed}}</h1>
+  </div>
+
+</mat-drawer-container>
