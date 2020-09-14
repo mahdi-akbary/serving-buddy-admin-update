@@ -1,9 +1,16 @@
 <mat-drawer-container class="container" autosize>
   <mat-drawer #drawer class="sidenav" mode="side"
+              [ngClass]="{'close-state' : isClosed, 'open-state' : !isClosed}"
               [opened]="!isClosed"
               (closedStart)="isClosed = true"
               (openedStart)="isClosed = false">
-    <h2>Inside drawer</h2>
+    <div class="side-nav-title">
+      <div>
+        <span class="nps">T-T</span>
+        <span class="title">Tea Talk</span>
+        <mat-icon>menu</mat-icon>
+      </div>
+    </div>
   </mat-drawer>
 
   <div class="sidenav-content">

@@ -1,14 +1,54 @@
+@import "../styles/color-const.styl"
+@import "../styles/measure-const.styl"
 .container
-    width 100%
+  width 100%
+  height 100%
+  background-color #fff
+  .sidenav-content
+    display flex
     height 100%
-    background-color #fff
-    .sidenav-content
-        display flex
-        height 100%
-        align-items center
-        justify-content center
-    .sidenav
-        padding 20px
-        width 300px
-    ::ng-deep mat-drawer
-        visibility visible
+    align-items center
+    justify-content center
+  .sidenav
+    background-color sideNav
+    width sideNavWidth
+    transition transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1)
+    .side-nav-title
+      width: 250px;
+      height: 43px;
+      background-color: #373c47;
+      color: #fff;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 2;
+      box-shadow: -1px 1px 3px #030303;
+      padding: 0;
+      > div
+        padding-top 12px
+        .nps
+          padding: 5px 2px 4px 1.5px;
+          margin: 0 15px;
+          font-size: 10px;
+          background-color: #8bc34a;
+          border-radius: 2px;
+          font-weight: bold;
+          cursor: pointer
+        .title
+          font-size: 13px;
+          font-weight: bold;
+          display: inline;
+          margin: 0;
+        mat-icon
+          margin-top: -3px;
+          margin-right: 13px;
+          display: block;
+          float: right;
+          cursor: pointer;
+  .close-state
+    transform translate3d(-80%, 0px, 0px) !important
+    background yellow
+  .open-state
+    font-size inherit
+  ::ng-deep mat-drawer
+    visibility visible !important
