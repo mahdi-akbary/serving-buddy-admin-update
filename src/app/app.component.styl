@@ -14,37 +14,35 @@
     width sideNavWidth
     transition transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1)
     .side-nav-title
-      width: 250px;
-      height: 43px;
-      background-color: #373c47;
-      color: #fff;
-      position: fixed;
-      left: 0;
-      top: 0;
-      z-index: 2;
-      box-shadow: -1px 1px 3px #030303;
-      padding: 0;
+      position relative
+      width 250px
+      height 43px
+      background-color #373c47
+      color #fff
+      left 0
+      top 0
+      z-index 2
+      box-shadow -1px 1px 3px #030303
+      padding 0
       > div
         padding-top 12px
         .nps
-          padding: 5px 2px 4px 1.5px;
-          margin: 0 15px;
-          font-size: 10px;
-          background-color: #8bc34a;
-          border-radius: 2px;
-          font-weight: bold;
-          cursor: pointer
+          padding 4px 2px 1.5px 2px
+          margin 0 15px
+          font-size 10px
+          background-color #8bc34a
+          border-radius 2px
+          cursor pointer
         .title
-          font-size: 13px;
-          font-weight: bold;
-          display: inline;
-          margin: 0;
+          font-size 13px
+          display inline
+          margin 0
         mat-icon
-          margin-top: -3px;
-          margin-right: 13px;
-          display: block;
-          float: right;
-          cursor: pointer;
+          margin-top -3px
+          margin-right 13px
+          display block
+          float right
+          cursor pointer
   .close-state
     transform translate3d(-80%, 0px, 0px) !important
     background yellow
@@ -52,3 +50,27 @@
     font-size inherit
   ::ng-deep mat-drawer
     visibility visible !important
+
+
+.tree
+  background-color sideNav
+  padding-top: 35px;
+  .node
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none !important;
+    color: #b7b7b7;
+    width: 250px;
+    min-height: 35px !important
+    font-size: 12px;
+    span
+      padding-left 15px
+    .node-icon
+      padding-left 15px
+      font-size  17px
+      display flex
+      justify-content center
+      align-items center
+  .child-node
+    width 230px
