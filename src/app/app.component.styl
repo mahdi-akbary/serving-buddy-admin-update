@@ -56,6 +56,7 @@
   background-color sideNav
   padding-top: 35px;
   .node
+    cursor pointer
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -64,13 +65,25 @@
     width: 250px;
     min-height: 35px !important
     font-size: 12px;
-    span
-      padding-left 15px
-    .node-icon
-      padding-left 15px
-      font-size  17px
+    transition: all 2s ease;
+    &:hover
+      background-color #333741
+    .node-text
       display flex
-      justify-content center
+      width 80%
       align-items center
-  .child-node
-    width 230px
+      span
+        padding-left 15px
+      .node-icon
+        padding-left 15px
+        font-size  17px
+        display flex
+        justify-content center
+        align-items center
+      .node-icon-status
+        position relative
+        right  20px
+
+.div-class
+  background-color yellow !important
+

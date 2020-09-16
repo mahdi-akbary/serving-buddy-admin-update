@@ -1,11 +1,32 @@
-import {Component} from '@angular/core';
+import {Component, HostBinding} from '@angular/core';
 import {FlatTreeControl} from "@angular/cdk/tree";
 import {MatTreeFlatDataSource, MatTreeFlattener} from "@angular/material/tree";
-
+import { trigger, state, style, transition, animate } from '@angular/animations';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.styl']
+  styleUrls: ['./app.component.styl'],
+  animations: [
+    trigger('openClose', [
+        transition(
+          ':enter',
+          [
+            style({ height: 0, opacity: 0 }),
+            animate('0.3s linear',
+              style({ height: 35, opacity: 1 }))
+          ]
+        ),
+        transition(
+          ':leave',
+          [
+            style({ height: 35, opacity: 1 }),
+            animate('0.3s linear',
+              style({ height: 0, opacity: 0 }))
+          ]
+        )
+      ]
+    ),
+  ]
 })
 export class AppComponent {
   showFiller: boolean = false;

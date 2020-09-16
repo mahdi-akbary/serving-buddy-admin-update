@@ -12,16 +12,21 @@
       </div>
     </div>
 
-    <mat-tree class="tree" [dataSource]="dataSource" [treeControl]="treeControl">
-      <mat-tree-node  *matTreeNodeDef="let node; when: hasChild"
-                     [ngClass]="{'node' : true , 'child-node': !node.expandable}"
-                     matTreeNodePadding
-                     matTreeNodePaddingIndent="20"
-                     matTreeNodeToggle>
-        <mat-icon class="node-icon">
-          {{node.icon}}</mat-icon>
-        <span>{{node.name}}</span>
-      </mat-tree-node>
+    <mat-tree  class="tree" [dataSource]="dataSource" [treeControl]="treeControl">
+        <mat-tree-node [@openClose] *matTreeNodeDef="let node; when: hasChild"
+                        [ngClass]="{'node' : true}"
+                        matTreeNodePadding
+                        matTreeNodeOutlet
+                        matTreeNodePaddingIndent="20"
+                        matTreeNodeToggle>
+          <div class="node-text">
+            <mat-icon class="node-icon">{{node.icon}}</mat-icon>
+            <span>{{node.name}}</span>
+          </div>
+            <mat-icon *ngIf="node.expandable" class="node-icon-status">
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+        </mat-tree-node>
     </mat-tree>
 
 <!--    <npsMenuItem [npsRouterLink]="'/orders'" [npsIcon]="'print'" [npsText]="'Orders &amp; bills'" [hasSub]="true">-->
