@@ -1,84 +1,39 @@
-<mat-drawer-container class="container" autosize>
-  <mat-drawer #drawer class="sidenav" mode="side"
+<mat-drawer-container autosize>
+  <mat-drawer #drawer mode="side"
               [ngClass]="{'close-state' : isClosed, 'open-state' : !isClosed}"
               [opened]="!isClosed"
               (closedStart)="isClosed = true"
               (openedStart)="isClosed = false">
-    <div class="side-nav-title">
-      <div>
-        <span class="nps">T-T</span>
-        <span class="title">Sample project</span>
-        <mat-icon>menu</mat-icon>
-      </div>
+    <div class="drawer-title" [ngClass]="{'drawer-title-mini-state': isClosed}">
+        <div class="name">
+          <span class="name-icon" (click)="drawer.toggle()">T-T</span>
+          <span class="name-text">Tea Talk</span>
+        </div>
+        <mat-icon (click)="drawer.toggle()">menu</mat-icon>
     </div>
-
-
     <mat-selection-list #shoes [multiple]="false">
       <div *ngFor="let parentOption of data" [ngClass]="{'selected': parentOption.is_expanded}">
 
         <mat-list-option [value]="parentOption.name" (click)="expandList(parentOption)">
           <div class="option-text">
             <mat-icon class="option-icon">{{parentOption.icon}}</mat-icon>
-            <span>{{parentOption.name}}</span>
+            <span [ngClass]="{'mini-state': isClosed}">{{parentOption.name}}</span>
           </div>
-          <mat-icon *ngIf="parentOption.children" class="icon-status">
+          <mat-icon *ngIf="parentOption.children" class="icon-status" [ngClass]="{'mini-state': isClosed}">
             {{parentOption.is_expanded ? 'expand_more' : 'chevron_right'}}
           </mat-icon>
         </mat-list-option>
-
-
-        <div class="child-node" [ngClass]="{'expand': parentOption.is_expanded}">
+        <div class="child-option" [ngClass]="{'expand': parentOption.is_expanded}">
           <mat-list-option class="option " *ngFor="let childOption of parentOption.children" [value]="childOption.name">
-            <div class="option-text">
+            <div [ngClass]="{'padding-left': !isClosed, 'option-text': true}">
               <mat-icon class="option-icon">{{parentOption.icon}}</mat-icon>
-              <span>{{childOption.name}}</span>
+              <span [ngClass]="{'mini-state': isClosed}">{{childOption.name}}</span>
             </div>
           </mat-list-option>
         </div>
       </div>
-
     </mat-selection-list>
-
-    <!--    <npsMenuItem [npsRouterLink]="'/orders'" [npsIcon]="'print'" [npsText]="'Orders &amp; bills'" [hasSub]="true">-->
-    <!--      <npsMenuItem [npsRouterLink]="'/orders/history'" [npsIcon]="'print'" [npsText]="'History'"></npsMenuItem>-->
-    <!--      <npsMenuItem [npsRouterLink]="'/orders/tables'" [npsIcon]="'print'" [npsText]="'Tables'"></npsMenuItem>-->
-    <!--      <npsMenuItem [npsRouterLink]="'/orders/menuCategories'" [npsIcon]="'print'" [npsText]="'Menu categories'"></npsMenuItem>-->
-    <!--      <npsMenuItem [npsRouterLink]="'/orders/menuItems'" [npsIcon]="'print'" [npsText]="'Menu items'"></npsMenuItem>-->
-    <!--    </npsMenuItem>-->
-    <!--    <npsMenuItem [npsRouterLink]="'/providers'" [npsIcon]="'local_cafe'" [npsText]="'Providers'"></npsMenuItem>-->
-    <!--    <npsMenuItem [npsRouterLink]="'/expenses'" [npsIcon]="'monetization_on'" [npsText]="'Expenses'"></npsMenuItem>-->
-    <!--    <npsMenuItem [npsRouterLink]="'/stock'" [npsIcon]="'store'" [npsText]="'Stock'" [hasSub]="true">-->
-    <!--      <npsMenuItem [npsRouterLink]="'/stock/manualUsage'" [npsIcon]="'store'" [npsText]="'Manual usage'"></npsMenuItem>-->
-    <!--      <npsMenuItem [npsRouterLink]="'/stock/addCorrectionLog'" [npsIcon]="'store'" [npsText]="'Add / correction log'"></npsMenuItem>-->
-    <!--      <npsMenuItem [npsRouterLink]="'/stock/usageLog'" [npsIcon]="'store'" [npsText]="'Usage log'"></npsMenuItem>-->
-    <!--    </npsMenuItem>-->
-    <!--    <npsMenuItem [npsRouterLink]="'/employees'" [npsIcon]="'people'" [npsText]="'Employees'" [hasSub]="true">-->
-    <!--      <npsMenuItem [npsRouterLink]="'/employees/leavesAndAbsenties'" [npsIcon]="'people'" [npsText]="'Leaves and absenties'"></npsMenuItem>-->
-    <!--      <npsMenuItem [npsRouterLink]="'/employees/advances'" [npsIcon]="'people'" [npsText]="'Advances'"></npsMenuItem>-->
-    <!--      <npsMenuItem [npsRouterLink]="'/employees/payroll'" [npsIcon]="'people'" [npsText]="'Payroll'"></npsMenuItem>-->
-    <!--    </npsMenuItem>-->
-    <!--    <npsMenuItem [npsRouterLink]="'/reports'" [npsIcon]="'report'" [npsText]="'Reports'" [hasSub]="true">-->
-    <!--      <npsMenuItem [npsRouterLink]="'/reports/paymentsLog'" [npsIcon]="'report'" [npsText]="'Payments log'"></npsMenuItem>-->
-    <!--      <npsMenuItem [npsRouterLink]="'/reports/dailySummaryReport'" [npsIcon]="'report'" [npsText]="'Daily summary report'"></npsMenuItem>-->
-    <!--      <npsMenuItem [npsRouterLink]="'/reports/itemsSummaryReport'" [npsIcon]="'report'" [npsText]="'Items summary report'"></npsMenuItem>-->
-    <!--      <npsMenuItem [npsRouterLink]="'/reports/categoriesSummaryReport'" [npsIcon]="'report'" [npsText]="'Categories summary report'"></npsMenuItem>-->
-    <!--      <npsMenuItem [npsRouterLink]="'/reports/debts'" [npsIcon]="'report'" [npsText]="'Debts'"></npsMenuItem>-->
-    <!--    </npsMenuItem>-->
-    <!--    <npsMenuItem [npsRouterLink]="'/settings'" [npsIcon]="'settings'" [npsText]="'Settings'" [hasSub]="true">-->
-    <!--      <npsMenuItem [npsRouterLink]="'/settings/users'" [npsIcon]="'settings'" [npsText]="'Users'"></npsMenuItem>-->
-    <!--    </npsMenuItem>-->
-    <!--    <npsMenuItem [npsRouterLink]="'/notifications'" [npsIcon]="'notifications'" [npsText]="'Notifications'" [npsBadge]="newNotificationsCount"></npsMenuItem>-->
-    <!--    <npsMenuItem [npsIcon]="'power_settings_new'" [npsText]="'Logout'" (click)="logout()"></npsMenuItem>-->
   </mat-drawer>
-  <div class="sidenav-content">
-    <button type="button" mat-button (click)="drawer.toggle()">
-      Toggle sidenav
-    </button>
-    <br>
-    <h1>status: {{isClosed}}</h1>
-    <span class="nps">T-T</span>
-    <span class="title">Tea Talk</span>
-    <mat-icon>menu</mat-icon>
-  </div>
+
 
 </mat-drawer-container>
