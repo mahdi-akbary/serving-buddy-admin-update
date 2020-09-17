@@ -52,38 +52,48 @@
     visibility visible !important
 
 
-.tree
+.list
   background-color sideNav
   padding-top: 35px;
-  .node
+  ::ng-deep .mat-list-item-content,
+  ::ng-deep .mat-list-text
+    width 100%
+    margin 0
+    padding 0 !important
+    display flex !important
+    justify-content space-between
+    align-items center
+    max-height 35px
+  .hidden
+    height 0
+    width 0
+    display none
+  .option
     cursor pointer
     display: flex;
     flex-direction: row;
     align-items: center;
-    text-decoration: none !important;
     color: #b7b7b7;
-    width: 250px;
-    min-height: 35px !important
     font-size: 12px;
-    transition: all 2s ease;
-    &:hover
-      background-color #333741
-    .node-text
+    height 35px
+    .option-text
       display flex
-      width 80%
       align-items center
       span
         padding-left 15px
-      .node-icon
+      .option-icon
         padding-left 15px
         font-size  17px
         display flex
         justify-content center
         align-items center
-      .node-icon-status
-        position relative
-        right  20px
+    .icon-status
+      font-size 17px
+      display flex
+      align-items center
 
 .div-class
   background-color yellow !important
 
+.child-node
+  position relative
