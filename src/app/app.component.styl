@@ -15,7 +15,7 @@
     transition transform 400ms cubic-bezier(0.25, 0.8, 0.25, 1)
     .side-nav-title
       position relative
-      width 250px
+      width sideNavWidth - 1
       height 43px
       background-color #373c47
       color #fff
@@ -52,7 +52,7 @@
     visibility visible !important
 
 
-.list
+mat-selection-list
   background-color sideNav
   padding-top: 35px;
   ::ng-deep .mat-list-item-content,
@@ -60,15 +60,10 @@
     width 100%
     margin 0
     padding 0 !important
-    display flex !important
-    justify-content space-between
+    flex-direction row !important
     align-items center
-    max-height 35px
-  .hidden
-    height 0
-    width 0
-    display none
-  .option
+    height 35px
+  mat-list-option
     cursor pointer
     display: flex;
     flex-direction: row;
@@ -79,6 +74,7 @@
     .option-text
       display flex
       align-items center
+      width: 100%;
       span
         padding-left 15px
       .option-icon
@@ -91,9 +87,19 @@
       font-size 17px
       display flex
       align-items center
+      padding-right 15px
+  .child-node
+    background-color #30353e
+    transition all 1.5s ease;
+    max-height 0
+    min-height 0
+    overflow hidden
+    .option-text
+      padding-left 20px
+  .expand
+    max-height 1000px
+    transition all 1.5s ease;
+  .selected
+    background-color #30353e
 
-.div-class
-  background-color yellow !important
 
-.child-node
-  position relative

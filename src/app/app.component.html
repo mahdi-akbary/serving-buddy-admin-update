@@ -7,29 +7,36 @@
     <div class="side-nav-title">
       <div>
         <span class="nps">T-T</span>
-        <span class="title">Tea Talk</span>
+        <span class="title">Sample project</span>
         <mat-icon>menu</mat-icon>
       </div>
     </div>
 
 
-    <mat-selection-list class="list" #shoes [multiple]="false">
-      <mat-list-option class="option" *ngFor="let parentOption of data" [value]="parentOption.name"
-                       (click)="expandList(parentOption)">
-        <div class="option-text">
-          <mat-icon class="option-icon">{{parentOption.icon}}</mat-icon>
-          <span>{{parentOption.name}}</span>
+    <mat-selection-list #shoes [multiple]="false">
+      <div *ngFor="let parentOption of data" [ngClass]="{'selected': parentOption.is_expanded}">
+
+        <mat-list-option [value]="parentOption.name" (click)="expandList(parentOption)">
+          <div class="option-text">
+            <mat-icon class="option-icon">{{parentOption.icon}}</mat-icon>
+            <span>{{parentOption.name}}</span>
+          </div>
           <mat-icon *ngIf="parentOption.children" class="icon-status">
-            {{true ? 'expand_more' : 'chevron_right'}}
+            {{parentOption.is_expanded ? 'expand_more' : 'chevron_right'}}
           </mat-icon>
-        </div>
-        <div *ngIf="parentOption.children" class="child-node" [ngClass]="{'hidden': !parentOption.is_expanded}">
-          <mat-list-option class="option" *ngFor="let childOption of parentOption.children" [value]="childOption.name">
-            <mat-icon>{{parentOption.icon}}</mat-icon>
-            <span>{{childOption.name}}</span>
+        </mat-list-option>
+
+
+        <div class="child-node" [ngClass]="{'expand': parentOption.is_expanded}">
+          <mat-list-option class="option " *ngFor="let childOption of parentOption.children" [value]="childOption.name">
+            <div class="option-text">
+              <mat-icon class="option-icon">{{parentOption.icon}}</mat-icon>
+              <span>{{childOption.name}}</span>
+            </div>
           </mat-list-option>
         </div>
-      </mat-list-option>
+      </div>
+
     </mat-selection-list>
 
     <!--    <npsMenuItem [npsRouterLink]="'/orders'" [npsIcon]="'print'" [npsText]="'Orders &amp; bills'" [hasSub]="true">-->
