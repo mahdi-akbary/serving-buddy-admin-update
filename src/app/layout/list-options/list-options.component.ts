@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NavigationEnd, Router} from "@angular/router";
 import {Location} from '@angular/common';
 
 @Component({
@@ -8,27 +7,29 @@ import {Location} from '@angular/common';
   styleUrls: ['./list-options.component.styl']
 })
 export class ListOptionsComponent implements OnInit {
-  data: IOption[];
+  optionsList: IOption[];
   @Input() isClosed: boolean;
+  lang: string | 'en' | 'prs' | 'ps';
+  currentSegment: string = null;
 
-  constructor(private router: Router, private location: Location) {
+  constructor(private location: Location) {
   }
 
   ngOnInit(): void {
-    this.data = TREE_DATA;
-    this.router.events.subscribe((event) => {
-      if (!(event instanceof NavigationEnd)) {
-        return;
-      }
-
-      console.log(event.url)
-    });
-    console.log('>>>>>>>>>>', this.location.path())
+    this.optionsList = LIST_DATA;
+    this.lang = localStorage.getItem('lang')
+    this.expandList(this.getParentUrlSegment(this.location.path()))
   }
 
-  expandList(option: IOption) {
-    this.data.forEach(item => {
-      item.name === option.name ?
+  getParentUrlSegment(url: string): string {
+    const urlArray = url.split('/')
+    this.currentSegment = urlArray[urlArray.length - 1]
+    return urlArray.length > 1 ? urlArray[2] : null;
+  }
+
+  expandList(urlSegment: string) {
+    this.optionsList.forEach(item => {
+      item.urlSegment === urlSegment ?
         item.is_expanded = true : item.is_expanded = false;
     })
   }
@@ -37,82 +38,82 @@ export class ListOptionsComponent implements OnInit {
 interface IOption {
   name: string;
   icon: string;
-  link: string;
+  urlSegment: string;
   children?: IOption[];
   is_expanded?: boolean;
 }
 
-const TREE_DATA: IOption[] = [
+const LIST_DATA: IOption[] = [
   {
     name: 'Orders & bills',
     icon: 'print',
-    link: '/orders-bills',
+    urlSegment: 'orders-bills',
     children: [
-      {name: 'History', icon: 'print', link: '/orders-bills/history'},
-      {name: 'Tables', icon: 'print', link: '/orders-bills/tables'},
-      {name: 'Menu categories', icon: 'print', link: '/orders-bills/menuCategories'},
-      {name: 'Menu items', icon: 'print', link: '/orders-bills/menuItems'},
+      {name: 'History', icon: 'print', urlSegment: 'history'},
+      {name: 'Tables', icon: 'print', urlSegment: 'tables'},
+      {name: 'Menu categories', icon: 'print', urlSegment: 'menu-categories'},
+      {name: 'Menu items', icon: 'print', urlSegment: 'menu-items'},
     ]
   },
   {
     name: 'Providers',
     icon: 'local_cafe',
-    link: '/providers'
+    urlSegment: 'providers'
   },
   {
     name: 'Expenses',
     icon: 'monetization_on',
-    link: '/expenses'
+    urlSegment: 'expenses'
   },
   {
     name: 'Stock',
     icon: 'store',
-    link: '/stock',
+    urlSegment: 'stock',
     children: [
-      {name: 'Manual usage', icon: 'store', link: '/stock/manualUsage'},
-      {name: 'Add / correction log', icon: 'store', link: '/stock/addCorrectionLog'},
-      {name: 'Usage log', icon: 'store', link: '/stock/usageLog'},
+      {name: 'Manual usage', icon: 'store', urlSegment: 'manual-usage'},
+      {name: 'Add / correction log', icon: 'store', urlSegment: 'add-correction-log'},
+      {name: 'Usage log', icon: 'store', urlSegment: 'usage-log'},
     ]
   },
   {
     name: 'Employees',
     icon: 'people',
-    link: '/employees',
+    urlSegment: 'employees',
     children: [
-      {name: 'Leaves and absenties', icon: 'people', link: '/employees/leavesAndAbsenties'},
-      {name: 'Advances', icon: 'people', link: '/employees/advances'},
-      {name: 'Payroll', icon: 'people', link: '/employees/payroll'}
+      {name: 'Leaves and absenties', icon: 'people', urlSegment: 'leaves-and-absenties'},
+      {name: 'Advances', icon: 'people', urlSegment: 'advances'},
+      {name: 'Payroll', icon: 'people', urlSegment: 'payroll'}
     ]
   },
   {
     name: 'Reports',
     icon: 'report',
-    link: '/reports',
+    urlSegment: 'reports',
     children: [
-      {name: 'Payments log', icon: 'report', link: '/reports/paymentsLog'},
-      {name: 'Daily summary report', icon: 'report', link: '/reports/dailySummaryReport'},
-      {name: 'Items summary report', icon: 'report', link: '/reports/itemsSummaryReport'},
-      {name: 'Categories summary report', icon: 'report', link: '/reports/categoriesSummaryReport'},
-      {name: 'Debts', icon: 'report', link: '/reports/debts'}
+      {name: 'Payments log', icon: 'report', urlSegment: 'payments-log'},
+      {name: 'Daily summary report', icon: 'report', urlSegment: 'daily-summary-report'},
+      {name: 'Items summary report', icon: 'report', urlSegment: 'items-summary-report'},
+      {name: 'Categories summary report', icon: 'report', urlSegment: 'categories-summary-report'},
+      {name: 'Debts', icon: 'report', urlSegment: 'debts'}
     ]
   },
   {
     name: 'Settings',
     icon: 'settings',
-    link: '/settings',
+    urlSegment: 'settings',
     children: [
-      {name: 'Users', icon: 'settings', link: '/settings/users'}
+      {name: 'Users', icon: 'settings', urlSegment: 'users'}
     ]
   },
   {
     name: 'Notifications',
     icon: 'notifications',
-    link: '/notifications'
+    urlSegment: 'notifications'
   },
   {
     name: 'Logout',
     icon: 'power_settings_new',
-    link: ''
+    urlSegment: ''
   },
 
 ];

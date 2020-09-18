@@ -1,7 +1,9 @@
 <mat-selection-list #shoes [multiple]="false">
-  <div *ngFor="let parentOption of data" [ngClass]="{'selected': parentOption.is_expanded}">
+  <div *ngFor="let parentOption of optionsList" [ngClass]="{'selected': parentOption.is_expanded}">
 
-    <mat-list-option [value]="parentOption.name" (click)="expandList(parentOption)">
+    <mat-list-option [value]="parentOption.name" (click)="expandList(parentOption.urlSegment)"
+                     [selected]="parentOption.urlSegment=== currentSegment"
+                     [routerLink]="[lang, parentOption.urlSegment]">
       <div class="option-text">
         <mat-icon class="option-icon">{{parentOption.icon}}</mat-icon>
         <span [ngClass]="{'mini-state': isClosed}">{{parentOption.name}}</span>
@@ -11,7 +13,9 @@
       </mat-icon>
     </mat-list-option>
     <div class="child-option" [ngClass]="{'expand': parentOption.is_expanded}">
-      <mat-list-option class="option " *ngFor="let childOption of parentOption.children" [value]="childOption.name">
+      <mat-list-option class="option " *ngFor="let childOption of parentOption.children"
+                       [selected]="childOption.urlSegment=== currentSegment"
+                       [routerLink]="[lang, parentOption.urlSegment, childOption.urlSegment]">
         <div [ngClass]="{'padding-left': !isClosed, 'option-text': true}">
           <mat-icon class="option-icon">{{parentOption.icon}}</mat-icon>
           <span [ngClass]="{'mini-state': isClosed}">{{childOption.name}}</span>
