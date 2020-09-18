@@ -1,0 +1,19 @@
+<mat-drawer-container autosize>
+  <mat-drawer #drawer mode="side"
+              [ngClass]="{'close-state' : isClosed, 'open-state' : !isClosed}"
+              [opened]="!isClosed"
+              (closedStart)="isClosed = true"
+              (openedStart)="isClosed = false">
+    <div class="drawer-title" [ngClass]="{'drawer-title-mini-state': isClosed}">
+      <div class="name">
+        <span class="name-icon" (click)="drawer.toggle()">T-T</span>
+        <span class="name-text">Tea Talk</span>
+      </div>
+      <mat-icon (click)="drawer.toggle()">menu</mat-icon>
+    </div>
+    <app-list-options [isClosed]="isClosed"></app-list-options>
+  </mat-drawer>
+  <mat-drawer-content [ngClass]="{'margin-left-5': isClosed}">
+    <ng-content></ng-content>
+  </mat-drawer-content>
+</mat-drawer-container>

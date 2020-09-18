@@ -1,0 +1,61 @@
+@import "../../../styles/color-const.styl"
+@import "../../../styles/measure-const.styl"
+mat-selection-list
+  background-color sideNav
+  padding-top: 35px;
+  ::ng-deep .mat-list-item-content,
+  ::ng-deep .mat-list-text
+    width 100%
+    margin 0
+    padding 0 !important
+    flex-direction row !important
+    align-items center
+    height 35px
+  mat-list-option
+    cursor pointer
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #b7b7b7;
+    font-size: 12px;
+    height 35px
+    .option-text
+      display flex
+      align-items center
+      width: 100%;
+      transition: padding 0.6s ease;
+      span
+        white-space: nowrap;
+        overflow: hidden;
+        padding-left 15px
+      .option-icon
+        padding-left 15px
+        font-size  17px
+        display flex
+        justify-content center
+        align-items center
+    .icon-status
+      font-size 17px
+      display flex
+      align-items center
+      padding-right 15px
+  .child-option
+    background-color #30353e
+    transition all 1.5s ease;
+    max-height 0
+    min-height 0
+    overflow hidden
+    .padding-left
+      transition: padding 0.6s ease;
+      padding-left 20px
+  .expand
+    max-height 1000px
+    transition all 1.5s ease;
+  .selected
+    background-color #30353e
+
+.mini-state
+  width 0 !important
+  height 0 !important
+  overflow hidden
+
