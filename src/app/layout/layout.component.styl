@@ -7,7 +7,9 @@ mat-drawer-container
   mat-drawer
     background-color sideNav
     width sideNavWidth
-    transition: width 0.6s ease;
+    transition-duration: 400ms
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-property: width;
     .drawer-title
       position relative
       width sideNavWidth
@@ -22,11 +24,13 @@ mat-drawer-container
       display flex
       justify-content space-around
       align-items center
-      transition: all 0.6s ease;
+      transition-duration: 400ms;
+      transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+      transition-property: all;
       .name
         width 67%
         .name-icon
-          padding 3px 3px 2.5px 3px
+          padding 4px 3px 1.5px 3px
           font-size 10px
           background-color #8bc34a
           border-radius 2px
@@ -55,3 +59,5 @@ mat-drawer-content
   margin-left 250px !important
 .margin-left-5
   margin-left 5% !important
+.main-content
+  margin-top 43px

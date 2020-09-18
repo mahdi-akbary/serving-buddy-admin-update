@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {NavigationEnd, Router} from "@angular/router";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-list-options',
@@ -8,11 +10,20 @@ import {Component, Input, OnInit} from '@angular/core';
 export class ListOptionsComponent implements OnInit {
   data: IOption[];
   @Input() isClosed: boolean;
-  constructor() {
+
+  constructor(private router: Router, private location: Location) {
   }
 
   ngOnInit(): void {
     this.data = TREE_DATA;
+    this.router.events.subscribe((event) => {
+      if (!(event instanceof NavigationEnd)) {
+        return;
+      }
+
+      console.log(event.url)
+    });
+    console.log('>>>>>>>>>>', this.location.path())
   }
 
   expandList(option: IOption) {
@@ -35,12 +46,12 @@ const TREE_DATA: IOption[] = [
   {
     name: 'Orders & bills',
     icon: 'print',
-    link: '/orders',
+    link: '/orders-bills',
     children: [
-      {name: 'History', icon: 'print', link: '/orders/history'},
-      {name: 'Tables', icon: 'print', link: '/orders/tables'},
-      {name: 'Menu categories', icon: 'print', link: '/orders/menuCategories'},
-      {name: 'Menu items', icon: 'print', link: '/orders/menuItems'},
+      {name: 'History', icon: 'print', link: '/orders-bills/history'},
+      {name: 'Tables', icon: 'print', link: '/orders-bills/tables'},
+      {name: 'Menu categories', icon: 'print', link: '/orders-bills/menuCategories'},
+      {name: 'Menu items', icon: 'print', link: '/orders-bills/menuItems'},
     ]
   },
   {

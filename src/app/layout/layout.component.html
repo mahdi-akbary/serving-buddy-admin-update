@@ -14,6 +14,10 @@
     <app-list-options [isClosed]="isClosed"></app-list-options>
   </mat-drawer>
   <mat-drawer-content [ngClass]="{'margin-left-5': isClosed}">
-    <ng-content></ng-content>
+    <app-header></app-header>
+    <app-banner></app-banner>
+    <div class="main-content">
+      <ng-content></ng-content>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>
