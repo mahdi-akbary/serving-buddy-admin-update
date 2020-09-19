@@ -1,1 +1,17 @@
-<p>orders-bills works!</p>
+<div class="container">
+  <mat-card *ngFor="let table of tables">
+    <mat-card-content>
+      <div class="top">
+        <span>{{table.id}}</span>
+        <div class="action">
+          <mat-icon>close</mat-icon>
+          <mat-icon matTooltip="Edit order">edit</mat-icon>
+        </div>
+      </div>
+      <div class="bottom">
+        <span>Orders: </span>
+        <span>{{table.orders_count}}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -35,7 +35,7 @@ export class InterceptorService implements HttpInterceptor {
       setHeaders: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        Cookie: '562d49727516866f0595668413c7572a=s%3AUG9fTQZs7sp6pJodb94XtJy2PbCEG4jl.QDOa8vMi5XP57Ftjb%2F824Nmbw3wRW4uz1ht3LVa73Nw'
+        // Cookie: '562d49727516866f0595668413c7572a=s%3AUG9fTQZs7sp6pJodb94XtJy2PbCEG4jl.QDOa8vMi5XP57Ftjb%2F824Nmbw3wRW4uz1ht3LVa73Nw'
       }
     });
     return next.handle(req).pipe(

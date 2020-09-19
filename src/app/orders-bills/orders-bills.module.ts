@@ -8,7 +8,9 @@ import {MenuCategoriesComponent} from './menu-categories/menu-categories.compone
 import {MenuItemsComponent} from './menu-items/menu-items.component';
 import {OrdersBillsComponent} from "./orders-bills.component";
 import {OrdersBillsService} from "./orders-bills.service";
-
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from "@angular/material/icon";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -20,7 +22,10 @@ import {OrdersBillsService} from "./orders-bills.service";
   ],
   imports: [
     CommonModule,
-    OrdersBillsRoutingModule
+    OrdersBillsRoutingModule,
+    MatCardModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   providers: [
     OrdersBillsService

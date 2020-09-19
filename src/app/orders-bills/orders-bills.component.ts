@@ -14,9 +14,9 @@ export class OrdersBillsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ordersBillsService.index().subscribe((tables: ITable[]) => {
+    this.ordersBillsService.index().subscribe((tables: any) => {
       console.log(tables)
-      this.tables = tables;
+      this.tables = tables.data;
     })
   }
 

@@ -28,8 +28,8 @@ interface  IRawTable {
 
 export interface  ITable {
   id: number;
-  orderId: number;
-  ordersCount: number;
+  order_id: number;
+  orders_count: number;
 }
 
 interface  IRawTableMinimal {
