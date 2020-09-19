@@ -7,6 +7,7 @@ import {TablesComponent} from './tables/tables.component';
 import {MenuCategoriesComponent} from './menu-categories/menu-categories.component';
 import {MenuItemsComponent} from './menu-items/menu-items.component';
 import {OrdersBillsComponent} from "./orders-bills.component";
+import {OrdersBillsService} from "./orders-bills.service";
 
 
 @NgModule({
@@ -20,6 +21,9 @@ import {OrdersBillsComponent} from "./orders-bills.component";
   imports: [
     CommonModule,
     OrdersBillsRoutingModule
+  ],
+  providers: [
+    OrdersBillsService
   ]
 })
 export class OrdersBillsModule {

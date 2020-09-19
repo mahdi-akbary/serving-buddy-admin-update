@@ -18,8 +18,7 @@ export class BannerComponent implements OnInit {
 
   ngOnInit(): void {
     this.createBreadcrumb(this.location.path());
-    console.log(this.urlSegmentOptions)
-    this.lang = localStorage.getItem('lang');
+      this.lang = localStorage.getItem('lang');
     this.router.events.subscribe((event) => {
       if (!(event instanceof NavigationEnd)) {
         return;
@@ -32,7 +31,6 @@ export class BannerComponent implements OnInit {
     this.urlSegmentOptions = [];
     const removedQuerySectionUrlArray = urlString.split('?')
     const urlArray = removedQuerySectionUrlArray[0].split('/')
-    console.log(urlArray, ' array')
     for (let i = 2; i < urlArray.length; i++) {
       this.listOptions.forEach(option => {
         if (urlArray[i] === option.urlSegment) {

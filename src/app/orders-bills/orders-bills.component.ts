@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ITable, OrdersBillsService} from "./orders-bills.service";
+
 
 @Component({
   selector: 'app-orders-bills',
@@ -6,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./orders-bills.component.styl']
 })
 export class OrdersBillsComponent implements OnInit {
+  tables: ITable[];
 
-  constructor() { }
+  constructor(private ordersBillsService: OrdersBillsService) {
+  }
 
   ngOnInit(): void {
-    console.log('here .......................')
+    this.ordersBillsService.index().subscribe((tables: ITable[]) => {
+      console.log(tables)
+      this.tables = tables;
+    })
   }
 
 }
