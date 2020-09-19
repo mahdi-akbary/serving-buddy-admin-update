@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
+import {NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-list-options',
@@ -12,13 +13,19 @@ export class ListOptionsComponent implements OnInit {
   lang: string | 'en' | 'prs' | 'ps';
   currentSegment: string = null;
 
-  constructor(private location: Location) {
+  constructor(private location: Location, private router: Router) {
   }
 
   ngOnInit(): void {
     this.optionsList = LIST_DATA;
     this.lang = localStorage.getItem('lang')
-    this.expandList(this.getParentUrlSegment(this.location.path()))
+    this.expandList(this.getParentUrlSegment(this.location.path()));
+    this.router.events.subscribe((event) => {
+      if (!(event instanceof NavigationEnd)) {
+        return;
+      }
+      this.expandList(this.getParentUrlSegment(event.urlAfterRedirects));
+    });
   }
 
   getParentUrlSegment(url: string): string {
@@ -35,7 +42,7 @@ export class ListOptionsComponent implements OnInit {
   }
 }
 
-interface IOption {
+export interface IOption {
   name: string;
   icon: string;
   urlSegment: string;
@@ -43,7 +50,7 @@ interface IOption {
   is_expanded?: boolean;
 }
 
-const LIST_DATA: IOption[] = [
+export const LIST_DATA: IOption[] = [
   {
     name: 'Orders & bills',
     icon: 'print',

@@ -2,7 +2,11 @@
   <div class="navigation-and-title">
     <ul class="breadcrumb">
       <mat-icon>dashboard</mat-icon>
-      <li>Main</li>
+      <li><a [routerLink]="[lang, 'orders-bills']">Main</a></li>
+      <li *ngFor="let option of urlSegmentOptions">
+        <span class="separator"> > </span>
+        <a [routerLink]="lang + '/' + option.urlSegment">{{option.name}}</a>
+      </li>
     </ul>
     <div class="title">
 
