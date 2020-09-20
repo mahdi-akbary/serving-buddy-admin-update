@@ -5,7 +5,7 @@
         <span>{{table.id}}</span>
         <div class="action">
           <mat-icon>close</mat-icon>
-          <mat-icon matTooltip="Edit order">edit</mat-icon>
+          <mat-icon matTooltip="Add/edit orders" (click)="addEditOrdersDialog(table.id)">edit</mat-icon>
         </div>
       </div>
       <div class="bottom">

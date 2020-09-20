@@ -16,6 +16,7 @@ import {HeaderComponent} from './layout/header/header.component';
 import {HttpService} from './services/http.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {InterceptorService} from './services/interceptor.service';
+import {AuthService} from "./services/auth.service";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {InterceptorService} from './services/interceptor.service';
   ],
   providers: [
     HttpService,
+    AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,

@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ITable, OrdersBillsService} from "./orders-bills.service";
+import {MatDialog} from "@angular/material/dialog";
+import {AddEditOrdersDialogComponent} from "./add-edit-orders-dialog/add-edit-orders-dialog.component";
 
 
 @Component({
@@ -9,8 +11,18 @@ import {ITable, OrdersBillsService} from "./orders-bills.service";
 })
 export class OrdersBillsComponent implements OnInit {
   tables: ITable[];
+  constructor(private ordersBillsService: OrdersBillsService,
+              public dialog: MatDialog) {
+  }
+  addEditOrdersDialog(tableNumber: number): void {
+    const dialogRef = this.dialog.open(AddEditOrdersDialogComponent, {
+      width: '700px',
+      data: {tableNumber: tableNumber}
+    });
 
-  constructor(private ordersBillsService: OrdersBillsService) {
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   ngOnInit(): void {

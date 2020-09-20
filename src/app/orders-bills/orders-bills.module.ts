@@ -11,6 +11,12 @@ import {OrdersBillsService} from "./orders-bills.service";
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from "@angular/material/icon";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {AddEditOrdersDialogComponent} from './add-edit-orders-dialog/add-edit-orders-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {FormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -18,18 +24,25 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     HistoryComponent,
     TablesComponent,
     MenuCategoriesComponent,
-    MenuItemsComponent
+    MenuItemsComponent,
+    AddEditOrdersDialogComponent
   ],
   imports: [
     CommonModule,
     OrdersBillsRoutingModule,
+    FormsModule,
     MatCardModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     OrdersBillsService
-  ]
+  ],
+  entryComponents: []
 })
 export class OrdersBillsModule {
 }

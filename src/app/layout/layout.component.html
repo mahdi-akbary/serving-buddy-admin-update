@@ -6,8 +6,8 @@
               (openedStart)="isClosed = false">
     <div class="drawer-title" [ngClass]="{'drawer-title-mini-state': isClosed}">
       <div class="name">
-        <span class="name-icon" (click)="drawer.toggle()">T-T</span>
-        <span class="name-text">Tea Talk</span>
+        <span class="name-icon" (click)="drawer.toggle()">{{nameIcon}}</span>
+        <span class="name-text">{{title}}</span>
       </div>
       <mat-icon (click)="drawer.toggle()">menu</mat-icon>
     </div>

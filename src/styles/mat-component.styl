@@ -1,0 +1,28 @@
+@import "color-palette.styl"
+mat-dialog-container
+  position relative
+  .dialog-herder
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: primary;
+    display flex
+    justify-content space-between
+    align-items center
+    padding 0 24px !important
+    mat-icon
+      cursor pointer
+      font-size 20px
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  .mat-dialog-title
+    margin 0 !important
+    font-size 15px !important
+    font-weight 500
+  .mat-dialog-content
+    margin-top 40px !important
+    padding 5px 24px !important
