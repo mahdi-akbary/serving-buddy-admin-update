@@ -1,3 +1,4 @@
+@import "../../../styles/color-palette.styl"
 .container
   top: 43px;
   width: 100%;
@@ -17,23 +18,28 @@
       right: 25px;
   .navigation-and-title
     width 80%
+    .title
+      font-size 18px
+      font-weight 500
+      color textDefault
+      padding-left 20px
     .breadcrumb
       list-style: none;
       padding-left: 20px;
-      color: #212121;
+      color: textDefault;
       display flex
       flex-direction row
       align-items center
       li
         font-size: 10px;
         text-decoration: none;
-        color: #212121;
+        color: textDefault;
         outline: none;
         .separator
           padding 0 5px
         a
           text-decoration none
-          color #212121
+          color textDefault
       mat-icon
         font-size 13px
         padding-bottom 2px

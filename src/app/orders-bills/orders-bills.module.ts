@@ -11,7 +11,7 @@ import {OrdersBillsService} from "./orders-bills.service";
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from "@angular/material/icon";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import {AddEditOrdersDialogComponent} from './add-edit-orders-dialog/add-edit-orders-dialog.component';
+import {AddEditDialogComponent} from './add-edit-dialog/add-edit-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -25,7 +25,7 @@ import {MatInputModule} from "@angular/material/input";
     TablesComponent,
     MenuCategoriesComponent,
     MenuItemsComponent,
-    AddEditOrdersDialogComponent
+    AddEditDialogComponent
   ],
   imports: [
     CommonModule,

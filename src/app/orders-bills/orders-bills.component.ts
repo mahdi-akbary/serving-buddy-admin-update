@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ITable, OrdersBillsService} from "./orders-bills.service";
 import {MatDialog} from "@angular/material/dialog";
-import {AddEditOrdersDialogComponent} from "./add-edit-orders-dialog/add-edit-orders-dialog.component";
+import {AddEditDialogComponent} from "./add-edit-dialog/add-edit-dialog.component";
 
 
 @Component({
@@ -15,7 +15,7 @@ export class OrdersBillsComponent implements OnInit {
               public dialog: MatDialog) {
   }
   addEditOrdersDialog(tableNumber: number): void {
-    const dialogRef = this.dialog.open(AddEditOrdersDialogComponent, {
+    const dialogRef = this.dialog.open(AddEditDialogComponent, {
       width: '700px',
       data: {tableNumber: tableNumber}
     });
