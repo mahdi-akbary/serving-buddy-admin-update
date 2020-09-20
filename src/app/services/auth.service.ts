@@ -13,7 +13,7 @@ export class AuthService {
 
   loginInDevelopmentMode() {
     if (!this.env.production) {
-      this.httpService.post('login', {username: 'nikzad', password: '123456789'}, {observe: 'response'})
+      this.httpService.post('login', this.env.userCredentials, {observe: 'response'})
         .subscribe((user: IUser) => console.log(user))
     }
   }

@@ -15,8 +15,9 @@ import {AddEditDialogComponent} from './add-edit-dialog/add-edit-dialog.componen
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
+import { NewOrderDialogComponent } from './add-edit-dialog/new-order-dialog/new-order-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +26,14 @@ import {MatInputModule} from "@angular/material/input";
     TablesComponent,
     MenuCategoriesComponent,
     MenuItemsComponent,
-    AddEditDialogComponent
+    AddEditDialogComponent,
+    NewOrderDialogComponent,
   ],
   imports: [
     CommonModule,
     OrdersBillsRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     MatCardModule,
     MatIconModule,
     MatTooltipModule,

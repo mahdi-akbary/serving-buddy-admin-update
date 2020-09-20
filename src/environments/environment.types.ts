@@ -4,5 +4,9 @@ export interface IEnvironment {
   baseUrl: {
     backend: string;
   }
+  userCredentials?: {
+    username: string;
+    password: string;
+  }
 
 }

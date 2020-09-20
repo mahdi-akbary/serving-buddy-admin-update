@@ -1,5 +1,5 @@
 <div class="dialog-herder">
-  <h1 color="primary" mat-dialog-title>Edit order - table #{{data.tableNumber}}</h1>
+  <h1 color="primary" mat-dialog-title>Orders - table #{{data.tableNumber}}</h1>
   <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
 </div>
 <div mat-dialog-content>
@@ -11,9 +11,9 @@
 
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button [disabled]="true" color="primary" [mat-dialog-close]="data.animal">EDIT</button>
-      <button mat-button [disabled]="true">TRANSFER</button>
-      <button mat-button>ADD</button>
+      <button mat-raised-button [disabled]="true" color="primary" [mat-dialog-close]="data.animal">EDIT</button>
+      <button mat-raised-button [disabled]="true">TRANSFER</button>
+      <button mat-raised-button (click)="AddOrderFor()">ADD</button>
     </mat-card-actions>
   </mat-card>
 

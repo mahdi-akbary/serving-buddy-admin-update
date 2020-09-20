@@ -9,6 +9,10 @@ export const environment: IEnvironment = {
   production: false,
   baseUrl: {
     backend: 'http://127.0.0.1:7000/'
+  },
+  userCredentials: {
+    username: 'nikzad',
+    password: '123456789'
   }
 };
 
