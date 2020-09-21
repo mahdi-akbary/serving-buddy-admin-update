@@ -4,11 +4,24 @@
 </div>
 <div mat-dialog-content>
   <mat-card>
-    <mat-card-header>
+    <mat-card-header *ngIf="!ordersSummary?.length">
       <mat-card-subtitle>No customer for this table yet.</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
-
+    <mat-card-content *ngIf="ordersSummary?.length">
+      <table>
+        <tr>
+          <th>Select</th>
+          <th>#</th>
+          <th>Order for</th>
+          <th>Order time</th>
+        </tr>
+        <tr *ngFor="let orderSummary of ordersSummary, let i = index">
+          <td>123</td>
+          <td>{{i + 1}}</td>
+          <td>{{orderSummary.customer_name}}</td>
+          <td>{{orderSummary.init_order_datetime | date: 'hh : mm : ss  a'}}</td>
+        </tr>
+      </table>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button [disabled]="true" color="primary" [mat-dialog-close]="data.animal">EDIT</button>

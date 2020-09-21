@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.loginInDevelopmentMode()
+    this.authService.init()
   }
 }
 

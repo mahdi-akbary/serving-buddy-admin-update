@@ -17,7 +17,8 @@ export class OrdersBillsComponent implements OnInit {
   addEditOrdersDialog(tableNumber: number): void {
     const dialogRef = this.dialog.open(AddEditDialogComponent, {
       width: '800px',
-      data: {tableNumber: tableNumber}
+      data: {tableNumber: tableNumber},
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -18,7 +18,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import { NewOrderDialogComponent } from './add-edit-dialog/new-order-dialog/new-order-dialog.component';
-
+import {MatTableModule} from '@angular/material/table';
 @NgModule({
   declarations: [
     OrdersBillsComponent,
@@ -40,7 +40,8 @@ import { NewOrderDialogComponent } from './add-edit-dialog/new-order-dialog/new-
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule
   ],
   providers: [
     OrdersBillsService

@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="submit(form.value)" (reset)="reset()">
+<form [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
   <div class="dialog-herder">
     <h1 color="primary" mat-dialog-title>Order for - table #{{data.tableNumber}}</h1>
     <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
@@ -6,13 +6,14 @@
   <div mat-dialog-content>
     <mat-form-field appearance="outline">
       <mat-label>Customer name</mat-label>
-      <input matInput formControlName="customer_name" type="text">
+      <input matInput formControlName="customerName" type="text">
+      <mat-error *ngIf="form.get('customerName')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
     </mat-form-field>
-
-
   </div>
   <div mat-dialog-actions>
-    <button mat-raised-button color="primary" type="submit">ADD</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">ADD</button>
     <button mat-button mat-dialog-close>CLOSE</button>
   </div>
 </form>

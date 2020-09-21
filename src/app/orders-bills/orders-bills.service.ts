@@ -16,23 +16,43 @@ export class OrdersBillsService {
   get(id: number, options?: {}): Observable<ITable> {
     return this.httpService.get(this.url + `/${id}`, options);
   }
+  getOrdersSummary(tableId): Observable<any>{
+    return this.httpService.get( `server/tables/${tableId}/orderSummaries`);
+  }
+
+  storeCustomer(data: ICustomer): Observable<any> {
+    return this.httpService.post(this.url + `/addOrder`, data);
+
+  }
+}
+
+export interface IOrdersSummary {
+  id:number;
+  customer_name:string;
+  init_order_datetime:Date;
 }
 
 
+export interface ICustomer {
+  id?: number;
+  tableId: number;
+  customerName: string | any;
+}
 
-interface  IRawTable {
+
+interface IRawTable {
   id: number;
   order_id: number;
   orders_count: number;
 }
 
-export interface  ITable {
+export interface ITable {
   id: number;
   order_id: number;
   orders_count: number;
 }
 
-interface  IRawTableMinimal {
+interface IRawTableMinimal {
   id: number;
   status: string;
   last_update_datetime: Date;
@@ -40,7 +60,7 @@ interface  IRawTableMinimal {
   last_updated_by_id: number;
 }
 
-export interface  ITableMinimal {
+export interface ITableMinimal {
   id: number;
   name: string;
   status: string;

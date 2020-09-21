@@ -11,11 +11,15 @@ export class AuthService {
   constructor(private httpService: HttpService) {
   }
 
-  loginInDevelopmentMode() {
+  init() {
     if (!this.env.production) {
-      this.httpService.post('login', this.env.userCredentials, {observe: 'response'})
-        .subscribe((user: IUser) => console.log(user))
+      this.loginInDevelopmentMode()
     }
+  }
+
+  loginInDevelopmentMode() {
+    this.httpService.post('login', this.env.userCredentials, {observe: 'response'})
+      .subscribe((user: IUser) => console.log(user))
   }
 }
 
