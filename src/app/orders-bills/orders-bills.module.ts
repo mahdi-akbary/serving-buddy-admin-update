@@ -19,6 +19,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import { NewOrderDialogComponent } from './add-edit-dialog/new-order-dialog/new-order-dialog.component';
 import {MatTableModule} from '@angular/material/table';
+import {MatRadioModule} from "@angular/material/radio";
+import {MatSelectModule} from "@angular/material/select";
+import {NewCustomerDialogComponent} from "./add-edit-dialog/new-customer-dialog/new-customer-dialog.component";
 @NgModule({
   declarations: [
     OrdersBillsComponent,
@@ -28,6 +31,7 @@ import {MatTableModule} from '@angular/material/table';
     MenuItemsComponent,
     AddEditDialogComponent,
     NewOrderDialogComponent,
+    NewCustomerDialogComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +45,9 @@ import {MatTableModule} from '@angular/material/table';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatRadioModule,
+    MatSelectModule
   ],
   providers: [
     OrdersBillsService

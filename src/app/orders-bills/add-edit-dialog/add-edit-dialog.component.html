@@ -1,11 +1,12 @@
 <div class="dialog-herder">
-  <h1 color="primary" mat-dialog-title>Orders - table #{{data.tableNumber}}</h1>
+  <h1 color="primary" mat-dialog-title>Table #{{data.tableNumber}}</h1>
   <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
 </div>
 <div mat-dialog-content>
   <mat-card>
-    <mat-card-header *ngIf="!ordersSummary?.length">
-      <mat-card-subtitle>No customer for this table yet.</mat-card-subtitle>
+    <mat-card-header>
+      <mat-card-title *ngIf="ordersSummary?.length">Customers</mat-card-title>
+      <mat-card-subtitle *ngIf="!ordersSummary?.length">No customer for this table yet.</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content *ngIf="ordersSummary?.length">
       <table>
@@ -16,7 +17,9 @@
           <th>Order time</th>
         </tr>
         <tr *ngFor="let orderSummary of ordersSummary, let i = index">
-          <td>123</td>
+          <td>
+            <mat-radio-button (click)="selectedOrder = orderSummary" [value]="orderSummary"></mat-radio-button>
+          </td>
           <td>{{i + 1}}</td>
           <td>{{orderSummary.customer_name}}</td>
           <td>{{orderSummary.init_order_datetime | date: 'hh : mm : ss  a'}}</td>
@@ -24,13 +27,32 @@
       </table>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button [disabled]="true" color="primary" [mat-dialog-close]="data.animal">EDIT</button>
-      <button mat-raised-button [disabled]="true">TRANSFER</button>
-      <button mat-raised-button (click)="AddOrderFor()">ADD</button>
+      <button mat-stroked-button [disabled]="!selectedOrder" color="primary" (click)="listOrders()">ORDERS</button>
+      <button mat-stroked-button [disabled]="!selectedOrder" (click)="enableTransfer()">TRANSFER</button>
+      <button mat-stroked-button (click)="AddNewCustomer()">ADD CUSTOMER</button>
     </mat-card-actions>
   </mat-card>
+  <br>
+  <form [formGroup]="transferForm" *ngIf="tables.length && transferForm &&  selectedOrder">
+    <mat-card>
+      <mat-form-field fxFlex="50" appearance="outline">
+        <mat-label>Select table</mat-label>
+        <mat-select formControlName="destinationTableId">
+          <mat-option *ngFor="let table of tables" [value]="table.id">
+            Table #{{table.id}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="transferForm.get('destinationTableId')?.errors?.required">
+          {{formValidationService.required.message()}}
+        </mat-error>
+      </mat-form-field>
+      <mat-card-actions>
+        <button mat-raised-button (click)="transferForm.valid && transfer(transferForm.value)">CONFIRM TRANSFER</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button color="primary" mat-dialog-close>OK</button>
+  <!--  <button mat-button color="primary" mat-dialog-close>OK</button>-->
 </div>

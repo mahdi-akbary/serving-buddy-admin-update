@@ -13,7 +13,7 @@ export class OrdersBillsService {
     return this.httpService.get(this.url, options);
   }
 
-  get(id: number, options?: {}): Observable<ITable> {
+  show(id: number, options?: {}): Observable<ITable> {
     return this.httpService.get(this.url + `/${id}`, options);
   }
   getOrdersSummary(tableId): Observable<any>{
@@ -22,7 +22,10 @@ export class OrdersBillsService {
 
   storeCustomer(data: ICustomer): Observable<any> {
     return this.httpService.post(this.url + `/addOrder`, data);
+  }
 
+  transfer(data): Observable<any> {
+    return this.httpService.put(this.url + `/transfer`, data);
   }
 }
 

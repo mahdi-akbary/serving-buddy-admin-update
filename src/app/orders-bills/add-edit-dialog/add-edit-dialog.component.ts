@@ -1,7 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {NewOrderDialogComponent} from "./new-order-dialog/new-order-dialog.component";
-import {IOrdersSummary, OrdersBillsService} from "../orders-bills.service";
+import {IOrdersSummary, ITable, OrdersBillsService} from "../orders-bills.service";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormValidationService} from "../../services/form-validation.service";
+import {NewCustomerDialogComponent} from "./new-customer-dialog/new-customer-dialog.component";
 
 @Component({
   selector: 'app-add-edit-dialog',
@@ -10,11 +12,16 @@ import {IOrdersSummary, OrdersBillsService} from "../orders-bills.service";
 })
 export class AddEditDialogComponent implements OnInit {
   ordersSummary: IOrdersSummary[] = [];
+  tables: ITable[] = [];
+  transferForm: FormGroup
+  selectedOrder = null;
 
   constructor(
     public dialogRef: MatDialogRef<AddEditDialogComponent>,
     private ordersBillsService: OrdersBillsService,
     public dialog: MatDialog,
+    public formBuilder: FormBuilder,
+    public formValidationService: FormValidationService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
@@ -30,8 +37,8 @@ export class AddEditDialogComponent implements OnInit {
     });
   }
 
-  AddOrderFor() {
-    const dialogRef = this.dialog.open(NewOrderDialogComponent, {
+  AddNewCustomer() {
+    const dialogRef = this.dialog.open(NewCustomerDialogComponent, {
       width: '300px',
       data: {tableNumber: this.data.tableNumber},
       disableClose: true
@@ -43,8 +50,30 @@ export class AddEditDialogComponent implements OnInit {
         this.setOrdersSummary()
       }
     });
-
   }
+
+  enableTransfer() {
+    console.log(this.selectedOrder, '<<<<<<<<<<<<<<<<,,')
+    this.ordersBillsService.index().subscribe((tables: any) => {
+      this.transferForm = this.formBuilder.group({
+        destinationTableId: [null, this.formValidationService.required.validator],
+        orderId: this.selectedOrder && this.selectedOrder.id
+      } as any);
+      this.tables = tables.data;
+    }, err => {
+    })
+  }
+
+  transfer(formData) {
+    console.log(formData)
+    this.ordersBillsService.transfer(formData).subscribe(() => {
+      this.ordersSummary = this.ordersSummary.filter(element => element.id !== this.selectedOrder.id)
+      this.selectedOrder = null;
+    }, err => {
+
+    })
+  }
+  listOrders(){}
 
 
 }

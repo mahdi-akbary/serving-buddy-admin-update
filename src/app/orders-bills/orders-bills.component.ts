@@ -11,9 +11,11 @@ import {AddEditDialogComponent} from "./add-edit-dialog/add-edit-dialog.componen
 })
 export class OrdersBillsComponent implements OnInit {
   tables: ITable[];
+
   constructor(private ordersBillsService: OrdersBillsService,
               public dialog: MatDialog) {
   }
+
   addEditOrdersDialog(tableNumber: number): void {
     const dialogRef = this.dialog.open(AddEditDialogComponent, {
       width: '800px',
@@ -23,12 +25,16 @@ export class OrdersBillsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.setTables()
     });
   }
 
   ngOnInit(): void {
+    this.setTables()
+  }
+
+  setTables() {
     this.ordersBillsService.index().subscribe((tables: any) => {
-      console.log(tables)
       this.tables = tables.data;
     })
   }
