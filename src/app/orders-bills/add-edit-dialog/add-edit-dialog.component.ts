@@ -1,9 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {IOrdersSummary, ITable, OrdersBillsService} from "../orders-bills.service";
+import {IMiscellaneousItem, IOrder, IOrdersSummary, ITable, OrdersBillsService} from "../orders-bills.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {FormValidationService} from "../../services/form-validation.service";
 import {NewCustomerDialogComponent} from "./new-customer-dialog/new-customer-dialog.component";
+import {NewOrderDialogComponent} from "./new-order-dialog/new-order-dialog.component";
 
 @Component({
   selector: 'app-add-edit-dialog',
@@ -13,8 +14,14 @@ import {NewCustomerDialogComponent} from "./new-customer-dialog/new-customer-dia
 export class AddEditDialogComponent implements OnInit {
   ordersSummary: IOrdersSummary[] = [];
   tables: ITable[] = [];
-  transferForm: FormGroup
+  transferForm: FormGroup;
   selectedOrder = null;
+  customerOrder: IOrder = null;
+  generationDate;
+  tempMiscellaneousItem = {
+    amount: null,
+    notes: null
+  } as IMiscellaneousItem;
 
   constructor(
     public dialogRef: MatDialogRef<AddEditDialogComponent>,
@@ -53,7 +60,6 @@ export class AddEditDialogComponent implements OnInit {
   }
 
   enableTransfer() {
-    console.log(this.selectedOrder, '<<<<<<<<<<<<<<<<,,')
     this.ordersBillsService.index().subscribe((tables: any) => {
       this.transferForm = this.formBuilder.group({
         destinationTableId: [null, this.formValidationService.required.validator],
@@ -73,7 +79,31 @@ export class AddEditDialogComponent implements OnInit {
 
     })
   }
-  listOrders(){}
 
+  listOrders(order: IOrdersSummary) {
+    this.ordersBillsService.show(order.id).subscribe((orderDetails: IOrder | any) => {
+        this.customerOrder = orderDetails.data;
+        console.log(this.customerOrder, '****')
+        this.generationDate = new Date();
+        this.tempMiscellaneousItem.amount = this.customerOrder.miscellaneous && this.customerOrder.miscellaneous.amount;
+        this.tempMiscellaneousItem.notes = this.customerOrder.miscellaneous && this.customerOrder.miscellaneous.notes;
+      },
+      (error => {
+        console.error(error);
+      }));
+  }
+  AddNewOrder(orderId) {
+    const dialogRef = this.dialog.open(NewOrderDialogComponent, {
+      width: '300px',
+      data: {tableId: this.data.tableNumber, orderId: orderId},
+      disableClose: true
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      if (result) {
+        this.setOrdersSummary()
+      }
+    });
+  }
 }

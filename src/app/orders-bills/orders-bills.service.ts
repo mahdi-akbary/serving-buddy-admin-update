@@ -13,11 +13,12 @@ export class OrdersBillsService {
     return this.httpService.get(this.url, options);
   }
 
-  show(id: number, options?: {}): Observable<ITable> {
+  show(id: number, options?: {}): Observable<IOrder> {
     return this.httpService.get(this.url + `/${id}`, options);
   }
-  getOrdersSummary(tableId): Observable<any>{
-    return this.httpService.get( `server/tables/${tableId}/orderSummaries`);
+
+  getOrdersSummary(tableId): Observable<any> {
+    return this.httpService.get(`server/tables/${tableId}/orderSummaries`);
   }
 
   storeCustomer(data: ICustomer): Observable<any> {
@@ -27,12 +28,22 @@ export class OrdersBillsService {
   transfer(data): Observable<any> {
     return this.httpService.put(this.url + `/transfer`, data);
   }
+  storeNewOrder(data): Observable<any> {
+    return this.httpService.post(this.url + `/orderItem/add`, data);
+  }
+
+  gerCategories(): Observable<any> {
+    return this.httpService.get(`server/categories/minimal`);
+  }
+  getItems(categoryId: number): Observable<any> {
+    return this.httpService.get(`server/categories/${categoryId}/items/minimal`);
+  }
 }
 
 export interface IOrdersSummary {
-  id:number;
-  customer_name:string;
-  init_order_datetime:Date;
+  id: number;
+  customer_name: string;
+  init_order_datetime: Date;
 }
 
 
@@ -74,4 +85,69 @@ export interface ITableMinimal {
       name: string
     }
   };
+}
+
+export interface IOrder {
+  id: number;
+  lastTableId: number;
+  grossTotal: number;
+  totalPayments: number;
+  discount: {
+    amount: number,
+    by: {
+      id: number,
+      name: string
+    }
+  };
+  initialOrderBy: {
+    id: number;
+    name: string;
+    datetime: Date;
+  };
+  lastUpdateBy: {
+    id: number;
+    name: string;
+    datetime: Date;
+  };
+  initialDispatchDatetime: Date;
+  lastDispatchDatetime: Date;
+  checkedOutBy: {
+    id: number;
+    name: string;
+    datetime: Date;
+  };
+  customerName: string;
+  notes: string;
+  miscellaneous: IMiscellaneousItem;
+  items: IMenuItemOrdered[];
+}
+
+export interface IMiscellaneousItem {
+  amount: number;
+  notes: string;
+}
+
+export interface IMenuItemOrdered extends IMenuItemBase {
+  orderId: number;
+  orderItemId: number;
+  count: number;
+  notes?: string;
+  display?: string;
+  toEdit?: boolean;
+  newlyInserted?: boolean;
+}
+
+interface IMenuItemBase {
+  id: number;
+  name: IName;
+  price: number;
+}
+
+export interface IName {
+  dari: string;
+  english: string;
+}
+export interface IMenuCategoryMinimal {
+  id: number;
+  nameEnglish: string
 }

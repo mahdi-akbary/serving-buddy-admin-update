@@ -1,19 +1,51 @@
 <form [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
   <div class="dialog-herder">
-    <h1 color="primary" mat-dialog-title>Order for - table #{{data.tableNumber}}</h1>
+    <h1 color="primary" mat-dialog-title>New Order</h1>
     <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
   </div>
   <div mat-dialog-content>
     <mat-form-field appearance="outline">
-      <mat-label>Customer name</mat-label>
-      <input matInput formControlName="customerName" type="text">
-      <mat-error *ngIf="form.get('customerName')?.errors?.required">
+      <mat-label>Select Category</mat-label>
+      <mat-select formControlName="provider">
+        <mat-option *ngFor="let category of menuCategoriesMinimal" [value]="category">
+          {{category?.name_english}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('provider')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Select Item</mat-label>
+      <mat-select formControlName="itemId">
+        <mat-option *ngFor="let item of menuItemsMinimal" [value]="item.id">
+          {{item?.name_english}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('itemId')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Quantity</mat-label>
+      <input matInput formControlName="quantity" type="number">
+      <mat-error *ngIf="form.get('quantity')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Notes</mat-label>
+      <input matInput formControlName="notes" type="text">
+      <mat-error *ngIf="form.get('notes')?.errors?.required">
         {{formValidationService.required.message()}}
       </mat-error>
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">ADD</button>
+    <button mat-stroked-button color="primary" type="submit" [disabled]="form.invalid">ADD</button>
     <button mat-button mat-dialog-close>CLOSE</button>
   </div>
 </form>
