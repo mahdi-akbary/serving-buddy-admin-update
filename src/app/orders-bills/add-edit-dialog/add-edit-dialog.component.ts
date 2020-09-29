@@ -15,7 +15,7 @@ export class AddEditDialogComponent implements OnInit {
   ordersSummary: IOrdersSummary[] = [];
   tables: ITable[] = [];
   transferForm: FormGroup;
-  selectedOrder = null;
+  selectedOrder: IOrdersSummary = null;
   customerOrder: IOrder = null;
   generationDate;
   tempMiscellaneousItem = {
@@ -92,17 +92,17 @@ export class AddEditDialogComponent implements OnInit {
         console.error(error);
       }));
   }
-  AddNewOrder(orderId) {
+
+  AddNewOrder(order: IOrdersSummary) {
     const dialogRef = this.dialog.open(NewOrderDialogComponent, {
       width: '300px',
-      data: {tableId: this.data.tableNumber, orderId: orderId},
+      data: {tableId: this.data.tableNumber, orderId: order.id},
       disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
       if (result) {
-        this.setOrdersSummary()
+        this.listOrders(order)
       }
     });
   }

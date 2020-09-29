@@ -27,7 +27,7 @@
       </table>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-stroked-button [disabled]="!selectedOrder" color="primary" (click)="listOrders(this.selectedOrder)">ORDERS</button>
+      <button mat-stroked-button [disabled]="!selectedOrder" color="primary" (click)="listOrders(selectedOrder)">ORDERS</button>
       <button mat-stroked-button [disabled]="!selectedOrder" (click)="enableTransfer()">TRANSFER</button>
       <button mat-stroked-button (click)="AddNewCustomer()">ADD</button>
     </mat-card-actions>
@@ -57,6 +57,7 @@
       <mat-card-title>
         Orders
       </mat-card-title>
+      <button mat-stroked-button color="primary" (click)="AddNewOrder(selectedOrder)">ADD</button>
     </mat-card-header>
     <mat-card-content>
       <table>
@@ -81,7 +82,7 @@
       </table>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-stroked-button color="primary" (click)="AddNewOrder(customerOrder.id)">ADD</button>
+
     </mat-card-actions>
   </mat-card>
 
