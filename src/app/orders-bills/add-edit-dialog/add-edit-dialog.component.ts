@@ -52,7 +52,6 @@ export class AddEditDialogComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
       if (result) {
         this.setOrdersSummary()
       }
@@ -71,7 +70,6 @@ export class AddEditDialogComponent implements OnInit {
   }
 
   transfer(formData) {
-    console.log(formData)
     this.ordersBillsService.transfer(formData).subscribe(() => {
       this.ordersSummary = this.ordersSummary.filter(element => element.id !== this.selectedOrder.id)
       this.selectedOrder = null;
@@ -83,7 +81,6 @@ export class AddEditDialogComponent implements OnInit {
   listOrders(order: IOrdersSummary) {
     this.ordersBillsService.show(order.id).subscribe((orderDetails: IOrder | any) => {
         this.customerOrder = orderDetails.data;
-        console.log(this.customerOrder, '****')
         this.generationDate = new Date();
         this.tempMiscellaneousItem.amount = this.customerOrder.miscellaneous && this.customerOrder.miscellaneous.amount;
         this.tempMiscellaneousItem.notes = this.customerOrder.miscellaneous && this.customerOrder.miscellaneous.notes;
@@ -93,10 +90,10 @@ export class AddEditDialogComponent implements OnInit {
       }));
   }
 
-  AddNewOrder(order: IOrdersSummary) {
+  AddNewOrder(order: IOrdersSummary | any) {
     const dialogRef = this.dialog.open(NewOrderDialogComponent, {
       width: '300px',
-      data: {tableId: this.data.tableNumber, orderId: order.id},
+      data: {tableId: this.data.tableNumber, orderId: order.id, ...order},
       disableClose: true
     });
 
@@ -105,5 +102,12 @@ export class AddEditDialogComponent implements OnInit {
         this.listOrders(order)
       }
     });
+  }
+
+  deleteOrder(orderDetail) {
+    this.ordersBillsService.deleteOrder(orderDetail.id, orderDetail.order_item_id).subscribe((res) => {
+      this.listOrders(this.selectedOrder);
+    }, (err) => {
+    })
   }
 }

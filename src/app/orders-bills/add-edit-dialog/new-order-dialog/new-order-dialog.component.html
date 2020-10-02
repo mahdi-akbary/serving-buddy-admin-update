@@ -45,7 +45,7 @@
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
-    <button mat-stroked-button color="primary" type="submit" [disabled]="form.invalid">ADD</button>
+    <button mat-stroked-button color="primary" type="submit" [disabled]="form.invalid">{{ data?.order_item_id ? 'EDIT' : 'SAVE' }}</button>
     <button mat-button mat-dialog-close>CLOSE</button>
   </div>
 </form>

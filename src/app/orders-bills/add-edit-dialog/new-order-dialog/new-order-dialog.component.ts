@@ -13,7 +13,7 @@ export class NewOrderDialogComponent implements OnInit {
 
   form: FormGroup;
   menuCategoriesMinimal: IMenuCategoryMinimal[] | any[];
-  menuItemsMinimal
+  menuItemsMinimal: any;
 
   constructor(
     public dialogRef: MatDialogRef<NewOrderDialogComponent>,
@@ -21,7 +21,6 @@ export class NewOrderDialogComponent implements OnInit {
     private ordersBillsService: OrdersBillsService,
     public formValidationService: FormValidationService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-    console.log(data, '<<<<<')
   }
 
   ngOnInit(): void {
@@ -30,7 +29,7 @@ export class NewOrderDialogComponent implements OnInit {
       orderId: this.data && this.data.orderId,
       itemId: [this.data && this.data.itemId, this.formValidationService.required.validator],
       provider: [this.data && this.data.provider, this.formValidationService.required.validator],
-      quantity: [this.data && this.data.quantity, this.formValidationService.required.validator],
+      quantity: [this.data && this.data.count, this.formValidationService.required.validator],
       notes: this.data && this.data.notes
     } as any);
     this.form.get('provider').valueChanges.subscribe(value => {
@@ -42,19 +41,37 @@ export class NewOrderDialogComponent implements OnInit {
   }
 
   submit(formData: any) {
-    formData.provider.id === 1 ? formData.provider = 'Hookah' : (formData.provider.id === 3 ? formData.provider = 'Kitchen' : formData.provider = 'None');
-    this.ordersBillsService.storeNewOrder(formData).subscribe((res) => {
-      this.dialogRef.close(true)
-    }, (err) => {
-    })
+    if (this.data && this.data.order_item_id) {
+      this.ordersBillsService.updateOrder({
+        count: formData.quantity,
+        orderId: formData.orderId,
+        id: this.data.order_item_id
+      }).subscribe((res) => {
+        this.dialogRef.close(true)
+      }, (err) => {
+      })
+    } else {
+      formData.provider.id === 1 ? formData.provider = 'Hookah' : (formData.provider.id === 3 ? formData.provider = 'Kitchen' : formData.provider = 'None');
+      // todo update db with a slug field and remove the above code that's based on ID
+      this.ordersBillsService.storeNewOrder(formData).subscribe((res) => {
+        this.dialogRef.close(true)
+      }, (err) => {
+      })
+    }
   }
+
 
   listCategories() {
     this.ordersBillsService
       .gerCategories()
       .subscribe(categories => {
-        console.log(categories)
         this.menuCategoriesMinimal = categories.data;
+        if (this.data && this.data.order_item_id) {
+          const item = this.findSelectedItemInDropdown(this.data, categories.data, 'category_id');
+          this.form.get('provider').setValue(item);
+          this.form.get('provider').disable();
+          this.listSelectedCategoryItems(item.id);
+        }
       }, (error => {
         console.error(error);
       }));
@@ -65,10 +82,18 @@ export class NewOrderDialogComponent implements OnInit {
     this.ordersBillsService
       .getItems(selectedCategoryId)
       .subscribe(items => {
-        console.log(items)
         this.menuItemsMinimal = items.data;
+        if (this.data && this.data.order_item_id) {
+          const item = this.findSelectedItemInDropdown(this.data, items.data, 'item_id');
+          this.form.get('itemId').setValue(item.id);
+          this.form.get('itemId').disable();
+        }
       }, (error => {
         console.error(error);
       }));
+  }
+
+  findSelectedItemInDropdown(data, list, fieldName: string) {
+    return list.find(item => item.id == data[fieldName])
   }
 }

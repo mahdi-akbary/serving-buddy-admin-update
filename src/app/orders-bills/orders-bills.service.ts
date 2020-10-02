@@ -31,6 +31,12 @@ export class OrdersBillsService {
   storeNewOrder(data): Observable<any> {
     return this.httpService.post(this.url + `/orderItem/add`, data);
   }
+  updateOrder(data): Observable<any> {
+    return this.httpService.put(this.url + `/orderItem`, data);
+  }
+  deleteOrder(orderId, orderItemId): Observable<any> {
+    return this.httpService.delete(this.url + `/orderItem/${orderItemId}/${orderId}`);
+  }
 
   gerCategories(): Observable<any> {
     return this.httpService.get(`server/categories/minimal`);

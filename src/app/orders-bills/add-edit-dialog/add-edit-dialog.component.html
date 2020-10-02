@@ -7,6 +7,16 @@
     <mat-card-header>
       <mat-card-title *ngIf="ordersSummary?.length">Customers</mat-card-title>
       <mat-card-subtitle *ngIf="!ordersSummary?.length">No customer for this table yet.</mat-card-subtitle>
+      <div class="action">
+        <button mat-stroked-button [disabled]="!selectedOrder" color="primary" (click)="listOrders(selectedOrder)">
+          ORDERS
+        </button>
+        <button mat-stroked-button [disabled]="!selectedOrder" (click)="enableTransfer()">TRANSFER</button>
+        <button mat-stroked-button (click)="AddNewCustomer()">
+          <mat-icon>add</mat-icon>
+          <span>ADD</span>
+        </button>
+      </div>
     </mat-card-header>
     <mat-card-content *ngIf="ordersSummary?.length">
       <table>
@@ -26,11 +36,6 @@
         </tr>
       </table>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-stroked-button [disabled]="!selectedOrder" color="primary" (click)="listOrders(selectedOrder)">ORDERS</button>
-      <button mat-stroked-button [disabled]="!selectedOrder" (click)="enableTransfer()">TRANSFER</button>
-      <button mat-stroked-button (click)="AddNewCustomer()">ADD</button>
-    </mat-card-actions>
   </mat-card>
   <br>
   <form [formGroup]="transferForm" *ngIf="tables.length && transferForm &&  selectedOrder">
@@ -57,7 +62,12 @@
       <mat-card-title>
         Orders
       </mat-card-title>
-      <button mat-stroked-button color="primary" (click)="AddNewOrder(selectedOrder)">ADD</button>
+      <div class="action">
+        <button mat-stroked-button color="primary" (click)="AddNewOrder(selectedOrder)">
+          <mat-icon>add</mat-icon>
+          <span>ADD</span>
+        </button>
+      </div>
     </mat-card-header>
     <mat-card-content>
       <table>
@@ -69,15 +79,24 @@
           <th>Unit price</th>
           <th>Total price</th>
           <th>Notes</th>
+          <th>Operations</th>
         </tr>
         <tr *ngFor="let item of customerOrder, let i = index">
-          <td>{{i + 1}}</td>
-          <td>{{item.item_name_english}}</td>
-          <td>{{item.item_name_dari}}</td>
-          <td>{{item.count}}</td>
-          <td>AFN {{item.price | number}}</td>
-          <td>AFN {{item.price * item.count | number}}</td>
-          <td>{{item.order_item_notes}}</td>
+          <td *ngIf="item.order_item_id">{{i + 1}}</td>
+          <td *ngIf="item.order_item_id">{{item.item_name_english}}</td>
+          <td *ngIf="item.order_item_id">{{item.item_name_dari}}</td>
+          <td *ngIf="item.order_item_id">{{item.count}}</td>
+          <td *ngIf="item.order_item_id">AFN {{item.price | number}}</td>
+          <td *ngIf="item.order_item_id">AFN {{item.price * item.count | number}}</td>
+          <td *ngIf="item.order_item_id">{{item.order_item_notes}}</td>
+          <td *ngIf="item.order_item_id" class="operations">
+            <button mat-icon-button color="accent" matTooltip="Edit" (click)="AddNewOrder(item)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" matTooltip="Delete" (click)="deleteOrder(item)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
         </tr>
       </table>
     </mat-card-content>

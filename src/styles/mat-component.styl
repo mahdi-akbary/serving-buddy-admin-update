@@ -1,6 +1,7 @@
 @import "color-palette.styl"
 mat-dialog-container
   position relative
+
   .dialog-header
     position: absolute;
     z-index: 1;
@@ -13,18 +14,21 @@ mat-dialog-container
     justify-content space-between
     align-items center
     padding 0 24px !important
+
     mat-icon
       cursor pointer
       font-size 20px
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid #ffffff30;
-      border-radius: 16px;
+      box-shadow: 0 1px 3px 0 #5b9a11eb;
+      border-radius: 6px;
+
   .mat-dialog-title
     margin 0 !important
     font-size 15px !important
     font-weight 500
+
   .mat-dialog-content
     margin-top 40px !important
     padding 5px 24px !important
