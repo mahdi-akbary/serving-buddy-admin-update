@@ -44,6 +44,10 @@ export class OrdersBillsService {
   getItems(categoryId: number): Observable<any> {
     return this.httpService.get(`server/categories/${categoryId}/items/minimal`);
   }
+
+  getCustomerTableHistory(customerId: number): Observable<any> {
+    return this.httpService.get(`server/tables/orderTableHistory/${customerId}`);
+  }
 }
 
 export interface IOrdersSummary {

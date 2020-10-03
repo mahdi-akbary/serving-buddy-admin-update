@@ -5,6 +5,8 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {FormValidationService} from "../../services/form-validation.service";
 import {NewCustomerDialogComponent} from "./new-customer-dialog/new-customer-dialog.component";
 import {NewOrderDialogComponent} from "./new-order-dialog/new-order-dialog.component";
+import {TableHistoryDialogComponent} from "./table-history-dialog/table-history-dialog.component";
+import {OrderDetailsDialogComponent} from "./order-details-dialog/order-details-dialog.component";
 
 @Component({
   selector: 'app-add-edit-dialog',
@@ -89,6 +91,19 @@ export class AddEditDialogComponent implements OnInit {
         console.error(error);
       }));
   }
+  showOrderDetails(order){
+    const dialogRef = this.dialog.open(OrderDetailsDialogComponent, {
+      width: '850px',
+      data: order,
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+
+      }
+    });
+  }
 
   AddNewOrder(order: IOrdersSummary | any) {
     const dialogRef = this.dialog.open(NewOrderDialogComponent, {
@@ -109,5 +124,19 @@ export class AddEditDialogComponent implements OnInit {
       this.listOrders(this.selectedOrder);
     }, (err) => {
     })
+  }
+
+  showHistory(ordersSummary) {
+    const dialogRef = this.dialog.open(TableHistoryDialogComponent, {
+      width: '450px',
+      data: ordersSummary,
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+
+      }
+    });
   }
 }

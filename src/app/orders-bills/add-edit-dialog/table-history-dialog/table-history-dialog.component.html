@@ -1,0 +1,18 @@
+<div class="dialog-header">
+  <h1 color="primary" mat-dialog-title>Customer table history</h1>
+  <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
+</div>
+<div mat-dialog-content>
+  <table class="dialog-table">
+    <tr>
+      <th>#</th>
+      <th>Table</th>
+      <th>Date-time</th>
+    </tr>
+    <tr *ngFor="let history of customerTableHistoryList, let i = index">
+      <td>{{i + 1}}</td>
+      <td>Table {{history.table_id}}</td>
+      <td>{{history.datetime | date: 'hh : mm : ss  a'}}</td>
+    </tr>
+  </table>
+</div>

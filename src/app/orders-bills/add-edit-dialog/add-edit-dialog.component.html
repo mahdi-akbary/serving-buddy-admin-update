@@ -8,6 +8,9 @@
       <mat-card-title *ngIf="ordersSummary?.length">Customers</mat-card-title>
       <mat-card-subtitle *ngIf="!ordersSummary?.length">No customer for this table yet.</mat-card-subtitle>
       <div class="action">
+<!--        <button mat-stroked-button [disabled]="!selectedOrder" color="primary" (click)="showOrderDetails(selectedOrder)">-->
+<!--          SHOW DETAILS-->
+<!--        </button>-->
         <button mat-stroked-button [disabled]="!selectedOrder" color="primary" (click)="listOrders(selectedOrder)">
           ORDERS
         </button>
@@ -19,12 +22,13 @@
       </div>
     </mat-card-header>
     <mat-card-content *ngIf="ordersSummary?.length">
-      <table>
+      <table class="dialog-table">
         <tr>
           <th>Select</th>
           <th>#</th>
           <th>Order for</th>
           <th>Order time</th>
+          <th>Operations</th>
         </tr>
         <tr *ngFor="let orderSummary of ordersSummary, let i = index">
           <td>
@@ -33,6 +37,11 @@
           <td>{{i + 1}}</td>
           <td>{{orderSummary.customer_name}}</td>
           <td>{{orderSummary.init_order_datetime | date: 'hh : mm : ss  a'}}</td>
+          <td class="operations">
+            <button mat-icon-button color="accent" matTooltip="Tables history" (click)="showHistory(orderSummary)">
+              <mat-icon>history</mat-icon>
+            </button>
+          </td>
         </tr>
       </table>
     </mat-card-content>
@@ -70,7 +79,7 @@
       </div>
     </mat-card-header>
     <mat-card-content>
-      <table>
+      <table class="dialog-table">
         <tr>
           <th>#</th>
           <th>English name</th>

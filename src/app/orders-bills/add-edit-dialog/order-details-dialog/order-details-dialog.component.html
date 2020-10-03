@@ -1,0 +1,65 @@
+<div class="dialog-header">
+  <h1 color="primary" mat-dialog-title>View order details</h1>
+  <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
+</div>
+<div mat-dialog-content>
+  <table class="dialog-table">
+    <tr>
+      <th>Order ID</th>
+      <td>10</td>
+      <th>Order for</th>
+      <th>Nikzad</th>
+    </tr>
+    <tr>
+      <th>Initial order time</th>
+      <td>10</td>
+      <th>Initial order by</th>
+      <th>Nikzad</th>
+    </tr>
+    <tr>
+      <th>Last update time</th>
+      <td>10</td>
+      <th>Last update by</th>
+      <th>Nikzad</th>
+    </tr>
+    <tr>
+      <th>Initial dispatch time</th>
+      <td>10</td>
+      <th>Last dispatch time</th>
+      <th>Nikzad</th>
+    </tr>
+    <tr>
+      <th>Checked out time</th>
+      <td>10</td>
+      <th>Checked out by</th>
+      <th>Nikzad</th>
+    </tr>
+  </table>
+
+  <br>
+
+  <table class="dialog-table">
+    <tr>
+      <th>#</th>
+      <th>English name</th>
+      <th>Dari name</th>
+      <th>Quantity</th>
+      <th>Unit price</th>
+      <th>Total price</th>
+      <th>Notes</th>
+    </tr>
+    <tr *ngFor="let history of currentOrder?.items, let i = index">
+      <td>{{i + 1}}</td>
+      <td>Table {{history.table_id}}</td>
+      <td>{{history.datetime | date: 'hh : mm : ss  a'}}</td>
+    </tr>
+  </table>
+</div>
+<div mat-dialog-actions>
+  <button mat-stroked-button type="button">ADD PAYMENT</button>
+  <button mat-stroked-button type="button">ADD DISCOUNT</button>
+  <button mat-stroked-button type="button">CHECKOUT</button>
+  <button mat-stroked-button type="button">ADD MISC ITEM</button>
+  <button mat-stroked-button type="button">CALCULATOR</button>
+  <button mat-stroked-button type="button">PRINT</button>
+</div>

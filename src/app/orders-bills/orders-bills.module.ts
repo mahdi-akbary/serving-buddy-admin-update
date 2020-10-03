@@ -22,6 +22,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatRadioModule} from "@angular/material/radio";
 import {MatSelectModule} from "@angular/material/select";
 import {NewCustomerDialogComponent} from "./add-edit-dialog/new-customer-dialog/new-customer-dialog.component";
+import {TableHistoryDialogComponent} from "./add-edit-dialog/table-history-dialog/table-history-dialog.component";
+import {OrderDetailsDialogComponent} from "./add-edit-dialog/order-details-dialog/order-details-dialog.component";
 @NgModule({
   declarations: [
     OrdersBillsComponent,
@@ -31,7 +33,9 @@ import {NewCustomerDialogComponent} from "./add-edit-dialog/new-customer-dialog/
     MenuItemsComponent,
     AddEditDialogComponent,
     NewOrderDialogComponent,
-    NewCustomerDialogComponent
+    NewCustomerDialogComponent,
+    TableHistoryDialogComponent,
+    OrderDetailsDialogComponent
   ],
   imports: [
     CommonModule,
