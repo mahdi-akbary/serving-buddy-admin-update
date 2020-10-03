@@ -16,10 +16,10 @@ export class OrdersBillsComponent implements OnInit {
               public dialog: MatDialog) {
   }
 
-  addEditOrdersDialog(tableNumber: number): void {
+  addEditOrdersDialog(tableNumber: number, isViewMode: boolean = false): void {
     const dialogRef = this.dialog.open(AddEditDialogComponent, {
       width: '800px',
-      data: {tableNumber: tableNumber},
+      data: {tableNumber: tableNumber, isViewMode: isViewMode},
       disableClose: true
     });
 

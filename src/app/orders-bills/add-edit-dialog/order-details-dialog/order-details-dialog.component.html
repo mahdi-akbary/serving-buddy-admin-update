@@ -6,33 +6,33 @@
   <table class="dialog-table">
     <tr>
       <th>Order ID</th>
-      <td>10</td>
+      <td>{{currentOrder?.id}}</td>
       <th>Order for</th>
-      <th>Nikzad</th>
+      <td>{{currentOrder?.customer_name}}</td>
     </tr>
     <tr>
       <th>Initial order time</th>
-      <td>10</td>
+      <td>{{currentOrder?.init_order_datetime | date: 'hh : mm : ss  a'}}</td>
       <th>Initial order by</th>
-      <th>Nikzad</th>
+      <td>{{currentOrder?.init_order_by_name}}</td>
     </tr>
     <tr>
       <th>Last update time</th>
-      <td>10</td>
+      <td>{{currentOrder?.last_update_datetime | date: 'hh : mm : ss  a'}}</td>
       <th>Last update by</th>
-      <th>Nikzad</th>
+      <td>{{currentOrder?.last_update_by_name}}</td>
     </tr>
     <tr>
       <th>Initial dispatch time</th>
-      <td>10</td>
+      <td>{{currentOrder?.init_dispatch_datetime}}</td>
       <th>Last dispatch time</th>
-      <th>Nikzad</th>
+      <td>{{currentOrder?.last_dispatch_datetime}}</td>
     </tr>
     <tr>
       <th>Checked out time</th>
-      <td>10</td>
+      <td>{{currentOrder?.checked_out_datetime}}</td>
       <th>Checked out by</th>
-      <th>Nikzad</th>
+      <td>{{currentOrder?.checked_out_by_name}}</td>
     </tr>
   </table>
 
@@ -48,10 +48,14 @@
       <th>Total price</th>
       <th>Notes</th>
     </tr>
-    <tr *ngFor="let history of currentOrder?.items, let i = index">
+    <tr *ngFor="let item of orderItems, let i = index">
       <td>{{i + 1}}</td>
-      <td>Table {{history.table_id}}</td>
-      <td>{{history.datetime | date: 'hh : mm : ss  a'}}</td>
+      <td>{{item?.item_name_english}}</td>
+      <td>{{item?.item_name_dari}}</td>
+      <td>{{item?.count}}</td>
+      <td>AFN {{item.price | number}}</td>
+      <td>AFN {{item.price * item.count | number}}</td>
+      <td>{{item.order_item_notes}}</td>
     </tr>
   </table>
 </div>
