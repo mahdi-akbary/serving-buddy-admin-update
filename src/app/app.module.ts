@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -14,10 +13,12 @@ import {ListOptionsComponent} from './layout/list-options/list-options.component
 import {BannerComponent} from './layout/banner/banner.component';
 import {HeaderComponent} from './layout/header/header.component';
 import {HttpService} from './services/http.service';
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {InterceptorService} from './services/interceptor.service';
-import {AuthService} from "./services/auth.service";
-import {FormValidationService} from "./services/form-validation.service";
+import {AuthService} from './services/auth.service';
+import {FormValidationService} from './services/form-validation.service';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {StaticDataService} from './services/static-data.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {FormValidationService} from "./services/form-validation.service";
     MatButtonModule,
     MatIconModule,
     MatListModule,
-    MatTreeModule
+    MatTreeModule,
+    FlexLayoutModule,
   ],
   providers: [
     HttpService,
@@ -48,6 +50,7 @@ import {FormValidationService} from "./services/form-validation.service";
       deps: [],
       multi: true
     },
+    StaticDataService
   ],
   bootstrap: [AppComponent]
 })

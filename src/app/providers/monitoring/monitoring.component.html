@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-card-title>{{ttProvider}}</mat-card-title>
+  <mat-card-content>
+    <button
+      class="actionButton"
+      mat-raised-button
+      [disabled]="!chosenRecord"
+      (click)="initLoadOrder(chosenRecord)"
+    >View</button>
+
+    <mat-radio-group></mat-radio-group>
+  </mat-card-content>
+</mat-card>

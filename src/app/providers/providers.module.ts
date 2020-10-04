@@ -1,15 +1,23 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { ProvidersRoutingModule } from './providers-routing.module';
-import { ProvidersComponent } from './providers.component';
+import {NgModule} from '@angular/core';
+import {ProvidersRoutingModule} from './providers-routing.module';
+import {ProvidersComponent} from './providers.component';
+import {MonitoringComponent} from './monitoring/monitoring.component';
+import {ProvidersService} from './providers.service';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
-  declarations: [ProvidersComponent],
+  declarations: [
+    ProvidersComponent,
+    MonitoringComponent
+  ],
   imports: [
-    CommonModule,
-    ProvidersRoutingModule
+    SharedModule,
+    ProvidersRoutingModule,
+  ],
+  providers: [
+    ProvidersService
   ]
 })
-export class ProvidersModule { }
+export class ProvidersModule {
+}
