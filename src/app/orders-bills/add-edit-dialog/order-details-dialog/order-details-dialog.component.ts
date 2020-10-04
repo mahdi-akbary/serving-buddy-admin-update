@@ -8,8 +8,8 @@ import {OrdersBillsService} from "../../orders-bills.service";
   styleUrls: ['./order-details-dialog.component.styl']
 })
 export class OrderDetailsDialogComponent implements OnInit {
-  currentOrder: any
-  orderItems: any[] = []
+  currentOrder: any;
+  orderItems: any;
 
   constructor(
     public dialogRef: MatDialogRef<OrderDetailsDialogComponent>,
@@ -21,6 +21,7 @@ export class OrderDetailsDialogComponent implements OnInit {
     this.ordersBillsService.show(this.order.id).subscribe((orderDetails: any) => {
       this.currentOrder = orderDetails && orderDetails.data && orderDetails.data[0];
       this.orderItems = orderDetails && orderDetails.data;
+      console.log(this.orderItems)
     })
   }
 }
