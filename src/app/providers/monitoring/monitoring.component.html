@@ -5,9 +5,39 @@
       class="actionButton"
       mat-raised-button
       [disabled]="!chosenRecord"
-      (click)="initLoadOrder(chosenRecord)"
-    >View</button>
+      (click)="viewDialog(chosenRecord)"
+    >View
+    </button>
 
-    <mat-radio-group></mat-radio-group>
+    <mat-radio-group [(ngModel)]="chosenRecord">
+      <table>
+        <thead>
+        <tr>
+          <th>Select</th>
+          <th>#</th>
+          <th>Table</th>
+          <th>Date time</th>
+          <th>Duration</th>
+          <th>Status</th>
+          <th>ID</th>
+          <th>Order ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let r of records; let i = index;">
+          <td>
+            <mat-radio-button [value]="r.provider_order_id"></mat-radio-button>
+          </td>
+          <td>{{i + 1}}</td>
+          <td>Table {{r.table_id}}</td>
+          <td>{{r.insert_datetime}}</td>
+          <td>{{getDuration(r.insert_datetime)}}</td>
+          <td>{{r.provider_order_status}}</td>
+          <td>{{r.provider_order_id}}</td>
+          <td>{{r.order_id}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </mat-radio-group>
   </mat-card-content>
 </mat-card>

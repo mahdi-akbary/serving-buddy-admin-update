@@ -1,6 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ProvidersService} from '../providers.service';
+import {IRawProviderListItem} from '../providers.types';
+import {MatDialog} from '@angular/material/dialog';
+import {ViewDialogComponent} from '../view-dialog/view-dialog.component';
 
 @Component({
   selector: 'app-monitoring',
@@ -10,14 +13,14 @@ import {ProvidersService} from '../providers.service';
 export class MonitoringComponent implements OnInit {
 
   @Input() ttProvider: string;
-  @Output() loadOrderEvent = new EventEmitter<number>();
 
-  public records = [];
+  public records: IRawProviderListItem[] = [];
 
   public chosenRecord = undefined;
 
   constructor(private providerService: ProvidersService,
-              private matSnackBar: MatSnackBar) {
+              private matSnackBar: MatSnackBar,
+              public matDialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -49,8 +52,12 @@ export class MonitoringComponent implements OnInit {
     return Math.round((((new Date()).getTime() - (new Date(startDate)).getTime()) / 1000) / 60) + ' min';
   }
 
-  initLoadOrder(providerOrderId: number) {
-    this.loadOrderEvent.emit(providerOrderId);
-    this.chosenRecord = undefined;
+  viewDialog(providerOrderId) {
+    console.log(this.chosenRecord, providerOrderId);
+    this.matDialog.open(ViewDialogComponent, {
+      width: '800px',
+      data: providerOrderId,
+      disableClose: true
+    });
   }
 }

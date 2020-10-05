@@ -23,16 +23,4 @@ export class ProvidersComponent implements OnInit {
     this.providers = this.staticDataService.toMonitorProviders;
   }
 
-  loadOrder(providerOrderId: number) {
-
-    this.providerService
-      .getProviderOrder(providerOrderId)
-      .subscribe((providerOrder: IRawProviderOrder) => {
-        this.currentProviderOrder = providerOrder;
-      }, (error) => {
-        this.matSnackBar.open('ERROR: Could not load order details.');
-        console.error(error);
-      });
-  }
-
 }

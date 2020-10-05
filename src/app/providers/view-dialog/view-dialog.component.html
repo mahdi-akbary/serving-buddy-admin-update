@@ -1,0 +1,24 @@
+<div class="dialog-header">
+  <h1 color="primary" mat-dialog-title>View order, table {{currentProviderOrder?.last_table_id}}</h1>
+  <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
+</div>
+<div mat-dialog-content>
+  <table class="dialog-table">
+    <tr>
+      <th>Provider</th>
+      <td>{{currentProviderOrder?.provider}}</td>
+    </tr>
+    <tr>
+      <th>Sub-order ID</th>
+      <td>{{currentProviderOrder?.provider_order_id}}</td>
+    </tr>
+    <tr>
+      <th>Main order ID</th>
+      <td>{{currentProviderOrder?.order_id}}</td>
+    </tr>
+    <tr>
+      <th>Sub-order placed at</th>
+      <td>{{currentProviderOrder?.insert_datetime}}</td>
+    </tr>
+  </table>
+</div>

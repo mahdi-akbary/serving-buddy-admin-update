@@ -4,12 +4,14 @@ import {ProvidersComponent} from './providers.component';
 import {MonitoringComponent} from './monitoring/monitoring.component';
 import {ProvidersService} from './providers.service';
 import {SharedModule} from '../shared/shared.module';
+import {ViewDialogComponent} from './view-dialog/view-dialog.component';
 
 
 @NgModule({
   declarations: [
     ProvidersComponent,
-    MonitoringComponent
+    MonitoringComponent,
+    ViewDialogComponent
   ],
   imports: [
     SharedModule,
