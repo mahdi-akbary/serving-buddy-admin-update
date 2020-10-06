@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {IRawProviderListItem, IRawProviderOrder} from './providers.types';
+import {IProviderOrderItem, IRawProviderListItem, IRawProviderOrder} from './providers.types';
 import {Observable} from 'rxjs';
 import {HttpService} from '../services/http.service';
 
@@ -17,6 +17,10 @@ export class ProvidersService {
 
   getProviderOrder(id: number): Observable<IRawProviderOrder> {
     return this.httpService.get('server/providers/' + id);
+  }
+
+  getProviderOrderItems(id: number): Observable<IProviderOrderItem[]> {
+    return this.httpService.get('server/providers/orderItem/' + id);
   }
 
 }

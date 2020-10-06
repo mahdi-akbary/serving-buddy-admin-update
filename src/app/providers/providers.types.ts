@@ -13,8 +13,8 @@ export interface  IRawProviderListItem extends Object{
 
 export interface IProviderOrderItem {
   id: number;
-  name_en: string;
-  name_da: string;
+  name_english: string;
+  name_dari: string;
   count: number;
   notes?: string
 }
