@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {IProviderOrderItem, IRawProviderListItem, IRawProviderOrder} from './providers.types';
+import {IProviderOrderItem, IProviderListItem, IProviderOrder} from './providers.types';
 import {Observable} from 'rxjs';
 import {HttpService} from '../services/http.service';
 
@@ -11,11 +11,11 @@ export class ProvidersService {
   constructor(private httpService: HttpService) {
   }
 
-  list(provider: string): Observable<IRawProviderListItem[]> {
+  list(provider: string): Observable<IProviderListItem[]> {
     return this.httpService.get(`server/providers?provider=${provider}`);
   }
 
-  getProviderOrder(id: number): Observable<IRawProviderOrder> {
+  getProviderOrder(id: number): Observable<IProviderOrder> {
     return this.httpService.get('server/providers/' + id);
   }
 

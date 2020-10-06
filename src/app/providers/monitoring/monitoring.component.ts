@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ProvidersService} from '../providers.service';
-import {IRawProviderListItem} from '../providers.types';
+import {IProviderListItem} from '../providers.types';
 import {MatDialog} from '@angular/material/dialog';
 import {ViewDialogComponent} from '../view-dialog/view-dialog.component';
 
@@ -14,7 +14,7 @@ export class MonitoringComponent implements OnInit {
 
   @Input() ttProvider: string;
 
-  public records: IRawProviderListItem[] = [];
+  public records: IProviderListItem[] = [];
 
   public chosenRecord = undefined;
 
@@ -24,10 +24,10 @@ export class MonitoringComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.scheduleFetch();
+    this.fetch();
   }
 
-  private fetch() {
+  fetch() {
     this.providerService.list(this.ttProvider)
       .subscribe(records => {
         this.records = records;
@@ -35,12 +35,6 @@ export class MonitoringComponent implements OnInit {
         console.error(error);
         this.matSnackBar.open('ERROR: Failed to fetch monitoring information.');
       });
-  }
-
-  private scheduleFetch() {
-    setInterval(() => {
-      this.fetch();
-    }, 4000);
   }
 
   reset() {

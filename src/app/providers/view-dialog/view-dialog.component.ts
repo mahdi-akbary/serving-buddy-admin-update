@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {IProviderOrderItem, IRawProviderListItem, IRawProviderOrder} from '../providers.types';
+import {IProviderOrderItem, IProviderListItem, IProviderOrder} from '../providers.types';
 import {ProvidersService} from '../providers.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
@@ -11,7 +11,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class ViewDialogComponent implements OnInit {
 
-  providerOrder: IRawProviderOrder = undefined;
+  providerOrder: IProviderOrder = undefined;
   providerOrderItems: IProviderOrderItem[] = [];
 
   constructor(
@@ -24,7 +24,7 @@ export class ViewDialogComponent implements OnInit {
   ngOnInit(): void {
     this.providersService
       .getProviderOrder(this.providerOrderId)
-      .subscribe((providerOrder: IRawProviderOrder) => {
+      .subscribe((providerOrder: IProviderOrder) => {
         this.providerOrder = providerOrder;
       }, (error) => {
         this.matSnackBar.open('ERROR: Could not load order details.');

@@ -1,16 +1,26 @@
-<mat-card>
-  <mat-card-title>{{ttProvider}}</mat-card-title>
+<mat-card class="boundary">
   <mat-card-content>
-    <button
-      class="actionButton"
-      mat-raised-button
-      [disabled]="!chosenRecord"
-      (click)="viewDialog(chosenRecord)"
-    >View
-    </button>
+    <mat-card-header>
+      <mat-card-title>{{ttProvider}}</mat-card-title>
+      <div class="action">
+        <button
+          class="actionButton"
+          mat-stroked-button
+          [disabled]="!chosenRecord"
+          (click)="viewDialog(chosenRecord)"
+        > VIEW
+        </button>
+        <button
+          class="actionButton"
+          mat-stroked-button
+          (click)="fetch()"
+        > REFRESH
+        </button>
+      </div>
+    </mat-card-header>
 
     <mat-radio-group [(ngModel)]="chosenRecord">
-      <table>
+      <table class="the-table">
         <thead>
         <tr>
           <th>Select</th>

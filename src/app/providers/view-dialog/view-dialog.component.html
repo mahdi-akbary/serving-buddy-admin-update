@@ -3,7 +3,7 @@
   <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
 </div>
 <div mat-dialog-content>
-  <table class="dialog-table">
+  <table class="the-table">
     <tr>
       <th>Provider</th>
       <td>{{providerOrder?.provider}}</td>
@@ -22,7 +22,7 @@
     </tr>
   </table>
 
-  <table class="dialog-table">
+  <table class="the-table">
     <tr>
       <th>#</th>
       <th>English name</th>
@@ -33,9 +33,9 @@
     <tr *ngFor="let item of providerOrderItems; let i = index;">
       <td>{{i + 1}}</td>
       <td>{{item.name_english}}</td>
-      <td>{{item.name_dari}}</td>
+      <td class="lang-prs">{{item.name_dari}}</td>
       <td>{{item.count}}</td>
-      <td>{{item.notes}}</td>
+      <td class="lang-prs">{{item.notes}}</td>
     </tr>
   </table>
 </div>

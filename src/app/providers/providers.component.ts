@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {StaticDataService} from '../services/static-data.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ProvidersService} from './providers.service';
-import {IRawProviderOrder} from './providers.types';
+import {IProviderOrder} from './providers.types';
 
 @Component({
   selector: 'app-providers',
@@ -12,7 +12,7 @@ import {IRawProviderOrder} from './providers.types';
 export class ProvidersComponent implements OnInit {
 
   private providers: string[];
-  public currentProviderOrder: IRawProviderOrder;
+  public currentProviderOrder: IProviderOrder;
 
   constructor(private staticDataService: StaticDataService,
               private providerService: ProvidersService,

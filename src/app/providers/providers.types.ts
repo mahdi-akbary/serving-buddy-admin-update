@@ -3,7 +3,7 @@ enum provider_order_status {
   Viewed = 'Viewed',
   Served = 'Served'
 }
-export interface  IRawProviderListItem extends Object{
+export interface  IProviderListItem extends Object{
   table_id: number;
   order_id: number;
   provider_order_id: number;
@@ -19,7 +19,7 @@ export interface IProviderOrderItem {
   notes?: string
 }
 
-export interface  IRawProviderOrder extends Object{
+export interface  IProviderOrder extends Object{
 
   // columns of provider_orders
   provider_order_id: number;
