@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-expenses',
@@ -9,11 +9,22 @@ import {FormGroup} from '@angular/forms';
 export class ExpensesComponent implements OnInit {
 
   form: FormGroup;
+  chosenRecord;
+  records = [];
+  totals:any = {};
 
-  constructor() {
+  constructor(
+    // public dialogRef: MatDialogRef<NewCustomerDialogComponent>,
+    public formBuilder: FormBuilder,
+    // @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
   }
 
   ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      start_date_time: undefined,
+      end_date_time: undefined,
+    });
   }
 
   submit(formData: any) {
