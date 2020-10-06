@@ -1,1 +1,37 @@
-<p>expenses works!</p>
+<div class="page-boundary" fxLayout="column">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>General actions</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
+
+      </form>
+      <div class="action">
+        <button
+          class="actionButton"
+          mat-stroked-button
+        > PRINT
+        </button>
+        <button
+          class="actionButton"
+          mat-stroked-button
+        > ADD NEW
+        </button>
+        <button
+          color="warn"
+          class="actionButton"
+          mat-stroked-button
+        > RESET
+        </button>
+        <button
+          color="primary"
+          class="actionButton"
+          mat-stroked-button
+        > SEARCH
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-expenses',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExpensesComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+  submit(formData: any) {
   }
 
 }

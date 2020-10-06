@@ -29,6 +29,14 @@ table tr th
   background-color #f3f3f36e
   font-weight 500
 
+mat-card-header, .mat-card-content
+  .action
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    button
+      margin-right 5px
+
 mat-card-header
   display flex
   justify-content space-between
@@ -37,12 +45,7 @@ mat-card-header
   mat-card-title
     margin 0
   .action
-    display: flex;
     width: 50%;
-    justify-content: flex-end;
-    align-items: center;
-    button
-      margin-right 5px
 
 mat-card-subtitle
   font-style italic
@@ -60,4 +63,5 @@ mat-card-subtitle
   direction rtl
   font-size 13px
 
-
+.page-boundary
+  padding 15px
