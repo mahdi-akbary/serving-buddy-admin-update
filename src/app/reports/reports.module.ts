@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {ReportsRoutingModule} from './reports-routing.module';
 import {PaymentsLogComponent} from './payments-log/payments-log.component';
 import {DailySummaryReportComponent} from './daily-summary-report/daily-summary-report.component';
@@ -11,6 +10,7 @@ import {DailySummaryReportService} from './daily-summary-report/daily-summary-re
 import {DebtsService} from './debts/debts.service';
 import {ItemsSummaryReportService} from './items-summary-report/items-summary-report.service';
 import {PaymentsLogService} from './payments-log/payments-log.service';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
@@ -22,7 +22,7 @@ import {PaymentsLogService} from './payments-log/payments-log.service';
     DebtsComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     ReportsRoutingModule
   ],
   providers: [

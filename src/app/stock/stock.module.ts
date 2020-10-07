@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {StockRoutingModule} from './stock-routing.module';
 import {StockComponent} from './stock.component';
 import {AddCorrectionLogComponent} from './add-correction-log/add-correction-log.component';
@@ -9,6 +8,7 @@ import {StockService} from './stock.service';
 import {AddCorrectionLogService} from './add-correction-log/add-correction-log.service';
 import {ManualUsageService} from './manual-usage/manual-usage.service';
 import {UsageLogService} from './usage-log/usage-log.service';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import {UsageLogService} from './usage-log/usage-log.service';
     UsageLogComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     StockRoutingModule
   ],
   providers: [

@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {SettingsRoutingModule} from './settings-routing.module';
 import {UsersComponent} from './users/users.component';
 import {UsersService} from './users/users.service';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
@@ -10,7 +10,7 @@ import {UsersService} from './users/users.service';
     UsersComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     SettingsRoutingModule
   ],
   providers: [

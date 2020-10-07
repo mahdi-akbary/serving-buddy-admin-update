@@ -9,6 +9,7 @@ import {EmployeesService} from './employees.service';
 import {AdvancesService} from './advances/advances.service';
 import {LeavesAndAbsentiesService} from './leaves-and-absenties/leaves-and-absenties.service';
 import {PayrollService} from './payroll/payroll.service';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import {PayrollService} from './payroll/payroll.service';
     PayrollComponent
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     EmployeesRoutingModule
   ],
   providers: [
