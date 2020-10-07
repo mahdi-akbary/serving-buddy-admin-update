@@ -19,7 +19,9 @@ export class AuthService {
 
   loginInDevelopmentMode() {
     this.httpService.post('login', this.env.userCredentials, {observe: 'response'})
-      .subscribe((user: IUser) => console.log(user))
+      .subscribe((res : any) => {
+        this.user = res.body.user as IUser
+      })
   }
 }
 

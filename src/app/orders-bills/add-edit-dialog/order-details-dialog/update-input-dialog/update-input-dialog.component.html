@@ -1,0 +1,23 @@
+<form [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
+  <div class="dialog-header">
+    <h1 color="primary" mat-dialog-title>Add {{data?.type}}</h1>
+    <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
+  </div>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Amount</mat-label>
+      <input matInput formControlName="value" type="number">
+      <mat-error *ngIf="form.get('value')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" *ngIf="data?.type ==='misc item'">
+      <mat-label>Note</mat-label>
+      <input matInput formControlName="note" type="text">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">ADD</button>
+    <button mat-button mat-dialog-close>CLOSE</button>
+  </div>
+</form>

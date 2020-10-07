@@ -12,6 +12,7 @@ import {NewCustomerDialogComponent} from './add-edit-dialog/new-customer-dialog/
 import {TableHistoryDialogComponent} from './add-edit-dialog/table-history-dialog/table-history-dialog.component';
 import {OrderDetailsDialogComponent} from './add-edit-dialog/order-details-dialog/order-details-dialog.component';
 import {SharedModule} from '../shared/shared.module';
+import {UpdateInputDialogComponent} from "./add-edit-dialog/order-details-dialog/update-input-dialog/update-input-dialog.component";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {SharedModule} from '../shared/shared.module';
     NewOrderDialogComponent,
     NewCustomerDialogComponent,
     TableHistoryDialogComponent,
-    OrderDetailsDialogComponent
+    OrderDetailsDialogComponent,
+    UpdateInputDialogComponent
   ],
   imports: [
     SharedModule,
