@@ -47,7 +47,6 @@ export class MonitoringComponent implements OnInit {
   }
 
   viewDialog(providerOrderId) {
-    console.log(this.chosenRecord, providerOrderId);
     this.matDialog.open(ViewDialogComponent, {
       width: '800px',
       data: providerOrderId,
