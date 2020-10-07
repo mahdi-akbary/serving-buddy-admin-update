@@ -1,0 +1,32 @@
+<form [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
+  <div class="dialog-header">
+    <h1 mat-dialog-title>Add expense</h1>
+    <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
+  </div>
+  <div mat-dialog-content fxLayout="row wrap">
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Amount</mat-label>
+      <input matInput formControlName="amount" type="text">
+      <mat-error *ngIf="form.get('amount')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Date time</mat-label>
+      <input matInput formControlName="datetime" type="text">
+      <mat-error *ngIf="form.get('datetime')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+      <mat-error *ngIf="form.get('datetime')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="action wide-action">
+    <button mat-stroked-button color="primary" type="submit" [disabled]="form.invalid">SAVE</button>
+  </div>
+</form>
