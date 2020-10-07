@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpService} from '../services/http.service';
 import {IExpense, IRawExpense} from './expenses.types';
 import {Observable} from 'rxjs';
+import {HttpParams} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,56 +11,27 @@ export class ExpensesService {
   constructor(private httpService: HttpService) {
   }
 
-  search(parameters) {
-    let params = new URLSearchParams();
+  search(parameters):Observable<IRawExpense[]> {
+    let params = new HttpParams();
     for (let p in parameters) {
-      params.set(p, parameters[p]);
+      params = params.append(p, parameters[p]);
     }
 
     return this.httpService
-      .get('/server/expenses', {
-        search: params
-      })
-      .toPromise()
-      .then(response => {
-        return response.json().data || [];
-      })
-      .then(records=> {
-        return Promise.resolve(this.searchConvert(records));
+      .get('server/expenses', {
+        params: params
       });
-  }
-
-  private searchConvert(rawRecords: IRawExpense[]): IExpense[] {
-
-    let tempRecords: IExpense[] = [];
-    for (let i = 0; i < rawRecords.length; i++) {
-      tempRecords[i] = {
-        id: rawRecords[i].id,
-        amount: rawRecords[i].amount,
-        description: rawRecords[i].description,
-        datetime: rawRecords[i].datetime,
-        lastUpdate: {
-          datetime: rawRecords[i].last_update_datetime,
-          by: {
-            id: rawRecords[i].last_update_by_id,
-            name: rawRecords[i].last_update_by_name
-          }
-        }
-      };
-    }
-
-    return tempRecords;
   }
 
   store(currentExpense): Observable<void> {
     return this.httpService.post('server/expenses', currentExpense);
   }
 
-  getExpense(expenseId: number): Observable<IRawExpense> {
+  view(expenseId: number): Observable<IRawExpense> {
     return this.httpService.get(`server/expenses/${expenseId}`);
   }
 
-  editSubmit(formData: IExpense): Observable<void> {
+  update(formData: IExpense): Observable<void> {
     return this.httpService.put('server/expenses', formData);
   }
 }

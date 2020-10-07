@@ -8,20 +8,26 @@
       <form *ngIf="form" [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
         <mat-form-field appearance="outline">
           <mat-label>Start date time</mat-label>
-          <input matInput formControlName="start_date_time" type="text">
+          <input matInput formControlName="start_datetime" type="text">
+          <mat-error *ngIf="form.get('start_datetime')?.errors?.required">
+            {{formValidationService.required.message()}}
+          </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>End date time</mat-label>
-          <input matInput formControlName="end_date_time" type="text">
+          <input matInput formControlName="end_datetime" type="text">
+          <mat-error *ngIf="form.get('end_datetime')?.errors?.required">
+            {{formValidationService.required.message()}}
+          </mat-error>
         </mat-form-field>
 
         <div class="action wide-action">
-          <button
-            class="actionButton"
-            mat-stroked-button
-            type="button"
-          > PRINT
-          </button>
+<!--          <button-->
+<!--            class="actionButton"-->
+<!--            mat-stroked-button-->
+<!--            type="button"-->
+<!--          > PRINT-->
+<!--          </button>-->
           <button
             class="actionButton"
             mat-stroked-button
@@ -34,6 +40,7 @@
             class="actionButton"
             mat-stroked-button
             type="button"
+            (click)="reset()"
           > RESET
           </button>
           <button
@@ -41,6 +48,8 @@
             class="actionButton"
             mat-stroked-button
             type="button"
+            [disabled]="!this.form.valid"
+            (click)="submit(this.form.value)"
           > SEARCH
           </button>
         </div>
@@ -50,6 +59,16 @@
 
   <mat-card class="not-first-row">
     <mat-card-content>
+
+      <button
+        color="primary"
+        mat-stroked-button
+        type="button"
+        [disabled]="!this.chosenRecord"
+        (click)="addEditDialog(this.chosenRecord)"
+      > EDIT
+      </button>
+
       <mat-radio-group [(ngModel)]="chosenRecord">
         <table class="the-table">
           <tr>
@@ -72,7 +91,7 @@
             <td>AFN {{r.amount | number}}</td>
             <td class="lang-prs">AFN {{r.description}}</td>
             <td>{{r.datetime}}</td>
-            <td>{{r.last_update_by_username}}</td>
+            <td>{{r.last_update_by_name}}</td>
             <td>{{r.last_update_datetime}}</td>
           </tr>
 
@@ -80,7 +99,7 @@
             <td></td>
             <td></td>
             <td>Totals:</td>
-            <td>{{totals.amount || 0 | number}} AFN</td>
+            <td>{{totalAmount || 0 | number}} AFN</td>
             <td></td>
             <td></td>
             <td></td>
