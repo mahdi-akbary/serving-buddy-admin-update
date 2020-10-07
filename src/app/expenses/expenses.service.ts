@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from '../services/http.service';
-import {IExpense, IRawExpense} from './expenses.types';
+import {IExpense} from './expenses.types';
 import {Observable} from 'rxjs';
 import {HttpParams} from '@angular/common/http';
 
@@ -11,7 +11,7 @@ export class ExpensesService {
   constructor(private httpService: HttpService) {
   }
 
-  search(parameters):Observable<IRawExpense[]> {
+  search(parameters): Observable<IExpense[]> {
     let params = new HttpParams();
     for (let p in parameters) {
       params = params.append(p, parameters[p]);
@@ -27,7 +27,7 @@ export class ExpensesService {
     return this.httpService.post('server/expenses', currentExpense);
   }
 
-  view(expenseId: number): Observable<IRawExpense> {
+  view(expenseId: number): Observable<IExpense> {
     return this.httpService.get(`server/expenses/${expenseId}`);
   }
 

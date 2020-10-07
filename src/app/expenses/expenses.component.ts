@@ -4,7 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {AddEditDialogComponent} from './add-edit-dialog/add-edit-dialog.component';
 import {FormValidationService} from '../services/form-validation.service';
 import {ExpensesService} from './expenses.service';
-import {IRawExpense} from './expenses.types';
+import {IExpense} from './expenses.types';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
@@ -16,7 +16,7 @@ export class ExpensesComponent implements OnInit {
 
   form: FormGroup;
   chosenRecord;
-  records: IRawExpense[] = [];
+  records: IExpense[] = [];
   totalAmount = 0;
 
   constructor(private matDialog: MatDialog,
@@ -38,7 +38,7 @@ export class ExpensesComponent implements OnInit {
   }
 
   submit(formData: any) {
-    this.expensesService.search(formData).subscribe((data: IRawExpense[]) => {
+    this.expensesService.search(formData).subscribe((data: IExpense[]) => {
       this.matSnackBar.open('OK: search expenses');
       this.records = data;
       this.calculateTotal();
@@ -49,7 +49,7 @@ export class ExpensesComponent implements OnInit {
   }
 
   private calculateTotal() {
-    this.records.forEach((item: IRawExpense) => {
+    this.records.forEach((item: IExpense) => {
       this.totalAmount = this.totalAmount + (+item.amount);
     });
   }

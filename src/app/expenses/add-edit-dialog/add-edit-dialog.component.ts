@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {FormValidationService} from '../../services/form-validation.service';
 import {ExpensesService} from '../expenses.service';
-import {IRawExpense} from '../expenses.types';
+import {IExpense} from '../expenses.types';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
@@ -27,7 +27,7 @@ export class AddEditDialogComponent implements OnInit {
   ngOnInit(): void {
     if (this.isUpdating()) {
 
-      this.expensesService.view(this.expenseId).subscribe((data: IRawExpense) => {
+      this.expensesService.view(this.expenseId).subscribe((data: IExpense) => {
         this.initForm(data);
       }, (error) => {
         this.matSnackBar.open('ERROR: could not get expense details');
@@ -40,7 +40,7 @@ export class AddEditDialogComponent implements OnInit {
   }
 
 
-  initForm(data?: IRawExpense) {
+  initForm(data?: IExpense) {
     this.form = this.formBuilder.group({
       id: data?.id,
       amount: [data?.amount, this.formValidationService.required.validator],
@@ -49,7 +49,7 @@ export class AddEditDialogComponent implements OnInit {
     });
   }
 
-  submit(formData: IRawExpense) {
+  submit(formData: IExpense) {
 
     if (this.isUpdating()) {
 
