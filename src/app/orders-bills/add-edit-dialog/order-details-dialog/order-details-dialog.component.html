@@ -57,6 +57,24 @@
       <td>AFN {{item.price * item.count | number}}</td>
       <td>{{item.order_item_notes}}</td>
     </tr>
+    <tr *ngIf="currentOrder?.miscellaneous_amount">
+      <td>--</td>
+      <td>Miscellaneous item</td>
+      <td>مورد متفرقه</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>{{currentOrder?.miscellaneous_amount}}</td>
+      <td>{{currentOrder?.miscellaneous_notes}}</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Gross total</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>AFN {{currentOrder.grossTotal | number}}</td>
+      <td></td>
+    </tr>
   </table>
 </div>
 <div mat-dialog-actions>
