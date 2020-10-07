@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {OrdersBillsService} from "../../orders-bills.service";
+import {UpdateInputDialogComponent} from "./update-input-dialog/update-input-dialog.component";
 
 @Component({
   selector: 'app-order-details-dialog',
@@ -14,6 +15,7 @@ export class OrderDetailsDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<OrderDetailsDialogComponent>,
     private ordersBillsService: OrdersBillsService,
+    public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public order: any) {
   }
 
@@ -23,5 +25,35 @@ export class OrderDetailsDialogComponent implements OnInit {
       this.orderItems = orderDetails && orderDetails.data;
       console.log(this.orderItems)
     })
+  }
+
+  getGrossTotal(list: any[] = []) {
+    let total = 0 as number;
+    for (let i = 0; i < list.length; i++) {
+      total += list[i].price * list[i].count;
+    }
+    if (this.currentOrder && this.currentOrder.miscellaneous_amount) {
+      total += this.currentOrder.miscellaneous_amount;
+    }
+    setTimeout(() => {
+      this.currentOrder = {...this.currentOrder, gross_total: total}
+    })
+    return total;
+  }
+
+  //
+  updateInput(type: string) {
+    let data: any;
+    const dialogRef = this.dialog.open(UpdateInputDialogComponent, {
+      width: '400px',
+      data: {...this.currentOrder, type: type},
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+
+      }
+    });
   }
 }

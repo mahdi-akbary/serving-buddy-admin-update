@@ -1,1 +1,91 @@
-<p>expenses works!</p>
+<div class="page-boundary" fxLayout="column">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>General actions</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form *ngIf="form" [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
+        <mat-form-field appearance="outline">
+          <mat-label>Start date time</mat-label>
+          <input matInput formControlName="start_date_time" type="text">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>End date time</mat-label>
+          <input matInput formControlName="end_date_time" type="text">
+        </mat-form-field>
+
+        <div class="action">
+          <button
+            class="actionButton"
+            mat-stroked-button
+            type="button"
+          > PRINT
+          </button>
+          <button
+            class="actionButton"
+            mat-stroked-button
+            type="button"
+          > ADD NEW
+          </button>
+          <button
+            color="warn"
+            class="actionButton"
+            mat-stroked-button
+            type="button"
+          > RESET
+          </button>
+          <button
+            color="primary"
+            class="actionButton"
+            mat-stroked-button
+            type="button"
+          > SEARCH
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="not-first-row">
+    <mat-card-content>
+      <mat-radio-group [(ngModel)]="chosenRecord">
+        <table class="the-table">
+          <tr>
+            <th>Select</th>
+            <th>#</th>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Date-time</th>
+            <th>Last update by</th>
+            <th>Last update date time</th>
+          </tr>
+
+          <tr *ngFor="let r of records; let i = index;">
+            <td>
+              <mat-radio-button value="r.id"></mat-radio-button>
+            </td>
+            <td>{{records.length - 1}}</td>
+            <td>{{r.id}}</td>
+            <td>AFN {{r.amount | number}}</td>
+            <td class="lang-prs">AFN {{r.description}}</td>
+            <td>{{r.datetime}}</td>
+            <td>{{r.last_update_by_username}}</td>
+            <td>{{r.last_update_datetime}}</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>Totals:</td>
+            <td>AFN {{totals.amount | number}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </mat-radio-group>
+    </mat-card-content>
+  </mat-card>
+</div>

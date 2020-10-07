@@ -28,12 +28,15 @@ export class OrdersBillsService {
   transfer(data): Observable<any> {
     return this.httpService.put(this.url + `/transfer`, data);
   }
+
   storeNewOrder(data): Observable<any> {
     return this.httpService.post(this.url + `/orderItem/add`, data);
   }
+
   updateOrder(data): Observable<any> {
     return this.httpService.put(this.url + `/orderItem`, data);
   }
+
   deleteOrder(orderId, orderItemId): Observable<any> {
     return this.httpService.delete(this.url + `/orderItem/${orderItemId}/${orderId}`);
   }
@@ -41,12 +44,17 @@ export class OrdersBillsService {
   gerCategories(): Observable<any> {
     return this.httpService.get(`server/categories/minimal`);
   }
+
   getItems(categoryId: number): Observable<any> {
     return this.httpService.get(`server/categories/${categoryId}/items/minimal`);
   }
 
   getCustomerTableHistory(customerId: number): Observable<any> {
     return this.httpService.get(`server/tables/orderTableHistory/${customerId}`);
+  }
+
+  updateInput(urlString: string, data): Observable<any> {
+    return this.httpService.put(this.url + urlString, data);
   }
 }
 
@@ -157,6 +165,7 @@ export interface IName {
   dari: string;
   english: string;
 }
+
 export interface IMenuCategoryMinimal {
   id: number;
   nameEnglish: string

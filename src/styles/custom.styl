@@ -1,4 +1,4 @@
-table.dialog-table
+table.the-table
   font-size 11px
   margin-top 10px
   border-collapse collapse
@@ -28,3 +28,53 @@ table tr th
   color #333
   background-color #f3f3f36e
   font-weight 500
+table tr .important
+  font-weight 600 !important
+mat-card-header, .mat-card-content
+  .action
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    button
+      margin-right 5px
+
+.mat-card-content
+  .action
+    border-top 1px solid #dddddd
+    padding-top 15px
+
+mat-card-header
+  display flex
+  justify-content space-between
+  align-items center
+  margin-bottom 10px
+  mat-card-title
+    margin 0
+  .action
+    width: 50%;
+
+mat-card-subtitle
+  font-style italic
+
+.operations
+  display flex
+  button
+    display: flex;
+    align-items: center;
+    justify-content: center
+    height 24px !important
+
+.lang-prs
+  font-family BYekan-Regular !important
+  direction rtl
+  font-size 13px
+
+.page-boundary
+  padding 15px
+
+mat-form-field
+  margin-left 5px
+  margin-right 5px
+
+mat-card.not-first-row
+  margin-top 15px !important

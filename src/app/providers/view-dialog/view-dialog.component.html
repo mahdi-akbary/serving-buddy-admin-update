@@ -1,0 +1,41 @@
+<div class="dialog-header">
+  <h1 mat-dialog-title>View order, table {{providerOrder?.last_table_id}}</h1>
+  <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
+</div>
+<div mat-dialog-content>
+  <table class="the-table">
+    <tr>
+      <th>Provider</th>
+      <td>{{providerOrder?.provider}}</td>
+    </tr>
+    <tr>
+      <th>Sub-order ID</th>
+      <td>{{providerOrder?.provider_order_id}}</td>
+    </tr>
+    <tr>
+      <th>Main order ID</th>
+      <td>{{providerOrder?.order_id}}</td>
+    </tr>
+    <tr>
+      <th>Sub-order placed at</th>
+      <td>{{providerOrder?.insert_datetime}}</td>
+    </tr>
+  </table>
+
+  <table class="the-table">
+    <tr>
+      <th>#</th>
+      <th>English name</th>
+      <th>Dari name</th>
+      <th>Quantity</th>
+      <th>Notes</th>
+    </tr>
+    <tr *ngFor="let item of providerOrderItems; let i = index;">
+      <td>{{i + 1}}</td>
+      <td>{{item.name_english}}</td>
+      <td class="lang-prs">{{item.name_dari}}</td>
+      <td>{{item.count}}</td>
+      <td class="lang-prs">{{item.notes}}</td>
+    </tr>
+  </table>
+</div>

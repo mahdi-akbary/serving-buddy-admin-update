@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "./services/auth.service";
+import {AuthService} from './services/auth.service';
+import {Breadcrumb} from './app.types';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,9 @@ import {AuthService} from "./services/auth.service";
   styleUrls: ['./app.component.styl'],
 })
 export class AppComponent implements OnInit {
+
+  breadcrumbData: Breadcrumb;
+
   constructor(private authService: AuthService) {
   }
 
