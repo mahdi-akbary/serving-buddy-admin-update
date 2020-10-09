@@ -3,7 +3,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {FormValidationService} from '../services/form-validation.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {StockService} from './stock.service';
-import {IRawStockListItem} from './stock.types';
+import {IRawStockListItem, IStockListItem, IStockListItemIdentifier} from './stock.types';
+import {AddEditDialogComponent} from './add-edit-dialog/add-edit-dialog.component';
 
 @Component({
   selector: 'app-stock',
@@ -12,7 +13,7 @@ import {IRawStockListItem} from './stock.types';
 })
 export class StockComponent implements OnInit {
 
-  chosenRecord;
+  chosenRecord: IStockListItemIdentifier;
   records: IRawStockListItem[] = [];
 
   constructor(private matDialog: MatDialog,
@@ -34,7 +35,13 @@ export class StockComponent implements OnInit {
     });
   }
 
-  addEditDialog(chosenRecord: any) {
-
+  addEditDialog(identifier?: IStockListItemIdentifier) {
+    this.matDialog.open(AddEditDialogComponent, {
+      width: '800px',
+      disableClose: true,
+      data: identifier
+    }).afterClosed().subscribe(() => {
+      this.list();
+    });
   }
 }

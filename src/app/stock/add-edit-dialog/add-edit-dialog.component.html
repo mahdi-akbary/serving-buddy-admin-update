@@ -1,0 +1,60 @@
+<form *ngIf="form" [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
+  <div class="dialog-header">
+    <h1 mat-dialog-title>Add quantity</h1>
+    <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
+  </div>
+  <div mat-dialog-content fxLayout="row wrap">
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Item name</mat-label>
+      <input matInput formControlName="name_english" type="text">
+      <mat-error *ngIf="form.get('name_english')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Item ID</mat-label>
+      <input matInput formControlName="item_id" type="text">
+      <mat-error *ngIf="form.get('item_id')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Available quantity</mat-label>
+      <input matInput formControlName="available_quantity" type="text">
+      <mat-error *ngIf="form.get('available_quantity')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Category</mat-label>
+      <input matInput formControlName="category_name_english" type="text">
+      <mat-error *ngIf="form.get('category_name_english')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Quantity to add</mat-label>
+      <input matInput formControlName="quantity_to_update" type="text">
+      <mat-error *ngIf="form.get('quantity_to_update')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Unit</mat-label>
+      <input matInput formControlName="unit" type="text">
+      <mat-error *ngIf="form.get('unit')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Notes</mat-label>
+      <input matInput formControlName="notes" type="text">
+      <mat-error *ngIf="form.get('notes')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="action wide-action">
+    <button mat-stroked-button color="primary" type="submit" [disabled]="form.invalid">SAVE</button>
+  </div>
+</form>

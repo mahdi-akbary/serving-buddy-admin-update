@@ -61,11 +61,11 @@
 
           <tr *ngFor="let r of records; let i = index;">
             <td>
-              <mat-radio-button [value]="r.item_id"></mat-radio-button>
+              <mat-radio-button [value]="{item_id: r.item_id, usage_type: r.usage_type}"></mat-radio-button>
             </td>
             <td>{{i + 1}}</td>
-            <td>{{r.item_name_english}}</td>
-            <td class="lang-prs">{{r.item_name_dari}}</td>
+            <td>{{r.name_english}}</td>
+            <td class="lang-prs">{{r.name_dari}}</td>
             <td>{{r.item_id}}</td>
             <td>{{r.usage_type}}</td>
             <td>{{r.category_name_english}}</td>

@@ -1,17 +1,22 @@
-
 export interface  IRawStockListItem {
   id: number;
   item_id: number;
-  item_name_english: string;
-  item_name_dari: string;
+  name_english: string;
+  name_dari: string;
   usage_type: string;
   category_name_english: string;
   available_quantity: number;
+  quantity_to_update?: number;
   unit: string;
   notes: string;
   last_update_by_id: number;
   last_update_by_name: string;
   last_update_datetime: Date;
+}
+
+export interface IStockListItemIdentifier {
+  item_id: number;
+  usage_type: string;
 }
 
 export interface  IStockListItem {
