@@ -1,0 +1,9 @@
+<div class="npa-view-element element-wrapper" fxLayout="column">
+    <div class="npa-label">
+        <ng-content select=".npa-label"></ng-content>
+    </div>
+    <div #npaValue class="npa-value" [ngClass]="{expandable: !isExpanded}">
+        <ng-content select=".npa-value"></ng-content>
+    </div>
+    <a *ngIf="expandable"  (click)="isExpanded = !isExpanded">{{isExpanded ? expandText.less : expandText.more}}</a>
+</div>

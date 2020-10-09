@@ -63,7 +63,7 @@
       <td>مورد متفرقه</td>
       <td>N/A</td>
       <td>N/A</td>
-      <td>{{currentOrder?.miscellaneous_amount}}</td>
+      <td>AFN {{currentOrder?.miscellaneous_amount}}</td>
       <td>{{currentOrder?.miscellaneous_notes}}</td>
     </tr>
     <tr *ngIf="orderItems">
@@ -72,7 +72,7 @@
       <td></td>
       <td></td>
       <td></td>
-      <td>AFN {{(currentOrder?.gross_total ? currentOrder?.gross_total : getGrossTotal(orderItems)) | number}}</td>
+      <td>AFN {{currentOrder?.gross_total | number}}</td>
       <td></td>
     </tr>
     <tr>
@@ -90,8 +90,8 @@
       <td></td>
       <td></td>
       <td></td>
-      <td class="important">AFN {{((currentOrder?.gross_total ? currentOrder?.gross_total : getGrossTotal(orderItems)) -
-        (currentOrder?.discount ? currentOrder?.discount : 0)) | number}}</td>
+      <td class="important">
+        AFN {{(currentOrder?.gross_total - (currentOrder?.discount ? currentOrder?.discount : 0)) | number}}</td>
       <td></td>
     </tr>
     <tr>
@@ -109,7 +109,7 @@
       <td></td>
       <td></td>
       <td></td>
-      <td class="important">AFN {{((currentOrder?.gross_total ? currentOrder?.gross_total : getGrossTotal(orderItems)) -
+      <td class="important">AFN {{(currentOrder?.gross_total -
         (currentOrder?.discount ? currentOrder?.discount : 0) - (currentOrder?.total_payments ? currentOrder?.total_payments : 0))  | number}}</td>
       <td></td>
     </tr>
@@ -118,8 +118,8 @@
 <div mat-dialog-actions>
   <button mat-stroked-button (click)="updateInput('payment')" type="button">ADD PAYMENT</button>
   <button mat-stroked-button (click)="updateInput('discount')" type="button">ADD DISCOUNT</button>
-  <button mat-stroked-button type="button">CHECKOUT</button>
-  <button mat-stroked-button (click)="updateInput('misc item') "type="button">ADD MISC ITEM</button>
+  <button mat-stroked-button (click)="checkout(currentOrder)" type="button">CHECKOUT</button>
+  <button mat-stroked-button (click)="updateInput('misc item') " type="button">ADD MISC ITEM</button>
   <button mat-stroked-button type="button">CALCULATOR</button>
   <button mat-stroked-button type="button">PRINT</button>
 </div>

@@ -14,6 +14,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {ViewElementComponent} from "./components/view-element/view-element.component";
 
 const modules = [
   CommonModule,
@@ -36,7 +37,13 @@ const modules = [
 
 @NgModule({
   imports: modules,
-  exports: modules
+  exports: [
+    ...modules,
+    ViewElementComponent
+  ],
+  declarations: [
+    ViewElementComponent
+  ]
 })
 export class SharedModule {
 }

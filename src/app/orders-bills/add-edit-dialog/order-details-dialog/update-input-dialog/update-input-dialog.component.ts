@@ -29,22 +29,41 @@ export class UpdateInputDialogComponent implements OnInit {
       value: [null, this.formValidationService.required.validator],
       note: '',
     } as any);
+    if (this.data.type === 'discount') {
+      this.form.get('value').setValue(this.data && this.data.discount)
+    }
+    if (this.data.type === 'misc item') {
+      this.form.get('value').setValue(this.data && this.data.miscellaneous_amount)
+      this.form.get('note').setValue(this.data && this.data.miscellaneous_notes)
+    }
   }
 
   submit(formData: any) {
-    let temp : any;
-    if(this.data.type === 'payment'){
-      temp = {id: this.data.id, paymentToAdd: formData.value}
-    }else if(this.data.type ==='discount'){
-      temp = {id: this.data.id, discount: {amount: formData.value, by: {id: this.authService.user.id, name: this.authService.user.name}}}
-    }else if(this.data.type ==='misc item'){
-      temp = {orderId: this.data.id, grossTotal: this.data.gross_total, miscellaneousItem: {amount: formData.value, notes:  formData.note}}
+    let temp: any;
+    let url = '';
+    if (this.data.type === 'payment') {
+      temp = {id: this.data.id, paymentToAdd: formData.value};
+      url = 'payment';
+    } else if (this.data.type === 'discount') {
+      temp = {
+        id: this.data.id,
+        discount: {amount: formData.value, by: {id: this.authService.user.id, name: this.authService.user.name}}
+      };
+      url = 'discount';
+    } else if (this.data.type === 'misc item') {
+      temp = {
+        orderId: this.data.id,
+        grossTotal: (this.data && this.data.miscellaneous_amount) ? this.data.gross_total - this.data.miscellaneous_amount + formData.value :
+          this.data.gross_total + formData.value,
+        miscellaneousItem: {amount: formData.value, notes: formData.note}
+      };
+      url = 'miscellaneous';
     }
-    console.log(temp)
-    // this.ordersBillsService.storeCustomer(temp).subscribe((res) => {
-    //   this.dialogRef.close(true)
-    // }, (err) => {
-    // })
+    console.log(temp);
+    this.ordersBillsService.updateInput(url, temp).subscribe((res) => {
+      this.dialogRef.close(true)
+    }, (err) => {
+    })
   }
 
   reset() {

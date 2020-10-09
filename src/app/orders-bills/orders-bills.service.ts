@@ -54,7 +54,11 @@ export class OrdersBillsService {
   }
 
   updateInput(urlString: string, data): Observable<any> {
-    return this.httpService.put(this.url + urlString, data);
+    return this.httpService.put(`${this.url}/${urlString}`, data);
+  }
+  checkout(data){
+    return this.httpService.put(`${this.url}/checkout`, data);
+
   }
 }
 

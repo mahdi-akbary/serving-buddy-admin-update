@@ -23,11 +23,12 @@ export class OrderDetailsDialogComponent implements OnInit {
     this.ordersBillsService.show(this.order.id).subscribe((orderDetails: any) => {
       this.currentOrder = orderDetails && orderDetails.data && orderDetails.data[0];
       this.orderItems = orderDetails && orderDetails.data;
+      this.setGrossTotal(this.orderItems)
       console.log(this.orderItems)
     })
   }
 
-  getGrossTotal(list: any[] = []) {
+  setGrossTotal(list: any[] = []) {
     let total = 0 as number;
     for (let i = 0; i < list.length; i++) {
       total += list[i].price * list[i].count;
@@ -35,10 +36,7 @@ export class OrderDetailsDialogComponent implements OnInit {
     if (this.currentOrder && this.currentOrder.miscellaneous_amount) {
       total += this.currentOrder.miscellaneous_amount;
     }
-    setTimeout(() => {
-      this.currentOrder = {...this.currentOrder, gross_total: total}
-    })
-    return total;
+    this.currentOrder = {...this.currentOrder, gross_total: total}
   }
 
   //
@@ -52,8 +50,18 @@ export class OrderDetailsDialogComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-
+        this.ngOnInit();
       }
     });
+  }
+
+  checkout(order) {
+    this.ordersBillsService.checkout({
+      id: order.id,
+      grossTotal: order.gross_total,
+      notes: order.notes
+    }).subscribe(res => {
+      this.dialogRef.close(true)
+    })
   }
 }

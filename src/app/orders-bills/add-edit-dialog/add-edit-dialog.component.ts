@@ -91,7 +91,8 @@ export class AddEditDialogComponent implements OnInit {
         console.error(error);
       }));
   }
-  showOrderDetails(order){
+
+  showOrderDetails(order) {
     const dialogRef = this.dialog.open(OrderDetailsDialogComponent, {
       width: '850px',
       data: order,
@@ -100,7 +101,7 @@ export class AddEditDialogComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-
+        this.setOrdersSummary();
       }
     });
   }
