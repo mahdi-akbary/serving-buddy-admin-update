@@ -1,1 +1,81 @@
-<p>stock works!</p>
+<div class="page-boundary" fxLayout="column">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>General actions</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="action wide-action">
+        <!--          <button-->
+        <!--            mat-stroked-button-->
+        <!--            type="button"-->
+        <!--          > PRINT-->
+        <!--          </button>-->
+        <button
+          mat-stroked-button
+          type="button"
+          (click)="list()"
+        > LIST
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="not-first-row">
+    <mat-card-content>
+
+      <div class="action per-item">
+        <button
+          mat-stroked-button
+          type="button"
+          [disabled]="!this.chosenRecord"
+          (click)="addEditDialog(this.chosenRecord)"
+        > ADD QUANTITY
+        </button>
+
+        <button
+          mat-stroked-button
+          color="warn"
+          type="button"
+          [disabled]="!this.chosenRecord"
+          (click)="addEditDialog(this.chosenRecord)"
+        > CORRECTION
+        </button>
+      </div>
+
+      <mat-radio-group [(ngModel)]="chosenRecord">
+        <table class="the-table">
+          <tr>
+            <th>Select</th>
+            <th>#</th>
+            <th>Item name (English)</th>
+            <th>Item name (Dari)</th>
+            <th>Item ID</th>
+            <th>Usage type</th>
+            <th>Category name</th>
+            <th>Available quantity</th>
+            <th>Unit</th>
+            <th>Last update by</th>
+            <th>Last update date time</th>
+          </tr>
+
+          <tr *ngFor="let r of records; let i = index;">
+            <td>
+              <mat-radio-button [value]="r.item_id"></mat-radio-button>
+            </td>
+            <td>{{i + 1}}</td>
+            <td>{{r.item_name_english}}</td>
+            <td class="lang-prs">{{r.item_name_dari}}</td>
+            <td>{{r.item_id}}</td>
+            <td>{{r.usage_type}}</td>
+            <td>{{r.category_name_english}}</td>
+            <td>{{r.available_quantity | number}}</td>
+            <td>{{r.unit}}</td>
+            <td>{{r.last_update_by_name}}</td>
+            <td>{{r.last_update_datetime}}</td>
+          </tr>
+        </table>
+      </mat-radio-group>
+    </mat-card-content>
+  </mat-card>
+</div>

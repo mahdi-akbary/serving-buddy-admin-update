@@ -1,9 +1,9 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {FormValidationService} from '../../services/form-validation.service';
 import {ExpensesService} from '../expenses.service';
-import {IRawExpense} from '../expenses.types';
+import {IExpense} from '../expenses.types';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
@@ -20,30 +20,63 @@ export class AddEditDialogComponent implements OnInit {
               public formBuilder: FormBuilder,
               private expensesService: ExpensesService,
               public formValidationService: FormValidationService,
-              @Inject(MAT_DIALOG_DATA) public data: any,
+              @Optional() @Inject(MAT_DIALOG_DATA) public expenseId: number,
               private matSnackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
+    if (this.isUpdating()) {
+
+      this.expensesService.view(this.expenseId).subscribe((data: IExpense) => {
+        this.initForm(data);
+      }, (error) => {
+        this.matSnackBar.open('ERROR: could not get expense details');
+        console.error('ERROR: could not get expense details', error);
+      });
+
+    } else {
+      this.initForm();
+    }
+  }
+
+
+  initForm(data?: IExpense) {
     this.form = this.formBuilder.group({
-      amount: [undefined, this.formValidationService.required.validator],
-      datetime: [undefined, this.formValidationService.required.validator],
-      description: [undefined, this.formValidationService.required.validator],
+      id: data?.id,
+      amount: [data?.amount, this.formValidationService.required.validator],
+      datetime: [data?.datetime, this.formValidationService.required.validator],
+      description: [data?.description, this.formValidationService.required.validator],
     });
   }
 
-  submit(formData: IRawExpense) {
-    this.expensesService.store(formData).subscribe((res) => {
-      this.matSnackBar.open('OK: expense added');
-      this.dialogRef.close()
-    }, (err) => {
-      this.matSnackBar.open('ERROR: could not add expense');
-      console.error('ERROR: could not add expense', err);
-    })
+  submit(formData: IExpense) {
+
+    if (this.isUpdating()) {
+
+      this.expensesService.update(formData).subscribe(() => {
+        this.matSnackBar.open('OK: expense updated');
+        this.dialogRef.close();
+      }, (err) => {
+        this.matSnackBar.open('ERROR: could not update expense');
+        console.error('ERROR: could not update expense', err);
+      });
+
+    } else {
+
+      this.expensesService.store(formData).subscribe(() => {
+        this.matSnackBar.open('OK: expense added');
+        this.dialogRef.close();
+      }, (err) => {
+        this.matSnackBar.open('ERROR: could not add expense');
+        console.error('ERROR: could not add expense', err);
+      });
+
+    }
+
   }
 
-  reset() {
-
+  private isUpdating(): boolean {
+    return !!this.expenseId;
   }
 
 }
