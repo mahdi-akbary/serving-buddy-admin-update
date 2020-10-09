@@ -7,11 +7,9 @@ import {Component, Input} from '@angular/core';
 })
 export class ViewElementComponent {
 
-  @Input() npaLabel: string;
-  @Input() for: string;
   @Input() expandable: boolean;
   @Input() expandText: { more: string; less: string };
-  isExpanded;
+  isExpanded: boolean;
 
   constructor() {
     this.isExpanded = this.expandable
