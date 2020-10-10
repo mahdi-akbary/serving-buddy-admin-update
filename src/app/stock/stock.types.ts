@@ -6,7 +6,6 @@ export interface  IRawStockListItem {
   usage_type: string;
   category_name_english: string;
   available_quantity: number;
-  quantity_to_update?: number;
   unit: string;
   notes: string;
   last_update_by_id: number;
@@ -14,9 +13,23 @@ export interface  IRawStockListItem {
   last_update_datetime: Date;
 }
 
+export interface  IStockManualLog {
+  id: number;
+  item_id: number;
+  name_english: string;
+  name_dari: string;
+  category_name_english: string;
+  available_quantity: number;
+  quantity_to_update: number;
+  usage_type?: 'Manual';
+  unit: string;
+  notes: string;
+}
+
 export interface IStockListItemIdentifier {
   item_id: number;
   usage_type: string;
+  is_correcting?: boolean;
 }
 
 export interface  IStockListItem {

@@ -28,8 +28,8 @@
         <button
           mat-stroked-button
           type="button"
-          [disabled]="!this.chosenRecord"
-          (click)="addEditDialog(this.chosenRecord)"
+          [disabled]="!chosenRecord"
+          (click)="addEditDialog(chosenRecord, false)"
         > ADD QUANTITY
         </button>
 
@@ -37,8 +37,8 @@
           mat-stroked-button
           color="warn"
           type="button"
-          [disabled]="!this.chosenRecord"
-          (click)="addEditDialog(this.chosenRecord)"
+          [disabled]="!chosenRecord"
+          (click)="addEditDialog(chosenRecord, true)"
         > CORRECTION
         </button>
       </div>

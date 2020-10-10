@@ -4,7 +4,7 @@ import {FormValidationService} from '../services/form-validation.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {StockService} from './stock.service';
 import {IRawStockListItem, IStockListItem, IStockListItemIdentifier} from './stock.types';
-import {AddEditDialogComponent} from './add-edit-dialog/add-edit-dialog.component';
+import {AddCorrectDialogComponent} from './add-correct-dialog/add-correct-dialog.component';
 
 @Component({
   selector: 'app-stock',
@@ -35,13 +35,20 @@ export class StockComponent implements OnInit {
     });
   }
 
-  addEditDialog(identifier?: IStockListItemIdentifier) {
-    this.matDialog.open(AddEditDialogComponent, {
+  addEditDialog(identifier: IStockListItemIdentifier, isCorrecting: boolean) {
+    identifier.is_correcting = isCorrecting;
+    this.matDialog.open(AddCorrectDialogComponent, {
       width: '800px',
       disableClose: true,
       data: identifier
     }).afterClosed().subscribe(() => {
+      this.reset();
       this.list();
     });
+  }
+
+  reset () {
+    this.records = [];
+    this.chosenRecord = undefined;
   }
 }

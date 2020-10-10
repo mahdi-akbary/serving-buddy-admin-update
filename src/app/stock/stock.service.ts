@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from '../services/http.service';
-import {IRawStockItemMinimal, IRawStockListItem, IStockItemMinimal} from './stock.types';
+import {IRawStockItemMinimal, IRawStockListItem, IStockItemMinimal, IStockManualLog} from './stock.types';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -41,15 +41,15 @@ export class StockService {
     return tempRecords;
   }
 
-  public view(itemId: number, usageType: string): Observable<IRawStockListItem> {
+  public view(itemId: number, usageType: string): Observable<IStockManualLog> {
     return this.httpService.get(`server/stock/${itemId}/${usageType}`);
   }
 
-  store(formData: IRawStockListItem): Observable<void> {
+  addQuantity(formData: IStockManualLog): Observable<void> {
     return this.httpService.patch('server/stock', formData);
   }
 
-  update(formData: IRawStockListItem): Observable<void> {
+  correctQuantity(formData: IStockManualLog): Observable<void> {
     return this.httpService.patch('server/stock/correction', formData);
   }
 
