@@ -1,0 +1,23 @@
+<div class="dialog-header">
+  <h1 color="primary" mat-dialog-title>Calculate the remainder</h1>
+  <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
+</div>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline">
+    <mat-label>Cash by customer</mat-label>
+    <input matInput type="number" [(ngModel)]="value">
+    <span matSuffix>AFN</span>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Grand total</mat-label>
+    <input [readonly]="true" matInput type="number"
+           [ngModel]="(data?.gross_total - (data?.discount ? data?.discount : 0))">
+    <span matSuffix>AFN</span>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>The remainder</mat-label>
+    <input [readonly]="true" matInput type="number"
+           [ngModel]="(data?.gross_total - data?.discount - data?.total_payments - (value ? value : 0))">
+    <span matSuffix>AFN</span>
+  </mat-form-field>
+</div>

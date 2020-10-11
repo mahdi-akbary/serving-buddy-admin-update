@@ -1,0 +1,20 @@
+<div class="dialog-header">
+  <h1 color="primary" mat-dialog-title>Payment history</h1>
+  <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
+</div>
+<div mat-dialog-content>
+  <table class="the-table">
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Date-time</th>
+    </tr>
+    <tr *ngFor="let history of paymentHistoryList, let i = index">
+      <td>{{i + 1}}</td>
+      <td>{{history.collector_name}}</td>
+      <td>AFN {{history.amount}}</td>
+      <td>{{history.datetime | date: 'hh : mm : ss  a'}}</td>
+    </tr>
+  </table>
+</div>

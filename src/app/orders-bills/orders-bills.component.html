@@ -7,7 +7,7 @@
           <button *ngIf="table.orders_count" mat-icon-button  matTooltip="View orders" (click)="addEditOrdersDialog(table.id, true)">
             <mat-icon>restaurant</mat-icon>
           </button>
-          <button *ngIf="!table.orders_count" mat-icon-button  matTooltip="Close" (click)="addEditOrdersDialog(table.id)">
+          <button *ngIf="!table.orders_count" mat-icon-button  matTooltip="Close">
             <mat-icon>close</mat-icon>
           </button>
           <button mat-icon-button color="primary" matTooltip="Add/edit orders" (click)="addEditOrdersDialog(table.id)">

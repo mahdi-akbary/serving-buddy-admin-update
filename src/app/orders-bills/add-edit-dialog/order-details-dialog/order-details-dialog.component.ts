@@ -2,6 +2,10 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {OrdersBillsService} from "../../orders-bills.service";
 import {UpdateInputDialogComponent} from "./update-input-dialog/update-input-dialog.component";
+import {PaymentHistoryDialogComponent} from "./payment-history-dialog/payment-history-dialog.component";
+import {environment as devEnvironment} from "../../../../environments/environment";
+import {environment as prodEnvironment} from "../../../../environments/environment.prod";
+import {CalculatorDialogComponent} from "./calculator-dialog/calculator-dialog.component";
 
 @Component({
   selector: 'app-order-details-dialog',
@@ -9,6 +13,7 @@ import {UpdateInputDialogComponent} from "./update-input-dialog/update-input-dia
   styleUrls: ['./order-details-dialog.component.styl']
 })
 export class OrderDetailsDialogComponent implements OnInit {
+  env = devEnvironment || prodEnvironment;
   currentOrder: any;
   orderItems: any;
 
@@ -55,6 +60,14 @@ export class OrderDetailsDialogComponent implements OnInit {
     });
   }
 
+  showPaymentHistory(order) {
+    this.dialog.open(PaymentHistoryDialogComponent, {
+      width: '400px',
+      data: order,
+      disableClose: true
+    });
+  }
+
   checkout(order) {
     this.ordersBillsService.checkout({
       id: order.id,
@@ -64,4 +77,31 @@ export class OrderDetailsDialogComponent implements OnInit {
       this.dialogRef.close(true)
     })
   }
+
+  fullPayment(order) {
+    this.ordersBillsService.updateInput('payment', {id: order.id, paymentToAdd: this.getRemainingPayment(order)})
+      .subscribe(res => {
+        this.ngOnInit();
+      })
+  }
+
+  getRemainingPayment(order): number {
+    return (((order && order.gross_total) ? order.gross_total : 0) -
+      ((order && order.discount) ? order?.discount : 0) -
+      ((order && order.total_payments) ? order.total_payments : 0));
+  }
+
+  openCalculator(order) {
+    this.dialog.open(CalculatorDialogComponent, {
+      width: '300px',
+      data: order,
+      disableClose: true
+    });
+  }
+
+  public printBill(order, lang) {
+    const url = this.env.baseUrl.backend + (lang === 'en' ? `print/bill/${order.id}` : `print/billfa/${order.id}`);
+    window.open(url, "Bill", "height=750,width=240");
+  }
+
 }

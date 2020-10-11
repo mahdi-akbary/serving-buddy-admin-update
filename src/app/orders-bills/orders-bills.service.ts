@@ -49,16 +49,20 @@ export class OrdersBillsService {
     return this.httpService.get(`server/categories/${categoryId}/items/minimal`);
   }
 
-  getCustomerTableHistory(customerId: number): Observable<any> {
+  tableHistory(customerId: number): Observable<any> {
     return this.httpService.get(`server/tables/orderTableHistory/${customerId}`);
   }
 
   updateInput(urlString: string, data): Observable<any> {
     return this.httpService.put(`${this.url}/${urlString}`, data);
   }
-  checkout(data){
-    return this.httpService.put(`${this.url}/checkout`, data);
 
+  checkout(data) {
+    return this.httpService.put(`${this.url}/checkout`, data);
+  }
+
+  paymentHistory(orderId: number) {
+    return this.httpService.get(`${this.url}/${orderId}/paymentCollectors`);
   }
 }
 
