@@ -99,3 +99,34 @@ export interface IManualUsageListItem {
     }
   }
 }
+
+export interface  IRawManualUsageListItem {
+  id: number;
+  name_english: string;
+  name_dari: string;
+  available_quantity: number;
+  unit: string;
+  status: string;
+  acceptable_limit: number;
+  notes?: string;
+  last_update_by_id: number;
+  last_update_by_name: string;
+  last_update_datetime: Date;
+}
+
+export interface IManualUsageListItem {
+  id: number;
+  name: IName,
+  availableQuantity: number;
+  unit: string;
+  status: string;
+  acceptableLimit: number;
+  notes?: string;
+  lastUpdate: {
+    datetime: Date,
+    by: {
+      id: number,
+      name: string
+    }
+  }
+}

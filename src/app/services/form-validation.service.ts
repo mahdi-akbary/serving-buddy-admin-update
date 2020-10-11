@@ -86,5 +86,26 @@ export class FormValidationService {
     return formControl.invalid && (formControl.dirty || formControl.touched);
   }
 
+  getValidNumber(n): number {
+    if (!n) {
+      return 0;
+    } else if (isNaN(n)) {
+      return 0;
+    } else if (n < 1) {
+      return 0;
+    } else {
+      return n;
+    }
+  }
+
+  getValidNumberSigned(n): number {
+    if (!n) {
+      return 0;
+    } else if (isNaN(n)) {
+      return 0;
+    } else {
+      return n;
+    }
+  }
 
 }
