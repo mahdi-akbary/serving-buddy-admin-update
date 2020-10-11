@@ -80,7 +80,7 @@
       <th>Discount</th>
       <td></td>
       <td></td>
-      <td></td>
+      <td><span *ngIf="currentOrder?.discount_by_name">({{currentOrder?.discount_by_name}})</span></td>
       <td>AFN {{(currentOrder?.discount ? currentOrder?.discount : 0) | number}}</td>
       <td></td>
     </tr>
@@ -99,7 +99,16 @@
       <th class="important">Total payments</th>
       <td></td>
       <td></td>
-      <td></td>
+      <td class="operations">
+        <button mat-icon-button color="primary" matTooltip="Add payment"
+                [disabled]="!getRemainingPayment(currentOrder)"
+                (click)="getRemainingPayment(currentOrder) && updateInput('payment')">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="accent" matTooltip="Tables history" (click)="showPaymentHistory(currentOrder)">
+          <mat-icon>history</mat-icon>
+        </button>
+      </td>
       <td class="important">AFN {{(currentOrder?.total_payments ? currentOrder?.total_payments : 0) | number}}</td>
       <td></td>
     </tr>
@@ -109,17 +118,19 @@
       <td></td>
       <td></td>
       <td></td>
-      <td class="important">AFN {{(currentOrder?.gross_total -
-        (currentOrder?.discount ? currentOrder?.discount : 0) - (currentOrder?.total_payments ? currentOrder?.total_payments : 0))  | number}}</td>
+      <td class="important">AFN {{ getRemainingPayment(currentOrder)  | number}}</td>
       <td></td>
     </tr>
   </table>
 </div>
-<div mat-dialog-actions>
-  <button mat-stroked-button (click)="updateInput('payment')" type="button">ADD PAYMENT</button>
-  <button mat-stroked-button (click)="updateInput('discount')" type="button">ADD DISCOUNT</button>
-  <button mat-stroked-button (click)="checkout(currentOrder)" type="button">CHECKOUT</button>
+<div mat-dialog-actions class="action-margin">
+  <button mat-stroked-button [disabled]="!getRemainingPayment(currentOrder)" color="primary"
+          (click)="getRemainingPayment(currentOrder) &&  fullPayment(currentOrder)" type="button">FULL PAYMENT</button>
+  <button mat-stroked-button [disabled]="!getRemainingPayment(currentOrder)"
+          (click)="getRemainingPayment(currentOrder) && updateInput('discount')" type="button">ADD DISCOUNT</button>
   <button mat-stroked-button (click)="updateInput('misc item') " type="button">ADD MISC ITEM</button>
-  <button mat-stroked-button type="button">CALCULATOR</button>
-  <button mat-stroked-button type="button">PRINT</button>
+  <button mat-stroked-button (click)="checkout(currentOrder)" type="button">CHECKOUT</button>
+  <button mat-stroked-button type="button" (click)="openCalculator(currentOrder)">CALCULATOR</button>
+  <button mat-stroked-button type="button" (click)="printBill(currentOrder, 'en')"><mat-icon>print</mat-icon> (EN)</button>
+  <button mat-stroked-button type="button" (click)="printBill(currentOrder, 'prs')"><mat-icon>print</mat-icon> (FA)</button>
 </div>

@@ -94,7 +94,7 @@ export class AddEditDialogComponent implements OnInit {
 
   showOrderDetails(order) {
     const dialogRef = this.dialog.open(OrderDetailsDialogComponent, {
-      width: '850px',
+      width: '900px',
       data: order,
       disableClose: true
     });

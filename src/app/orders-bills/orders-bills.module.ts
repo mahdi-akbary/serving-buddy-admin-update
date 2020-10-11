@@ -13,6 +13,8 @@ import {TableHistoryDialogComponent} from './add-edit-dialog/table-history-dialo
 import {OrderDetailsDialogComponent} from './add-edit-dialog/order-details-dialog/order-details-dialog.component';
 import {SharedModule} from '../shared/shared.module';
 import {UpdateInputDialogComponent} from "./add-edit-dialog/order-details-dialog/update-input-dialog/update-input-dialog.component";
+import {PaymentHistoryDialogComponent} from "./add-edit-dialog/order-details-dialog/payment-history-dialog/payment-history-dialog.component";
+import {CalculatorDialogComponent} from "./add-edit-dialog/order-details-dialog/calculator-dialog/calculator-dialog.component";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import {UpdateInputDialogComponent} from "./add-edit-dialog/order-details-dialog
     NewCustomerDialogComponent,
     TableHistoryDialogComponent,
     OrderDetailsDialogComponent,
-    UpdateInputDialogComponent
+    UpdateInputDialogComponent,
+    PaymentHistoryDialogComponent,
+    CalculatorDialogComponent
   ],
   imports: [
     SharedModule,
