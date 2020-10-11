@@ -1,1 +1,42 @@
-<p>history works!</p>
+<form action="">
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="isExpanded">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          General actions
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Start date-time</mat-label>
+        <input matInput type="datetime-local">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>End date-time</mat-label>
+        <input matInput type="datetime-local">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Order ID</mat-label>
+        <input matInput type="number" min="1">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Customer name</mat-label>
+        <input matInput type="text" min="1">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Choose a table</mat-label>
+        <input matInput type="number" min="1">
+      </mat-form-field>
+
+      <mat-action-row>
+        <button mat-raised-button color="primary" type="submit">SEARCH</button>
+        <button mat-button type="button">RESET</button>
+        <button mat-button type="button">PRINT</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</form>

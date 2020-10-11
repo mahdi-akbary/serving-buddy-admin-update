@@ -11,8 +11,8 @@ export const environment: IEnvironment = {
     backend: 'http://127.0.0.1:7000/'
   },
   userCredentials: {
-    username: 'musa',
-    password: '123456'
+    username: 'nikzad',
+    password: '123456789'
   }
 };
 

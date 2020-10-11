@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./history.component.styl']
 })
 export class HistoryComponent implements OnInit {
-
+  isExpanded: boolean = true;
   constructor() { }
 
   ngOnInit(): void {
