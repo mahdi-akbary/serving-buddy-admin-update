@@ -8,13 +8,17 @@
       <mat-card-title *ngIf="ordersSummary?.length">Customers</mat-card-title>
       <mat-card-subtitle *ngIf="!ordersSummary?.length">No customer for this table yet.</mat-card-subtitle>
       <div class="action">
-        <button *ngIf="data.isViewMode" mat-stroked-button [disabled]="!selectedOrder" color="primary" (click)="showOrderDetails(selectedOrder)">
+        <button *ngIf="data.isViewMode" mat-stroked-button [disabled]="!selectedOrder" color="primary"
+                (click)="showOrderDetails(selectedOrder)">
           SHOW DETAILS
         </button>
-        <button *ngIf="!data.isViewMode" mat-stroked-button [disabled]="!selectedOrder" color="primary" (click)="listOrders(selectedOrder)">
+        <button *ngIf="!data.isViewMode" mat-stroked-button [disabled]="!selectedOrder" color="primary"
+                (click)="listOrders(selectedOrder)">
           ORDERS
         </button>
-        <button *ngIf="!data.isViewMode" mat-stroked-button [disabled]="!selectedOrder" (click)="enableTransfer()">TRANSFER</button>
+        <button *ngIf="!data.isViewMode" mat-stroked-button [disabled]="!selectedOrder" (click)="enableTransfer()">
+          TRANSFER
+        </button>
         <button *ngIf="!data.isViewMode" mat-stroked-button (click)="AddNewCustomer()">
           <mat-icon>add</mat-icon>
           <span>ADD</span>
@@ -48,8 +52,8 @@
   </mat-card>
   <br>
   <form [formGroup]="transferForm" *ngIf="tables.length && transferForm &&  selectedOrder">
-    <mat-card>
-      <mat-form-field fxFlex="50" appearance="outline">
+    <mat-card fxLayout="column">
+      <mat-form-field fxFlex="30" appearance="outline">
         <mat-label>Select table</mat-label>
         <mat-select formControlName="destinationTableId">
           <mat-option *ngFor="let table of tables" [value]="table.id">
@@ -61,7 +65,9 @@
         </mat-error>
       </mat-form-field>
       <mat-card-actions>
-        <button mat-raised-button (click)="transferForm.valid && transfer(transferForm.value)">CONFIRM TRANSFER</button>
+        <button mat-stroked-button (click)="transferForm.valid && transfer(transferForm.value)">CONFIRM
+          TRANSFER
+        </button>
       </mat-card-actions>
     </mat-card>
   </form>
@@ -103,8 +109,8 @@
               <mat-icon>edit</mat-icon>
             </button>
             <button mat-icon-button color="warn" matTooltip="Delete" (click)="deleteOrder(item)">
-            <mat-icon>delete</mat-icon>
-          </button>
+              <mat-icon>delete</mat-icon>
+            </button>
           </td>
         </tr>
       </table>

@@ -64,6 +64,10 @@ export class OrdersBillsService {
   paymentHistory(orderId: number) {
     return this.httpService.get(`${this.url}/${orderId}/paymentCollectors`);
   }
+
+  search(params) {
+    return this.httpService.get(`${this.url}/history`, {params: params});
+  }
 }
 
 export interface IOrdersSummary {
