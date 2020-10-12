@@ -1,6 +1,6 @@
-<form [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
+<form [formGroup]="form" (ngSubmit)="form.valid && submit(form.value, panel)">
   <mat-accordion>
-    <mat-expansion-panel [expanded]="isExpanded">
+    <mat-expansion-panel #panel class="disabled-pointer" [expanded]="isExpanded" (click)="$event.stopPropagation();">
       <mat-expansion-panel-header>
         <mat-panel-title>
           General actions
@@ -11,11 +11,17 @@
         <mat-form-field appearance="outline">
           <mat-label>Start date-time</mat-label>
           <input matInput type="datetime-local" formControlName="startDatetime">
+          <mat-error *ngIf="form.get('startDatetime')?.errors?.required">
+            {{formValidationService.required.message()}}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>End date-time</mat-label>
           <input matInput type="datetime-local" formControlName="endDatetime">
+          <mat-error *ngIf="form.get('endDatetime')?.errors?.required">
+            {{formValidationService.required.message()}}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -46,3 +52,51 @@
     </mat-expansion-panel>
   </mat-accordion>
 </form>
+
+<mat-card *ngIf="searchResultList?.length">
+  <mat-card-header>
+    <mat-card-title>Search result</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table class="the-table">
+      <tr>
+        <th>Options</th>
+        <th>#</th>
+        <th>Customer name</th>
+        <th>Order ID</th>
+        <th>Table number</th>
+        <th>Order date-time</th>
+        <th>Checkout date-time</th>
+        <th>Gross total</th>
+        <th>Discount</th>
+        <th>Grand total</th>
+        <th>Total payments</th>
+        <th>Remaining payment</th>
+      </tr>
+      <tr *ngFor="let item of searchResultList, let i = index">
+        <td class="operations">
+          <button mat-icon-button color="accent" matTooltip="View details" (click)="view(item)">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+        </td>
+        <td>{{i + 1}}</td>
+        <td>{{item.customer_name}}</td>
+        <td>{{item.order_id}}</td>
+        <td>{{item.last_table_id}}</td>
+        <td>{{item.init_order_datetime | date: 'yyyy-MM-dd  hh : mm : ss  a'}}</td>
+        <td>{{item.checked_out_datetime | date: 'yyyy-MM-dd  hh : mm : ss  a'}}</td>
+        <td>AFN {{item.gross_total}}</td>
+        <td>AFN {{item.discount}}</td>
+        <td>AFN {{item.gross_total - item.discount}}</td>
+        <td>AFN {{item.total_payments}}</td>
+        <td>AFN {{item.gross_total - item.discount - item.total_payments}}</td>
+      </tr>
+    </table>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="isSearched && !searchResultList?.length">
+  <mat-card-header>
+    <mat-card-subtitle>No history found!</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>

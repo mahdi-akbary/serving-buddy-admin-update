@@ -68,6 +68,15 @@ export class OrdersBillsService {
   search(params) {
     return this.httpService.get(`${this.url}/history`, {params: params});
   }
+  tables() {
+    return this.httpService.get(`server/tables/full`);
+  }
+  storeTable(data){
+    return this.httpService.post(`server/tables`, data);
+  }
+  updateTable(data){
+    return this.httpService.put(`server/tables`, data);
+  }
 }
 
 export interface IOrdersSummary {

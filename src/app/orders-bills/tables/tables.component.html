@@ -1,1 +1,35 @@
-<p>tables works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Tables</mat-card-title>
+    <div class="action">
+      <button mat-stroked-button (click)="add()">
+        <mat-icon>add</mat-icon>
+        <span>ADD</span>
+      </button>
+    </div>
+  </mat-card-header>
+  <mat-card-content *ngIf="tables?.length">
+    <table class="the-table">
+      <tr>
+        <th>Options</th>
+        <th>#</th>
+        <th>Table ID</th>
+        <th>Status</th>
+        <th>Last update by</th>
+        <th>Last update date time</th>
+      </tr>
+      <tr *ngFor="let table of tables, let i = index">
+        <td class="operations">
+          <button mat-icon-button color="accent" matTooltip="Edit" (click)="update(table)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+        <td>{{i + 1}}</td>
+        <td>{{table.id}}</td>
+        <td>{{table.status}}</td>
+        <td>{{table.last_updated_by_name}}</td>
+        <td>{{table.last_update_datetime | date: 'yyyy-MM-dd  hh : mm : ss  a'}}</td>
+      </tr>
+    </table>
+  </mat-card-content>
+</mat-card>

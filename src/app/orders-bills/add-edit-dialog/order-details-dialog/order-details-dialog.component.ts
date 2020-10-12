@@ -29,7 +29,7 @@ export class OrderDetailsDialogComponent implements OnInit {
       this.currentOrder = orderDetails && orderDetails.data && orderDetails.data[0];
       this.orderItems = orderDetails && orderDetails.data;
       this.setGrossTotal(this.orderItems)
-      console.log(this.orderItems)
+
     })
   }
 

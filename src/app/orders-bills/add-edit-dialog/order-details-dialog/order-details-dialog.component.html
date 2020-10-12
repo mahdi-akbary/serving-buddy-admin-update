@@ -12,25 +12,25 @@
     </tr>
     <tr>
       <th>Initial order time</th>
-      <td>{{currentOrder?.init_order_datetime | date: 'hh : mm : ss  a'}}</td>
+      <td>{{currentOrder?.init_order_datetime | date: 'yyyy-MM-dd  hh : mm : ss  a'}}</td>
       <th>Initial order by</th>
       <td>{{currentOrder?.init_order_by_name}}</td>
     </tr>
     <tr>
       <th>Last update time</th>
-      <td>{{currentOrder?.last_update_datetime | date: 'hh : mm : ss  a'}}</td>
+      <td>{{currentOrder?.last_update_datetime | date: 'yyyy-MM-dd  hh : mm : ss  a'}}</td>
       <th>Last update by</th>
       <td>{{currentOrder?.last_update_by_name}}</td>
     </tr>
     <tr>
       <th>Initial dispatch time</th>
-      <td>{{currentOrder?.init_dispatch_datetime}}</td>
+      <td>{{currentOrder?.init_dispatch_datetime | date: 'yyyy-MM-dd  hh : mm : ss  a'}}</td>
       <th>Last dispatch time</th>
-      <td>{{currentOrder?.last_dispatch_datetime}}</td>
+      <td>{{currentOrder?.last_dispatch_datetime | date: 'yyyy-MM-dd  hh : mm : ss  a'}}</td>
     </tr>
     <tr>
       <th>Checked out time</th>
-      <td>{{currentOrder?.checked_out_datetime}}</td>
+      <td>{{currentOrder?.checked_out_datetime | date: 'yyyy-MM-dd  hh : mm : ss  a'}}</td>
       <th>Checked out by</th>
       <td>{{currentOrder?.checked_out_by_name}}</td>
     </tr>

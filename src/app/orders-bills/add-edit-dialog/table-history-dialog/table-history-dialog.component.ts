@@ -19,9 +19,6 @@ export class TableHistoryDialogComponent implements OnInit {
   ngOnInit(): void {
     this.ordersBillsService.tableHistory(this.data.id).subscribe(historyList => {
       this.customerTableHistoryList = historyList.data
-      console.log('-----------------------')
-      console.log(historyList)
-      console.log('-----------------------')
     })
   }
 }

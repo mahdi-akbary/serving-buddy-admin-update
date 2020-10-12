@@ -14,6 +14,6 @@ export class CalculatorDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data)
+
   }
 }

@@ -1,0 +1,34 @@
+<form [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
+  <div class="dialog-header">
+    <h1 color="primary" mat-dialog-title>New Table</h1>
+    <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
+  </div>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Table ID</mat-label>
+      <input matInput formControlName="id" type="number" [readonly]="data?.id">
+      <mat-error *ngIf="form.get('id')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+      <mat-error *ngIf="!form.get('id')?.errors?.required">
+        Duplicate table ID
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" *ngIf="data?.id">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option *ngFor="let status of Statuses" [value]="status">
+          {{status}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('status')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">SAVE</button>
+    <button mat-button mat-dialog-close>CLOSE</button>
+  </div>
+</form>

@@ -24,7 +24,7 @@ export class UpdateInputDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data)
+
     this.form = this.formBuilder.group({
       value: [null, this.formValidationService.required.validator],
       note: '',
@@ -59,7 +59,7 @@ export class UpdateInputDialogComponent implements OnInit {
       };
       url = 'miscellaneous';
     }
-    console.log(temp);
+
     this.ordersBillsService.updateInput(url, temp).subscribe((res) => {
       this.dialogRef.close(true)
     }, (err) => {

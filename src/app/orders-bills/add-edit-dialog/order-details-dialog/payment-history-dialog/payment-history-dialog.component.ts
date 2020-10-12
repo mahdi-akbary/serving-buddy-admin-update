@@ -19,9 +19,7 @@ export class PaymentHistoryDialogComponent implements OnInit {
   ngOnInit(): void {
     this.ordersBillsService.paymentHistory(this.data.id).subscribe(historyList => {
       this.paymentHistoryList = historyList.data
-      console.log('-----------------------')
-      console.log(historyList)
-      console.log('-----------------------')
+
     })
   }
 }

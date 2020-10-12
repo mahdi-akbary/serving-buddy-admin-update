@@ -16,6 +16,7 @@ import {UpdateInputDialogComponent} from "./add-edit-dialog/order-details-dialog
 import {PaymentHistoryDialogComponent} from "./add-edit-dialog/order-details-dialog/payment-history-dialog/payment-history-dialog.component";
 import {CalculatorDialogComponent} from "./add-edit-dialog/order-details-dialog/calculator-dialog/calculator-dialog.component";
 import {MatExpansionModule} from '@angular/material/expansion';
+import {NewTableDialogComponent} from "./tables/new-table-dialog/new-table-dialog.component";
 @NgModule({
   declarations: [
     OrdersBillsComponent,
@@ -30,7 +31,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     OrderDetailsDialogComponent,
     UpdateInputDialogComponent,
     PaymentHistoryDialogComponent,
-    CalculatorDialogComponent
+    CalculatorDialogComponent,
+    NewTableDialogComponent
   ],
   imports: [
     SharedModule,
