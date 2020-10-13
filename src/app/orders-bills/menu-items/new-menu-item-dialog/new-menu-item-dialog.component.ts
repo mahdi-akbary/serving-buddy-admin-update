@@ -7,20 +7,18 @@ import {AuthService} from "../../../services/auth.service";
 import {StaticDataService} from "../../../services/static-data.service";
 
 @Component({
-  selector: 'app-new-menu-category-dialog',
-  templateUrl: './new-menu-category-dialog.component.html',
-  styleUrls: ['./new-menu-category-dialog.component.styl']
+  selector: 'app-new-menu-item-dialog',
+  templateUrl: './new-menu-item-dialog.component.html',
+  styleUrls: ['./new-menu-item-dialog.component.styl']
 })
-export class NewMenuCategoryDialogComponent implements OnInit {
+export class NewMenuItemDialogComponent implements OnInit {
 
   form: FormGroup;
   statuses: any[];
-  providers: any[];
-  printers: any[];
-  trackInStockOptions: any[];
+  categories: any[] = []
 
   constructor(
-    public dialogRef: MatDialogRef<NewMenuCategoryDialogComponent>,
+    public dialogRef: MatDialogRef<NewMenuItemDialogComponent>,
     public formBuilder: FormBuilder,
     private ordersBillsService: OrdersBillsService,
     private authService: AuthService,
@@ -31,16 +29,27 @@ export class NewMenuCategoryDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.statuses = this.staticDataService.statues;
-    this.providers = this.staticDataService.providers;
-    this.printers = this.staticDataService.printers;
-    this.trackInStockOptions = this.staticDataService.yesNoOptions;
+    this.ordersBillsService.gerCategories().subscribe((res: any) => {
+      this.categories = res.data
+    });
     this.form = this.formBuilder.group({
-      printer: [this.data && this.data.printer, this.formValidationService.required.validator],
-      provider: [this.data && this.data.provider, this.formValidationService.required.validator],
-      trackInStock: [this.data && this.data.track_in_stock, this.formValidationService.required.validator],
+      price: [this.data && this.data.price, this.formValidationService.required.validator],
+      category: [this.data && this.data.category, this.formValidationService.required.validator],
       dari: [this.data && this.data.name_dari, this.formValidationService.required.validator],
       english: [this.data && this.data.name_english, this.formValidationService.required.validator],
     });
+    this.ordersBillsService.gerCategories().subscribe((res: any) => {
+      this.categories = res.data
+      if (this.data && this.data.category_id) {
+        this.categories.forEach(category => {
+          if (category.id === this.data.category_id) {
+            this.form.get('category').setValue(category)
+          }
+        })
+      }
+    });
+
+
     if (this.data && this.data.id) {
       this.form.addControl('status', new FormControl(this.data.status, this.formValidationService.required.validator));
     }
@@ -59,11 +68,11 @@ export class NewMenuCategoryDialogComponent implements OnInit {
         }
       };
       this.data.status = formData.status;
-      this.ordersBillsService.updateCategories({...temp, ...formData}).subscribe(res => {
+      this.ordersBillsService.updateItems({...temp, ...formData}).subscribe(res => {
         this.dialogRef.close(true)
       })
     } else {
-      this.ordersBillsService.storeCategories(formData).subscribe((res) => {
+      this.ordersBillsService.storeItems(formData).subscribe((res) => {
         this.dialogRef.close(true)
       }, (err) => {
       })

@@ -1,1 +1,97 @@
-<p>menu-items works!</p>
+<form [formGroup]="form" (ngSubmit)="form.valid && submit(form.value, panel)">
+  <mat-accordion>
+    <mat-expansion-panel #panel class="disabled-pointer" [expanded]="isExpanded" (click)="$event.stopPropagation();">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          General actions
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="form-fields">
+        <mat-form-field appearance="outline">
+          <mat-label>Choose category</mat-label>
+          <mat-select formControlName="category">
+            <mat-option *ngFor="let category of categories" [value]="category">
+              {{category.name_english}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Select table</mat-label>
+          <mat-select formControlName="item">
+            <mat-option *ngFor="let item of items" [value]="item">
+              {{item.name_english}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Select table</mat-label>
+          <mat-select formControlName="status">
+            <mat-option *ngFor="let status of statuses" [value]="status">
+              {{status}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+      <mat-action-row>
+        <button mat-stroked-button color="primary" type="submit">SEARCH</button>
+        <button mat-stroked-button type="button" (click)="form.reset()">RESET</button>
+        <button mat-stroked-button type="button" (click)="addNewItem()">
+          <mat-icon>add</mat-icon>
+          <span>ADD</span>
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</form>
+
+<mat-card *ngIf="searchResultList?.length">
+  <mat-card-header>
+    <mat-card-title>Search result</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table class="the-table">
+      <tr>
+        <th>Options</th>
+        <th>#</th>
+       <th>Item ID</th>
+       <th>Category name</th>
+       <th>Item name (English)</th>
+       <th>Item name (Dari)</th>
+       <th>Price</th>
+       <th>Status</th>
+       <th>Last update by</th>
+       <th>Last update date time</th>
+      </tr>
+      <tr *ngFor="let item of searchResultList, let i = index">
+        <td class="operations">
+          <button mat-icon-button color="accent" matTooltip="Edit" (click)="updateItem(item)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" matTooltip="History" (click)="itemHistory(item)">
+            <mat-icon>history</mat-icon>
+          </button>
+        </td>
+        <td>{{i + 1}}</td>
+        <td>{{item.id}}</td>
+        <td>{{item.category_name_english}}</td>
+        <td>{{item.name_english}}</td>
+        <td>{{item.name_dari}}</td>
+        <td>AFN {{item.price}}</td>
+        <td>{{item.status}}</td>
+        <td>{{item.last_updated_by_name}}</td>
+        <td>{{item.last_update_datetime | date: 'yyyy-MM-dd  hh : mm : ss  a'}}</td>
+      </tr>
+    </table>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="isSearched && !searchResultList?.length">
+  <mat-card-header>
+    <mat-card-subtitle>No history found!</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>

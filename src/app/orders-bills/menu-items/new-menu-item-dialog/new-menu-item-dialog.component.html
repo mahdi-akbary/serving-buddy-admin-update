@@ -1,0 +1,63 @@
+<form [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
+  <div class="dialog-header">
+    <h1 color="primary" mat-dialog-title>
+      <span *ngIf="!data?.id">New menu Item</span>
+      <span *ngIf="data?.id">Edit menu Item ({{data?.id}})</span>
+    </h1>
+    <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
+  </div>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Choose category</mat-label>
+      <mat-select formControlName="category">
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{category.name_english}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('category')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Item name (English)</mat-label>
+      <input matInput formControlName="english" type="text">
+      <mat-error *ngIf="form.get('english')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Item name (Dari)</mat-label>
+      <input matInput formControlName="dari" type="text">
+      <mat-error *ngIf="form.get('dari')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Price</mat-label>
+      <input matInput formControlName="price" type="number">
+      <mat-error *ngIf="form.get('price')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline" *ngIf="data?.id">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option *ngFor="let status of statuses" [value]="status">
+          {{status}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('status')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">SAVE</button>
+    <button mat-button mat-dialog-close>CLOSE</button>
+  </div>
+</form>

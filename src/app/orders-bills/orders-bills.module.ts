@@ -18,6 +18,8 @@ import {CalculatorDialogComponent} from "./add-edit-dialog/order-details-dialog/
 import {MatExpansionModule} from '@angular/material/expansion';
 import {NewTableDialogComponent} from "./tables/new-table-dialog/new-table-dialog.component";
 import {NewMenuCategoryDialogComponent} from "./menu-categories/new-menu-category-dialog/new-menu-category-dialog.component";
+import {NewMenuItemDialogComponent} from "./menu-items/new-menu-item-dialog/new-menu-item-dialog.component";
+import {ItemHistoryDialogComponent} from "./menu-items/item-history-dialog/item-history-dialog.component";
 @NgModule({
   declarations: [
     OrdersBillsComponent,
@@ -34,7 +36,9 @@ import {NewMenuCategoryDialogComponent} from "./menu-categories/new-menu-categor
     PaymentHistoryDialogComponent,
     CalculatorDialogComponent,
     NewTableDialogComponent,
-    NewMenuCategoryDialogComponent
+    NewMenuCategoryDialogComponent,
+    NewMenuItemDialogComponent,
+    ItemHistoryDialogComponent
   ],
   imports: [
     SharedModule,

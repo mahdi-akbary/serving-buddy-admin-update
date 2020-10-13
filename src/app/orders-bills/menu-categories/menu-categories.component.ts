@@ -35,7 +35,6 @@ export class MenuCategoriesComponent implements OnInit {
   }
 
   update(category) {
-    console.log(category)
     const dialogRef = this.dialog.open(NewMenuCategoryDialogComponent, {
       width: '300px',
       data: category,

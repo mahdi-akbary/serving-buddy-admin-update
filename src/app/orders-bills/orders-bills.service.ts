@@ -53,6 +53,10 @@ export class OrdersBillsService {
     return this.httpService.get(`server/tables/orderTableHistory/${customerId}`);
   }
 
+  itemHistory(itemId: number): Observable<any> {
+    return this.httpService.get(`server/items/${itemId}/history`);
+  }
+
   updateInput(urlString: string, data): Observable<any> {
     return this.httpService.put(`${this.url}/${urlString}`, data);
   }
@@ -68,22 +72,40 @@ export class OrdersBillsService {
   search(params) {
     return this.httpService.get(`${this.url}/history`, {params: params});
   }
+
+  searchItems(params) {
+    return this.httpService.get(`server/items/search`, {params: params});
+  }
+
+  storeItems(data) {
+    return this.httpService.post(`server/items`, data);
+  }
+
+  updateItems(data) {
+    return this.httpService.put(`server/items`, data);
+  }
+
   tables() {
     return this.httpService.get(`server/tables/full`);
   }
-  storeTable(data){
+
+  storeTable(data) {
     return this.httpService.post(`server/tables`, data);
   }
-  updateTable(data){
+
+  updateTable(data) {
     return this.httpService.put(`server/tables`, data);
   }
+
   categories() {
     return this.httpService.get(`server/categories/full`);
   }
-  storeCategories(data){
+
+  storeCategories(data) {
     return this.httpService.post(`server/categories`, data);
   }
-  updateCategories(data){
+
+  updateCategories(data) {
     return this.httpService.put(`server/categories`, data);
   }
 }

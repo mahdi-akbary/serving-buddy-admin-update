@@ -1,0 +1,32 @@
+<div class="dialog-header">
+  <h1 color="primary" mat-dialog-title>Item change history</h1>
+  <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
+</div>
+<div mat-dialog-content class="content">
+  <table class="the-table">
+    <tr>
+      <th>#</th>
+      <th>Item ID</th>
+      <th>Category ID	</th>
+      <th>Category name	</th>
+      <th>Item name (English)	</th>
+      <th>Item name (Dari)	</th>
+      <th>Price	</th>
+      <th>Status</th>
+      <th>Update by	</th>
+      <th>Update date-time</th>
+    </tr>
+    <tr *ngFor="let history of itemHistoryList, let i = index">
+      <td>{{i + 1}}</td>
+      <td>{{history.id}}</td>
+      <td>{{history.category_id}}</td>
+      <td>{{history.category_name_english}}</td>
+      <td>{{history.name_english}}</td>
+      <td>{{history.name_dari}}</td>
+      <td>{{history.price}}</td>
+      <td>{{history.status}}</td>
+      <td>{{history.updated_by_name}}</td>
+      <td>{{history.update_datetime | date: 'hh : mm : ss  a'}}</td>
+    </tr>
+  </table>
+</div>
