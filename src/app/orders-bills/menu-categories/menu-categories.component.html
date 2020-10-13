@@ -1,1 +1,45 @@
-<p>menu-categories works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Categories</mat-card-title>
+    <div class="action">
+      <button mat-stroked-button (click)="add()">
+        <mat-icon>add</mat-icon>
+        <span>ADD</span>
+      </button>
+    </div>
+  </mat-card-header>
+  <mat-card-content *ngIf="menuCategories?.length">
+    <table class="the-table">
+      <tr>
+        <th>Options</th>
+        <th>#</th>
+        <th>Category ID</th>
+        <th>Category name (English)</th>
+        <th>Category name (Dari)</th>
+        <th>Provider</th>
+        <th>Printer</th>
+        <th>Status</th>
+        <th>Track in stock</th>
+        <th>Last update by</th>
+        <th>Last update date time</th>
+      </tr>
+      <tr *ngFor="let menuCategory of menuCategories, let i = index">
+        <td class="operations">
+          <button mat-icon-button color="accent" matTooltip="Edit" (click)="update(menuCategory)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+        <td>{{i + 1}}</td>
+        <td>{{menuCategory.id}}</td>
+        <td>{{menuCategory.name_english}}</td>
+        <td>{{menuCategory.name_dari}}</td>
+        <td>{{menuCategory.provider}}</td>
+        <td>{{menuCategory.printer}}</td>
+        <td>{{menuCategory.status}}</td>
+        <td>{{menuCategory.track_in_stock}}</td>
+        <td>{{menuCategory.last_updated_by_name}}</td>
+        <td>{{menuCategory.last_update_datetime | date: 'yyyy-MM-dd  hh : mm : ss  a'}}</td>
+      </tr>
+    </table>
+  </mat-card-content>
+</mat-card>

@@ -21,11 +21,11 @@ const routes: Routes = [
   },
   {
     path: 'menu-categories',
-    component: MenuItemsComponent
+    component: MenuCategoriesComponent
   },
   {
     path: 'menu-items',
-    component: MenuCategoriesComponent
+    component: MenuItemsComponent
   }
 
 

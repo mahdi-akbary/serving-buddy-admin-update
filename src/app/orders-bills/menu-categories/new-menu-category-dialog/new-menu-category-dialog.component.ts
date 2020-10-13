@@ -7,17 +7,20 @@ import {AuthService} from "../../../services/auth.service";
 import {StaticDataService} from "../../../services/static-data.service";
 
 @Component({
-  selector: 'app-new-table-dialog',
-  templateUrl: './new-table-dialog.component.html',
-  styleUrls: ['./new-table-dialog.component.styl']
+  selector: 'app-new-menu-category-dialog',
+  templateUrl: './new-menu-category-dialog.component.html',
+  styleUrls: ['./new-menu-category-dialog.component.styl']
 })
-export class NewTableDialogComponent implements OnInit {
+export class NewMenuCategoryDialogComponent implements OnInit {
 
   form: FormGroup;
   statuses: any[];
+  providers: any[];
+  printers: any[];
+  trackInStockOptions: any[];
 
   constructor(
-    public dialogRef: MatDialogRef<NewTableDialogComponent>,
+    public dialogRef: MatDialogRef<NewMenuCategoryDialogComponent>,
     public formBuilder: FormBuilder,
     private ordersBillsService: OrdersBillsService,
     private authService: AuthService,
@@ -28,35 +31,27 @@ export class NewTableDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.statuses = this.staticDataService.statues;
+    this.providers = this.staticDataService.providers;
+    this.printers = this.staticDataService.printers;
+    this.trackInStockOptions = this.staticDataService.yesNoOptions;
     this.form = this.formBuilder.group({
-      id: [this.data && this.data.id, this.formValidationService.required.validator],
+      printer: [this.data && this.data.printer, this.formValidationService.required.validator],
+      provider: [this.data && this.data.provider, this.formValidationService.required.validator],
+      trackInStock: [this.data && this.data.track_in_stock, this.formValidationService.required.validator],
+      dari: [this.data && this.data.name_dari, this.formValidationService.required.validator],
+      english: [this.data && this.data.name_english, this.formValidationService.required.validator],
     });
     if (this.data && this.data.id) {
       this.form.addControl('status', new FormControl(this.data.status, this.formValidationService.required.validator));
     }
-    this.form.get('id').valueChanges.subscribe(value => {
-      if (value) {
-        let found = false;
-        let index = 0;
-        this.data.tables.forEach(table => {
-          index++;
-          if (table.id === value) {
-            this.form.get('id').setErrors({'incorrect': true});
-            this.form.get('id').markAsDirty()
-            found = true;
-          }
-          if (index === this.data.tables.length && !found) {
-            this.form.get('id').setErrors(null);
-          }
-
-        })
-      }
-    })
-
-
   }
 
   submit(formData) {
+    formData.name = {english: formData.english, dari: formData.dari};
+    formData.id = this.data.id;
+    delete formData.english;
+    delete formData.dari;
+    console.log(formData, '******')
     if (this.data && this.data.id) {
       const temp = {
         lastUpdate: {
@@ -65,11 +60,11 @@ export class NewTableDialogComponent implements OnInit {
         }
       };
       this.data.status = formData.status;
-      this.ordersBillsService.updateTable({...temp, ...this.data}).subscribe(res => {
+      this.ordersBillsService.updateCategories({...temp, ...formData}).subscribe(res => {
         this.dialogRef.close(true)
       })
     } else {
-      this.ordersBillsService.storeTable(formData).subscribe((res) => {
+      this.ordersBillsService.storeCategories(formData).subscribe((res) => {
         this.dialogRef.close(true)
       }, (err) => {
       })

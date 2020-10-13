@@ -1,0 +1,79 @@
+<form [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
+  <div class="dialog-header">
+    <h1 color="primary" mat-dialog-title>
+      <span *ngIf="!data?.id">New menu category</span>
+      <span *ngIf="data?.id">Edit menu category ({{data?.id}})</span>
+    </h1>
+    <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
+  </div>
+  <div mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Category name (English)</mat-label>
+      <input matInput formControlName="english" type="text">
+      <mat-error *ngIf="form.get('english')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Category name (Dari)</mat-label>
+      <input matInput formControlName="dari" type="text" >
+      <mat-error *ngIf="form.get('dari')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+      <mat-label>Provider</mat-label>
+      <mat-select formControlName="provider">
+        <mat-option *ngFor="let provider of providers" [value]="provider">
+          {{provider}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('provider')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" >
+      <mat-label>Printer</mat-label>
+      <mat-select formControlName="printer">
+        <mat-option *ngFor="let printer of printers" [value]="printer">
+          {{printer}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('printer')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Track in stock</mat-label>
+      <mat-select formControlName="trackInStock">
+        <mat-option *ngFor="let option of trackInStockOptions" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('trackInStock')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" *ngIf="data?.id">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option *ngFor="let status of statuses" [value]="status">
+          {{status}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('status')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">SAVE</button>
+    <button mat-button mat-dialog-close>CLOSE</button>
+  </div>
+</form>

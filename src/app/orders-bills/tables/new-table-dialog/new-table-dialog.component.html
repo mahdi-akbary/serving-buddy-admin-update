@@ -1,6 +1,9 @@
 <form [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
   <div class="dialog-header">
-    <h1 color="primary" mat-dialog-title>New Table</h1>
+    <h1 color="primary" mat-dialog-title>
+      <span *ngIf="!data?.id">New Table</span>
+      <span *ngIf="data?.id">Edit Table</span>
+    </h1>
     <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
   </div>
   <div mat-dialog-content>
@@ -18,7 +21,7 @@
     <mat-form-field appearance="outline" *ngIf="data?.id">
       <mat-label>Status</mat-label>
       <mat-select formControlName="status">
-        <mat-option *ngFor="let status of Statuses" [value]="status">
+        <mat-option *ngFor="let status of statuses" [value]="status">
           {{status}}
         </mat-option>
       </mat-select>

@@ -77,6 +77,15 @@ export class OrdersBillsService {
   updateTable(data){
     return this.httpService.put(`server/tables`, data);
   }
+  categories() {
+    return this.httpService.get(`server/categories/full`);
+  }
+  storeCategories(data){
+    return this.httpService.post(`server/categories`, data);
+  }
+  updateCategories(data){
+    return this.httpService.put(`server/categories`, data);
+  }
 }
 
 export interface IOrdersSummary {
