@@ -1,1 +1,50 @@
-<p>employees works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Tables</mat-card-title>
+    <div class="action">
+      <button mat-stroked-button (click)="add()">
+        <mat-icon>add</mat-icon>
+        <span>ADD</span>
+      </button>
+      <button mat-stroked-button (click)="add()">
+        <mat-icon>print</mat-icon>
+        <span> Print</span>
+      </button>
+    </div>
+  </mat-card-header>
+  <mat-card-content *ngIf="employees?.length">
+    <table class="the-table">
+      <tr>
+        <th>Options</th>
+        <th>#</th>
+        <th>Employee name</th>
+        <th>Employee ID	</th>
+        <th>Father name</th>
+        <th>Designation</th>
+        <th>Status</th>
+        <th>Salary</th>
+        <th>Last update by</th>
+        <th>Last update date time</th>
+      </tr>
+      <tr *ngFor="let employee of employees, let i = index">
+        <td class="operations">
+          <button mat-icon-button color="accent" matTooltip="Edit" (click)="update(employee)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="accent" matTooltip="View" (click)="view(employee)">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+        </td>
+        <td>{{i + 1}}</td>
+        <td>{{employee.name}}</td>
+        <td>{{employee.id}}</td>
+        <td>{{employee.father_name}}</td>
+        <td>{{employee.designation}}</td>
+        <td>{{employee.status}}</td>
+        <td>AFN {{employee.salary}}</td>
+        <td>{{employee.last_update_by_name}}</td>
+        <td>{{employee.last_update_datetime | date: 'yyyy-MM-dd  hh : mm : ss  a'}}</td>
+      </tr>
+    </table>
+  </mat-card-content>
+</mat-card>

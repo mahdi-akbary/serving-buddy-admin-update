@@ -10,13 +10,15 @@ import {AdvancesService} from './advances/advances.service';
 import {LeavesAndAbsentiesService} from './leaves-and-absenties/leaves-and-absenties.service';
 import {PayrollService} from './payroll/payroll.service';
 import {SharedModule} from '../shared/shared.module';
+import {AddEditEmployeeDialogComponent} from "./add-edit-employee-dialog/add-edit-employee-dialog.component";
 
 @NgModule({
   declarations: [
     EmployeesComponent,
     LeavesAndAbsentiesComponent,
     AdvancesComponent,
-    PayrollComponent
+    PayrollComponent,
+    AddEditEmployeeDialogComponent
   ],
   imports: [
     SharedModule,
