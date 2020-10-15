@@ -1,0 +1,64 @@
+<br>
+<table class="the-table">
+  <tr>
+    <th>Employee ID</th>
+    <td>{{data?.id}}</td>
+  </tr>
+  <tr>
+    <th>Employee name</th>
+    <td>{{data?.name}}</td>
+  </tr>
+  <tr>
+    <th>Father name</th>
+    <td>{{data?.father_name}}</td>
+  </tr>
+  <tr>
+    <th>Designation</th>
+    <td>{{data?.designation}}</td>
+  </tr>
+  <tr>
+    <th>Year-month</th>
+    <td>{{data?.targetYearMonth}}</td>
+  </tr>
+</table>
+
+
+  <div class="dialog-header">
+    <h1 color="primary" mat-dialog-title>
+      <span>List leaves/absenties</span>
+    </h1>
+    <mat-icon (click)="close()" matTooltip="close">close</mat-icon>
+  </div>
+  <div mat-dialog-content>
+    <table class="the-table">
+      <tr>
+        <th>Options</th>
+        <th>#</th>
+        <th>Record ID</th>
+        <th>For date</th>
+        <th>Type</th>
+        <th>Duration</th>
+        <th>Notes</th>
+        <th>Inserted by</th>
+        <th>Insert datetime</th>
+      </tr>
+      <tr *ngFor="let item of leavesAndAbsentiesList, let i = index">
+        <td class="operations">
+          <button mat-icon-button color="primary" matTooltip="Delete" (click)="delete(item)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+        <td>{{i + 1}}</td>
+        <td>{{item?.id}}</td>
+        <td>{{item?.for_date | date: 'yyyy-MM-dd  hh : mm : ss  a'}}</td>
+        <td>{{item?.type}}</td>
+        <td>{{item?.duration}}</td>
+        <td>{{item?.notes}}</td>
+        <td>{{item?.last_update_by_name}}</td>
+        <td>{{item?.last_update_datetime | date: 'yyyy-MM-dd  hh : mm : ss  a'}}</td>
+      </tr>
+    </table>
+
+
+  </div>
+

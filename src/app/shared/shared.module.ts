@@ -15,6 +15,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {ViewElementComponent} from "./components/view-element/view-element.component";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 const modules = [
   CommonModule,
@@ -33,6 +34,7 @@ const modules = [
   MatSelectModule,
   MatSnackBarModule,
   FlexLayoutModule,
+  MatExpansionModule
 ];
 
 @NgModule({
