@@ -1,1 +1,98 @@
-<p>payroll works!</p>
+<form [formGroup]="form" (ngSubmit)="form.valid && submit(form.value, panel)">
+  <mat-accordion>
+    <mat-expansion-panel #panel class="disabled-pointer" [expanded]="isExpanded" (click)="$event.stopPropagation();">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          General actions
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="form-fields">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Select year</mat-label>
+          <mat-select formControlName="year">
+            <mat-option *ngFor="let year of years" [value]="year">
+              {{year}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('year')?.errors?.required">
+            {{formValidationService.required.message()}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Select month</mat-label>
+          <mat-select formControlName="month">
+            <mat-option *ngFor="let month of months" [value]="month">
+              {{month}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('month')?.errors?.required">
+            {{formValidationService.required.message()}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-action-row>
+        <button mat-stroked-button color="primary" type="submit">SEARCH</button>
+        <button mat-stroked-button type="button" (click)="form.reset()">RESET</button>
+        <button mat-stroked-button type="button">PRINT</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</form>
+
+<mat-card *ngIf="searchResultList?.length">
+  <mat-card-header>
+    <mat-card-title>Search result</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table class="the-table">
+      <tr>
+        <th>Options</th>
+        <th>#</th>
+        <th>Employee name</th>
+        <th>Employee ID</th>
+        <th>Year-month</th>
+        <th>Base salary (monthly)</th>
+        <th>Total for abasenties</th>
+        <th>Total advances</th>
+        <th>Old calculations</th>
+        <th>Adjustments</th>
+        <th>Total payable</th>
+        <th>Paid</th>
+        <th>Remaining</th>
+        <th>Executed by</th>
+        <th>Execution datetime</th>
+      </tr>
+      <tr *ngFor="let item of searchResultList, let i = index">
+        <td class="operations">
+          <button mat-icon-button color="primary" matTooltip="Payroll" (click)="add(item)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </td>
+        <td>{{i + 1}}</td>
+        <td>{{item?.employee_name}}</td>
+        <td>{{item?.employee_id}}</td>
+        <td>{{item?.targetYearMonth}}</td>
+        <td>AFN {{item?.base_salary_monthly ? item?.base_salary_monthly : 0}}</td>
+        <td>AFN {{item?.total_for_absenties ? item?.total_for_absenties : 0}}</td>
+        <td>AFN {{item?.total_advances ? item?.total_advances : 0}}</td>
+        <td>AFN {{item?.old_calculations ? item?.old_calculations : 0}}</td>
+        <td>AFN {{item?.adjustments ? item?.adjustments : 0}}</td>
+        <td>AFN {{item?.payable_salary ? item?.payable_salary : 0}}</td>
+        <td>AFN {{item?.paid ? item?.paid : 0}}</td>
+        <td>AFN {{item?.remaining ? item?.remaining : 0}}</td>
+        <td>{{item?.executed_by_name}}</td>
+        <td>{{item?.execution_datetime}}</td>
+      </tr>
+    </table>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="isSearched && !searchResultList?.length">
+  <mat-card-header>
+    <mat-card-subtitle>No history found!</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>

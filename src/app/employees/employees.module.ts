@@ -15,6 +15,7 @@ import {NewLeaveAbsentDialogComponent} from "./leaves-and-absenties/new-leave-ab
 import {ListLeaveAbsentDialogComponent} from "./leaves-and-absenties/list-leave-absent-dialog/list-leave-absent-dialog.component";
 import {NewAdvanceDialogComponent} from "./advances/new-advance-dialog-dialog/new-advance-dialog.component";
 import {ListAdvanceDialogComponent} from "./advances/list-advance-dialog/list-advance-dialog.component";
+import {NewPayrollDialogComponent} from "./payroll/new-payroll-dialog-dialog/new-payroll-dialog.component";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {ListAdvanceDialogComponent} from "./advances/list-advance-dialog/list-ad
     NewLeaveAbsentDialogComponent,
     ListLeaveAbsentDialogComponent,
     NewAdvanceDialogComponent,
-    ListAdvanceDialogComponent
+    ListAdvanceDialogComponent,
+    NewPayrollDialogComponent
   ],
   imports: [
     SharedModule,
