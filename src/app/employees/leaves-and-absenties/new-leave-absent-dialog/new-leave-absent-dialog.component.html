@@ -72,7 +72,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Notes</mat-label>
       <input matInput formControlName="notes" type="text">
-      <mat-error *ngIf="form.get('dari')?.errors?.required">
+      <mat-error *ngIf="form.get('notes')?.errors?.required">
         {{formValidationService.required.message()}}
       </mat-error>
     </mat-form-field>

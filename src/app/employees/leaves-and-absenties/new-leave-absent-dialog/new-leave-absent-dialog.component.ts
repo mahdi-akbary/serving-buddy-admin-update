@@ -48,27 +48,11 @@ export class NewLeaveAbsentDialogComponent implements OnInit {
   }
 
   submit(formData) {
-
-    // if (this.data && this.data.id) {
-    //   formData.id = this.data.id;
-    //   const temp = {
-    //     lastUpdate: {
-    //       by: {id: this.authService.user.id, name: this.authService.user.name},
-    //       datetime: new Date()
-    //     }
-    //   };
-    //   this.data.status = formData.status;
-    //   this.leavesAndAbsentiesService.update({...temp, ...formData}).subscribe(res => {
-    //     this.dialogRef.close(true)
-    //   })
-    // } else {
     formData.forDate = this.data.targetYearMonth + '-' + formData.forDate
     this.leavesAndAbsentiesService.store(formData).subscribe((res) => {
       this.dialogRef.close(true)
     }, (err) => {
     })
-
-    // }
   }
 
 
