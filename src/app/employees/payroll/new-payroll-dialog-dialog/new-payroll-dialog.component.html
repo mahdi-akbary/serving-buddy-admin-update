@@ -61,7 +61,10 @@
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="32">
       <mat-label>Adjustments</mat-label>
-      <input matInput formControlName="adjustments" readonly>
+      <input matInput formControlName="adjustments" [readonly]="this.data && this.data.id">
+      <mat-error *ngIf="form.get('adjustments')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" fxFlex="32">
@@ -71,7 +74,10 @@
 
     <mat-form-field appearance="outline" fxFlex="32">
       <mat-label>Paid</mat-label>
-      <input matInput formControlName="paid" readonly>
+      <input matInput formControlName="paid" [readonly]="this.data && this.data.id">
+      <mat-error *ngIf="form.get('paid')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" fxFlex="32">
@@ -82,15 +88,25 @@
 
     <mat-form-field appearance="outline">
       <mat-label>Notes</mat-label>
-      <input matInput formControlName="notes" type="text">
+      <input matInput formControlName="notes" type="text" [readonly]="this.data && this.data.id">
       <mat-error *ngIf="form.get('notes')?.errors?.required">
         {{formValidationService.required.message()}}
       </mat-error>
     </mat-form-field>
 
+    <mat-form-field appearance="outline" fxFlex="32" *ngIf="(this.data && this.data.id)">
+      <mat-label>Executed Datetime</mat-label>
+      <input matInput formControlName="execution_datetime" readonly>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" fxFlex="32" *ngIf="(this.data && this.data.id)">
+      <mat-label>Executed by</mat-label>
+      <input matInput formControlName="executed_by_name" readonly>
+    </mat-form-field>
+
   </div>
   <div mat-dialog-actions>
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">EXECUTE</button>
+    <button mat-raised-button *ngIf="!(this.data && this.data.id)" color="primary" type="submit" [disabled]="form.invalid">EXECUTE</button>
     <button mat-button mat-dialog-close>CLOSE</button>
   </div>
 </form>

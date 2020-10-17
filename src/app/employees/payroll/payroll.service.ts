@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpService} from "../../services/http.service";
 import {Observable} from "rxjs";
 
@@ -14,24 +14,17 @@ export class PayrollService {
   index(options?: {}): Observable<any> {
     return this.httpService.get(this.url, {params: options});
   }
+
   View(options?: {}): Observable<any> {
     return this.httpService.get(this.url + '/view', {params: options});
   }
 
   store(data): Observable<any> {
-    return this.httpService.post(this.url, data);
+    return this.httpService.post(this.url + '/execute', data);
   }
 
   update(data): Observable<any> {
     return this.httpService.get(this.url, data);
-  }
-
-  indexLeavesAndAbsenties(options?: {}): Observable<any> {
-    return this.httpService.get(this.url + '/days', {params: options});
-  }
-
-  destroyLeavesAndAbsenties(id: number): Observable<any> {
-    return this.httpService.delete(`${this.url}/days/${id}`);
   }
 
   generateSelectYears(): string[] {
