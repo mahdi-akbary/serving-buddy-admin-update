@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {StockService} from '../stock.service';
 import {AddCorrectionLogService} from './add-correction-log.service';
-import {IRawAddCorrectionLog, IRawStockItemMinimal} from '../stock.types';
+import {IAddCorrectionLog, IStockItemMinimal} from '../stock.types';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {FormValidationService} from '../../services/form-validation.service';
 
@@ -16,10 +16,10 @@ export class AddCorrectionLogComponent implements OnInit {
   form: FormGroup;
   public generationDate: Date;
 
-  public records: IRawAddCorrectionLog[] = [];
+  public records: IAddCorrectionLog[] = [];
 
   public formData = {};
-  public itemsMinimal: IRawStockItemMinimal[] = [];
+  public itemsMinimal: IStockItemMinimal[] = [];
 
   constructor(private addCorrectionLogService: AddCorrectionLogService,
               private matSnackBar: MatSnackBar,

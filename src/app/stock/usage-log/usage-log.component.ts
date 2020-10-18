@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IRawStockItemMinimal, IRawUsageLog} from '../stock.types';
+import {IStockItemMinimal, IUsageLog} from '../stock.types';
 import {UsageLogService} from './usage-log.service';
 import {StockService} from '../stock.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -15,9 +15,9 @@ export class UsageLogComponent implements OnInit {
 
   public form: FormGroup;
   public generationDate: Date;
-  public records: IRawUsageLog[] = [];
+  public records: IUsageLog[] = [];
   public formData = {};
-  public itemsMinimal: IRawStockItemMinimal[] = [];
+  public itemsMinimal: IStockItemMinimal[] = [];
 
   constructor(private usageLogService: UsageLogService,
               private matSnackBar: MatSnackBar,

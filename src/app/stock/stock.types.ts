@@ -34,17 +34,10 @@ export interface IStockListItemIdentifier {
   ui_switch?: IStockListItemUiSwitch;
 }
 
-export interface IRawStockItemMinimal {
+export interface IStockItemMinimal {
   item_id: number;
   name_english: string;
   usage_type: string;
-}
-
-export interface IStockItemMinimal {
-  itemId: string;
-  nameEnglish: string;
-  usageType: string;
-  itemIdUsageType: string;
 }
 
 export interface IManualUsageListItem {
@@ -63,27 +56,6 @@ export interface IManualUsageListItem {
 }
 
 export interface IAddCorrectionLog {
-  item: {
-    id: number,
-    nameEnglish: string,
-    nameDari: string
-  };
-  categoryNameEnglish: string;
-  usageType: string;
-  update: {
-    datetime: Date,
-    by: {
-      id: number,
-      name: string
-    }
-  };
-  quantity: number;
-  notes: string;
-  type: string;
-  unit: string;
-}
-
-export interface IRawAddCorrectionLog {
   item_id: number;
   item_name_english: string;
   item_name_dari: string;
@@ -98,7 +70,7 @@ export interface IRawAddCorrectionLog {
   notes: string;
 }
 
-export interface IRawUsageLog {
+export interface IUsageLog {
   order_id: number;
   last_table_id: number;
   last_table_name?: string;
