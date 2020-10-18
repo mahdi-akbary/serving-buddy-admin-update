@@ -1,1 +1,62 @@
-<p>users works!</p>
+<div class="page-boundary" fxLayout="column">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>General actions</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="action wide-action">
+        <button
+          mat-stroked-button
+          type="button"
+          (click)="addEditDialog()"
+        > ADD
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="not-first-row">
+    <mat-card-content>
+
+      <div class="action per-item">
+
+        <button
+          mat-stroked-button
+          type="button"
+          [disabled]="!chosenRecord"
+          (click)="addEditDialog(chosenRecord)"
+        > EDIT
+        </button>
+      </div>
+
+      <mat-radio-group [(ngModel)]="chosenRecord">
+        <table class="the-table">
+          <tr>
+            <th>Select</th>
+            <th>#</th>
+            <th>Name</th>
+            <th>Username</th>
+            <th>User type</th>
+            <th>Status</th>
+            <th>Last update by</th>
+            <th>Last update date time</th>
+          </tr>
+
+          <tr *ngFor="let r of records; let i = index;">
+            <td>
+              <mat-radio-button [value]="r.id"></mat-radio-button>
+            </td>
+            <td>{{i + 1}}</td>
+            <td>{{r.name}}</td>
+            <td>{{r.username}}</td>
+            <td>{{r.user_type}}</td>
+            <td>{{r.status}}</td>
+            <td>{{r.last_updated_by_name | number}}</td>
+            <td>{{r.last_update_datetime}}</td>
+          </tr>
+        </table>
+      </mat-radio-group>
+    </mat-card-content>
+  </mat-card>
+</div>

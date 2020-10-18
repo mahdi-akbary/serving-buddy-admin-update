@@ -1,0 +1,73 @@
+<form *ngIf="form" [formGroup]="form" (submit)="form.valid && submit(form.value)">
+  <div class="dialog-header">
+    <h1 mat-dialog-title>{{isUpdating() ? 'Edit' : 'Add'}} user</h1>
+    <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
+  </div>
+  <div mat-dialog-content fxLayout="row wrap">
+
+    <app-view-element *ngIf="isUpdating()" fxFlex="50">
+      <div class="app-label">Username</div>
+      <div class="app-value">{{form.get('username').value}}</div>
+    </app-view-element>
+
+    <mat-form-field  *ngIf="!isUpdating()" appearance="outline" fxFlex="50">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" type="text">
+      <mat-error *ngIf="form.get('username')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" type="text">
+      <mat-error *ngIf="form.get('name')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>User type</mat-label>
+      <mat-select formControlName="user_type">
+        <mat-option *ngFor="let userType of userTypes" [value]="userType">
+          {{userType}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('user_type')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option *ngFor="let status of statuses" [value]="status">
+          {{status}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('status')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" type="password">
+      <mat-error *ngIf="form.get('password')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Confirm password</mat-label>
+      <input matInput formControlName="confirm_password" type="password">
+      <mat-error *ngIf="form.get('confirm_password')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions class="action wide-action">
+    <button mat-stroked-button color="primary" type="submit" [disabled]="form.invalid">SAVE</button>
+  </div>
+</form>

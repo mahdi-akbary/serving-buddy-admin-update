@@ -4,7 +4,7 @@
     <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
   </div>
   <div mat-dialog-content>
-    <mat-form-field appearance="outline">
+    `<mat-form-field appearance="outline">
       <mat-label>Select Category</mat-label>
       <mat-select formControlName="provider">
         <mat-option *ngFor="let category of menuCategoriesMinimal" [value]="category">
@@ -14,7 +14,7 @@
       <mat-error *ngIf="form.get('provider')?.errors?.required">
         {{formValidationService.required.message()}}
       </mat-error>
-    </mat-form-field>
+    </mat-form-field>`
 
     <mat-form-field appearance="outline">
       <mat-label>Select Item</mat-label>
