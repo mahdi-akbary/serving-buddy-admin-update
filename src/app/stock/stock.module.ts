@@ -9,8 +9,8 @@ import {AddCorrectionLogService} from './add-correction-log/add-correction-log.s
 import {ManualUsageService} from './manual-usage/manual-usage.service';
 import {UsageLogService} from './usage-log/usage-log.service';
 import {SharedModule} from '../shared/shared.module';
-import {AddCorrectDialogComponent} from './add-correct-dialog/add-correct-dialog.component';
 import {AddEditDialogComponent} from './manual-usage/add-edit-dialog/add-edit-dialog.component';
+import {StockManipulationDialogComponent} from './stock-manipulation-dialog/stock-manipulation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import {AddEditDialogComponent} from './manual-usage/add-edit-dialog/add-edit-di
     AddCorrectionLogComponent,
     ManualUsageComponent,
     UsageLogComponent,
-    AddCorrectDialogComponent,
+    StockManipulationDialogComponent,
     AddEditDialogComponent
   ],
   imports: [

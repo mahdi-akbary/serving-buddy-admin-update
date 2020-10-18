@@ -3,8 +3,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {FormValidationService} from '../services/form-validation.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {StockService} from './stock.service';
-import {IRawStockListItem, IStockListItem, IStockListItemIdentifier} from './stock.types';
-import {AddCorrectDialogComponent} from './add-correct-dialog/add-correct-dialog.component';
+import {IRawStockListItem, IStockListItemIdentifier, IStockListItemUiSwitch} from './stock.types';
+import {StockManipulationDialogComponent} from './stock-manipulation-dialog/stock-manipulation-dialog.component';
 
 @Component({
   selector: 'app-stock',
@@ -35,9 +35,9 @@ export class StockComponent implements OnInit {
     });
   }
 
-  addEditDialog(identifier: IStockListItemIdentifier, isCorrecting: boolean) {
-    identifier.is_correcting = isCorrecting;
-    this.matDialog.open(AddCorrectDialogComponent, {
+  stockManipulationDialog(identifier: IStockListItemIdentifier, uiSwitch: IStockListItemUiSwitch) {
+    identifier.ui_switch = uiSwitch;
+    this.matDialog.open(StockManipulationDialogComponent, {
       width: '800px',
       disableClose: true,
       data: identifier
@@ -47,7 +47,7 @@ export class StockComponent implements OnInit {
     });
   }
 
-  reset () {
+  reset() {
     this.records = [];
     this.chosenRecord = undefined;
   }

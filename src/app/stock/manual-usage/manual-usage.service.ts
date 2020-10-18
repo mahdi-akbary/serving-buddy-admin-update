@@ -28,4 +28,10 @@ export class ManualUsageService {
       .put('server/stock/manual-usage/usage', currentItem);
   }
 
+  addUsage(formData: IStockManualLog): Observable<void> {
+    return this.httpService
+      .post('server/stock/manual-usage/usage', formData);
+  }
+
+
 }

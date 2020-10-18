@@ -6,8 +6,8 @@ import {StaticDataService} from '../../services/static-data.service';
 import {FormValidationService} from '../../services/form-validation.service';
 import {AuthService} from '../../services/auth.service';
 import {MatDialog} from '@angular/material/dialog';
-import {AddCorrectDialogComponent} from '../add-correct-dialog/add-correct-dialog.component';
 import {AddEditDialogComponent} from '../../expenses/add-edit-dialog/add-edit-dialog.component';
+import {StockManipulationDialogComponent} from '../stock-manipulation-dialog/stock-manipulation-dialog.component';
 
 @Component({
   selector: 'app-manual-usage',
@@ -156,13 +156,13 @@ export class ManualUsageComponent implements OnInit {
     this.currentItem = undefined;
   }
 
-  addUsageDialog(itemId: number) {
+  stockManipulationDialog(itemId: number) {
     const identifier: IStockListItemIdentifier = {
       item_id: itemId,
       usage_type: 'Manual',
-      is_correcting: false
+      ui_switch: 'add-usage'
     };
-    this.matDialog.open(AddCorrectDialogComponent, {
+    this.matDialog.open(StockManipulationDialogComponent, {
       width: '800px',
       disableClose: true,
       data: identifier

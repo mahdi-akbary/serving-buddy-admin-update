@@ -1,5 +1,5 @@
 <div class="dialog-header">
-  <h1 mat-dialog-title>{{data?.is_correcting ? 'Correct' : 'Add' }} quantity</h1>
+  <h1 mat-dialog-title>{{identifier?.ui_switch | titlecase}}</h1>
   <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
 </div>
 <form *ngIf="form" [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
@@ -14,14 +14,14 @@
     </app-view-element>
     <app-view-element fxFlex="50">
       <div class="app-label">Available quantity</div>
-      <div class="app-value">{{form.get('available_quantity').value}}</div>
+      <div class="app-value">{{form.get('available_quantity').value | number}}</div>
     </app-view-element>
     <app-view-element fxFlex="50">
       <div class="app-label">Category</div>
       <div class="app-value">{{form.get('category_name_english').value}}</div>
     </app-view-element>
     <mat-form-field appearance="outline" fxFlex="50">
-      <mat-label>Quantity to add</mat-label>
+      <mat-label>Quantity</mat-label>
       <input matInput formControlName="quantity_to_update" type="text">
       <mat-error *ngIf="form.get('quantity_to_update')?.errors?.required">
         {{formValidationService.required.message()}}

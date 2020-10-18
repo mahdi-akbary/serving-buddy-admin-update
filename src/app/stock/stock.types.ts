@@ -1,4 +1,4 @@
-export interface  IRawStockListItem {
+export interface IRawStockListItem {
   id: number;
   item_id: number;
   name_english: string;
@@ -13,7 +13,7 @@ export interface  IRawStockListItem {
   last_update_datetime: Date;
 }
 
-export interface  IStockManualLog {
+export interface IStockManualLog {
   id: number;
   item_id: number;
   name_english: string;
@@ -26,13 +26,15 @@ export interface  IStockManualLog {
   notes: string;
 }
 
+export type IStockListItemUiSwitch = 'add-quantity' | 'correction' | 'add-usage';
+
 export interface IStockListItemIdentifier {
   item_id: number;
   usage_type: string;
-  is_correcting?: boolean;
+  ui_switch?: IStockListItemUiSwitch;
 }
 
-export interface  IStockListItem {
+export interface IStockListItem {
   id: number;
   item: {
     id: string,
@@ -67,8 +69,8 @@ export interface IStockItemMinimal {
 }
 
 export interface IName {
-  dari:string;
-  english:string;
+  dari: string;
+  english: string;
 }
 
 export interface IManualUsageListItem {
@@ -88,7 +90,7 @@ export interface IManualUsageListItem {
   }
 }
 
-export interface  IRawManualUsageListItem {
+export interface IRawManualUsageListItem {
   id: number;
   name_english: string;
   name_dari: string;
