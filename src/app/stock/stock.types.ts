@@ -61,3 +61,39 @@ export interface IManualUsageListItem {
   last_update_by_name: string;
   last_update_datetime: Date;
 }
+
+export interface IAddCorrectionLog {
+  item: {
+    id: number,
+    nameEnglish: string,
+    nameDari: string
+  };
+  categoryNameEnglish: string;
+  usageType: string;
+  update: {
+    datetime: Date,
+    by: {
+      id: number,
+      name: string
+    }
+  };
+  quantity: number;
+  notes: string;
+  type: string;
+  unit: string;
+}
+
+export interface IRawAddCorrectionLog {
+  item_id: number;
+  item_name_english: string;
+  item_name_dari: string;
+  category_name_english: string;
+  usage_type: string;
+  update_by_id: number;
+  update_by_name: string;
+  update_datetime: Date;
+  quantity: number;
+  type: string;
+  unit: string;
+  notes: string;
+}
