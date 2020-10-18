@@ -97,3 +97,21 @@ export interface IRawAddCorrectionLog {
   unit: string;
   notes: string;
 }
+
+export interface IRawUsageLog {
+  order_id: number;
+  last_table_id: number;
+  last_table_name?: string;
+  customer_name: string;
+  item_id: number;
+  item_name_english: string;
+  item_name_dari: string;
+  category_name_english: string;
+  usage_type: string;
+  update_by_id: number;
+  update_by_name: string;
+  update_datetime: Date;
+  quantity: number;
+  unit: number;
+  notes: string;
+}

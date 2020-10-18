@@ -6,6 +6,7 @@
 
     <mat-card-content>
       <form *ngIf="form" [formGroup]="form" (submit)="form.valid && submit(form.value)">
+
         <mat-form-field appearance="outline">
           <mat-label>Start date time</mat-label>
           <input matInput formControlName="start_datetime" type="text">
@@ -13,10 +14,23 @@
             {{formValidationService.required.message()}}
           </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
           <mat-label>End date time</mat-label>
           <input matInput formControlName="end_datetime" type="text">
           <mat-error *ngIf="form.get('end_datetime')?.errors?.required">
+            {{formValidationService.required.message()}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Item</mat-label>
+          <mat-select formControlName="item">
+            <mat-option *ngFor="let item of itemsMinimal" [value]="item.name_english">
+              {{item.name_english}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('item')?.errors?.required">
             {{formValidationService.required.message()}}
           </mat-error>
         </mat-form-field>

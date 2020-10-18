@@ -44,6 +44,7 @@ export class AddCorrectionLogComponent implements OnInit {
     this.form = this.formBuilder.group({
       start_datetime: [undefined, this.formValidationService.required.validator],
       end_datetime: [undefined, this.formValidationService.required.validator],
+      item: [undefined],
     });
   }
 
