@@ -5,7 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {FormValidationService} from "../../services/form-validation.service";
 import {AdvancesService} from "./advances.service";
 import {ListAdvanceDialogComponent} from "./list-advance-dialog/list-advance-dialog.component";
-import {NewAdvanceDialogComponent} from "./new-advance-dialog-dialog/new-advance-dialog.component";
+import {NewAdvanceDialogComponent} from "./new-advance-dialog/new-advance-dialog.component";
 
 @Component({
   selector: 'app-advances',

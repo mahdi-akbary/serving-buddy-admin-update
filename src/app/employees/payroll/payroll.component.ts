@@ -4,7 +4,7 @@ import {StaticDataService} from "../../services/static-data.service";
 import {MatDialog} from "@angular/material/dialog";
 import {FormValidationService} from "../../services/form-validation.service";
 import {PayrollService} from "./payroll.service";
-import {NewPayrollDialogComponent} from "./new-payroll-dialog-dialog/new-payroll-dialog.component";
+import {NewPayrollDialogComponent} from "./new-payroll-dialog/new-payroll-dialog.component";
 
 @Component({
   selector: 'app-payroll',

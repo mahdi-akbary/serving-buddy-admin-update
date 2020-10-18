@@ -7,6 +7,7 @@ import {FormValidationService} from '../../services/form-validation.service';
 import {AuthService} from '../../services/auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import {AddCorrectDialogComponent} from '../add-correct-dialog/add-correct-dialog.component';
+import {AddEditDialogComponent} from '../../expenses/add-edit-dialog/add-edit-dialog.component';
 
 @Component({
   selector: 'app-manual-usage',
@@ -24,9 +25,7 @@ export class ManualUsageComponent implements OnInit {
 
   public correctQuantityFormActive = true;
 
-  public currentItem = {
-    name: {}
-  };
+  public currentItem;
 
   public statuses: string[];
   public stockUnits: string[];
@@ -136,50 +135,6 @@ export class ManualUsageComponent implements OnInit {
     window.print();
   }
 
-  // addUsageSubmit(currentItem: IManualUsageListItem, dialog) {
-  //   if (!this.isAddUsageFormValid(currentItem)) {
-  //     return;
-  //   }
-  //
-  //   this.manualUsageService
-  //     .addUsageSubmit(currentItem, this.usageQuantity)
-  //     .then(() => {
-  //       let targetRecord: IManualUsageListItem = this.records.find((r: IManualUsageListItem) => {
-  //         return r.id == currentItem.id;
-  //       });
-  //       targetRecord.availableQuantity = (+targetRecord.availableQuantity) - (+this.usageQuantity);
-  //       targetRecord.lastUpdate.datetime = new Date();
-  //       targetRecord.lastUpdate.by.id = this.authService.user.id;
-  //       targetRecord.lastUpdate.by.name = this.authService.user.name;
-  //
-  //       this.matSnackBar.open('OK: usage added successfully.');
-  //       dialog.close();
-  //     })
-  //     .catch(error => {
-  //       this.matSnackBar.open('ERROR: Failed to add the usage.');
-  //       console.error(error);
-  //     });
-  // }
-
-  isAddUsageFormValid(formData: IManualUsageListItem) {
-    if (!this.usageQuantity) {
-      this.matSnackBar.open('ERROR: "Usage quantity" is required.');
-      return false;
-    }
-
-    if (this.usageQuantity && !this.formValidationService.getValidNumber(this.usageQuantity)) {
-      this.matSnackBar.open('ERROR: "Usage quantity" is not valid.');
-      return false;
-    }
-
-    if (!formData.notes) {
-      this.matSnackBar.open('ERROR: Notes is required.');
-      return false;
-    }
-
-    return true;
-  }
-
   resetAddUsageForm() {
     this.usageQuantity = '';
     this.currentItem = {
@@ -189,81 +144,16 @@ export class ManualUsageComponent implements OnInit {
 
   load(stockManualItemId: number) {
     this.manualUsageService.view(stockManualItemId)
-      .then((record: IManualUsageListItem) => {
+      .subscribe((record: IRawManualUsageListItem) => {
         this.currentItem = record;
-      })
-      .catch(error => {
+      }, error => {
         console.error(error);
         this.matSnackBar.open('ERROR: View failed.');
       });
   }
 
   resetEditForm() {
-    this.currentItem = {
-      name: {}
-    };
-  }
-
-  // editItemSubmit(currentItem: IManualUsageListItem) {
-  //   if (!this.isEditItemFormValid(currentItem)) {
-  //     return;
-  //   }
-  //
-  //   this.manualUsageService
-  //     .editItemSubmit(currentItem)
-  //     .then(() => {
-  //       let targetRecord: IManualUsageListItem = this.records.find((r: IManualUsageListItem) => {
-  //         return r.id == currentItem.id;
-  //       });
-  //       targetRecord.name.english = currentItem.name.english;
-  //       targetRecord.name.dari = currentItem.name.dari;
-  //       targetRecord.status = currentItem.status;
-  //       targetRecord.acceptableLimit = currentItem.acceptableLimit;
-  //       targetRecord.unit = currentItem.unit;
-  //       targetRecord.lastUpdate.datetime = new Date();
-  //       targetRecord.lastUpdate.by.id = this.authService.user.id;
-  //       targetRecord.lastUpdate.by.name = this.authService.user.name;
-  //
-  //       this.matSnackBar.open('OK: item edited successfully.');
-  //     })
-  //     .catch(error => {
-  //       this.matSnackBar.open('ERROR: Failed to edit the item.');
-  //       console.error(error);
-  //     });
-  // }
-
-  isEditItemFormValid(formData: IManualUsageListItem) {
-    if (formData.name && !formData.name.english) {
-      this.matSnackBar.open('ERROR: English name is required.');
-      return false;
-    }
-
-    if (formData.name && !formData.name.dari) {
-      this.matSnackBar.open('ERROR: Dari name is required.');
-      return false;
-    }
-
-    if (!formData.status) {
-      this.matSnackBar.open('ERROR: Status is required.');
-      return false;
-    }
-
-    if (!formData.unit) {
-      this.matSnackBar.open('ERROR: Unit is required.');
-      return false;
-    }
-
-    if (!formData.acceptableLimit) {
-      this.matSnackBar.open('ERROR: Limit is required.');
-      return false;
-    }
-
-    if (formData.acceptableLimit && !this.formValidationService.getValidNumber(formData.acceptableLimit)) {
-      this.matSnackBar.open('ERROR: Limit is not valid.');
-      return false;
-    }
-
-    return true;
+    this.currentItem = undefined;
   }
 
   addUsageDialog(itemId: number) {
@@ -282,11 +172,19 @@ export class ManualUsageComponent implements OnInit {
     });
   }
 
-  addEditDialog() {
-
+  addEditDialog(itemId?: number) {
+    this.matDialog.open(AddEditDialogComponent, {
+      width: '800px',
+      disableClose: true,
+      data: itemId
+    })
+      .afterClosed()
+      .subscribe(() => {
+        this.list();
+      });
   }
 
-  reset () {
+  reset() {
     this.records = [];
     this.chosenRecord = undefined;
   }

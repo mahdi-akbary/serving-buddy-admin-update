@@ -13,9 +13,9 @@ import {SharedModule} from '../shared/shared.module';
 import {AddEditEmployeeDialogComponent} from "./add-edit-employee-dialog/add-edit-employee-dialog.component";
 import {NewLeaveAbsentDialogComponent} from "./leaves-and-absenties/new-leave-absent-dialog/new-leave-absent-dialog.component";
 import {ListLeaveAbsentDialogComponent} from "./leaves-and-absenties/list-leave-absent-dialog/list-leave-absent-dialog.component";
-import {NewAdvanceDialogComponent} from "./advances/new-advance-dialog-dialog/new-advance-dialog.component";
 import {ListAdvanceDialogComponent} from "./advances/list-advance-dialog/list-advance-dialog.component";
-import {NewPayrollDialogComponent} from "./payroll/new-payroll-dialog-dialog/new-payroll-dialog.component";
+import {NewAdvanceDialogComponent} from './advances/new-advance-dialog/new-advance-dialog.component';
+import {NewPayrollDialogComponent} from './payroll/new-payroll-dialog/new-payroll-dialog.component';
 
 @NgModule({
   declarations: [

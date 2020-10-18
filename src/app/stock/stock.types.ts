@@ -66,23 +66,11 @@ export interface IStockItemMinimal {
   itemIdUsageType: string;
 }
 
-export interface  IRawManualUsageListItem {
-  id: number;
-  name_english: string;
-  name_dari: string;
-  available_quantity: number;
-  unit: string;
-  status: string;
-  acceptable_limit: number;
-  notes?: string;
-  last_update_by_id: number;
-  last_update_by_name: string;
-  last_update_datetime: Date;
-}
 export interface IName {
   dari:string;
   english:string;
 }
+
 export interface IManualUsageListItem {
   id: number;
   name: IName,
@@ -105,6 +93,7 @@ export interface  IRawManualUsageListItem {
   name_english: string;
   name_dari: string;
   available_quantity: number;
+  quantity_to_update?: number;
   unit: string;
   status: string;
   acceptable_limit: number;
