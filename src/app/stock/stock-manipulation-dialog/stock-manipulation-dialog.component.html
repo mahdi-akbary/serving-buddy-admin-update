@@ -2,24 +2,29 @@
   <h1 mat-dialog-title>{{identifier?.ui_switch | titlecase}}</h1>
   <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
 </div>
-<form *ngIf="form" [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
+<form *ngIf="form" [formGroup]="form" (submit)="form.valid && submit(form.value)">
   <div mat-dialog-content fxLayout="row wrap">
+
     <app-view-element fxFlex="50">
       <div class="app-label">Item name</div>
       <div class="app-value">{{form.get('name_english').value}}</div>
     </app-view-element>
+
     <app-view-element fxFlex="50">
       <div class="app-label">Item ID</div>
       <div class="app-value">{{form.get('item_id').value}}</div>
     </app-view-element>
+
     <app-view-element fxFlex="50">
       <div class="app-label">Available quantity</div>
       <div class="app-value">{{form.get('available_quantity').value | number}}</div>
     </app-view-element>
+
     <app-view-element fxFlex="50">
       <div class="app-label">Category</div>
       <div class="app-value">{{form.get('category_name_english').value}}</div>
     </app-view-element>
+
     <mat-form-field appearance="outline" fxFlex="50">
       <mat-label>Quantity</mat-label>
       <input matInput formControlName="quantity_to_update" type="text">
@@ -27,10 +32,12 @@
         {{formValidationService.required.message()}}
       </mat-error>
     </mat-form-field>
+
     <app-view-element fxFlex="50">
       <div class="app-label">Unit</div>
       <div class="app-value">{{form.get('unit').value}}</div>
     </app-view-element>
+
     <mat-form-field appearance="outline" fxFlex="100">
       <mat-label>Notes</mat-label>
       <input matInput formControlName="notes" type="text">

@@ -4,7 +4,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormValidationService} from '../../../services/form-validation.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ManualUsageService} from '../manual-usage.service';
-import {IRawManualUsageListItem} from '../../stock.types';
+import {IManualUsageListItem} from '../../stock.types';
+import {StaticDataService} from '../../../services/static-data.service';
 
 @Component({
   selector: 'app-add-edit-dialog',
@@ -14,24 +15,30 @@ import {IRawManualUsageListItem} from '../../stock.types';
 export class AddEditDialogComponent implements OnInit {
 
   form: FormGroup;
-  formData: IRawManualUsageListItem;
+  formData: IManualUsageListItem;
+  units: string[] = [];
+  statuses: string[] = [];
 
   constructor(public dialogRef: MatDialogRef<AddEditDialogComponent>,
               public formBuilder: FormBuilder,
               private manualUsageService: ManualUsageService,
               public formValidationService: FormValidationService,
+              private staticDataService: StaticDataService,
               @Optional() @Inject(MAT_DIALOG_DATA) public itemId: number,
               private matSnackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
+    this.statuses = this.staticDataService.statues;
+    this.units = this.staticDataService.stockUnits;
+
     if (this.isUpdating()) {
 
-      this.manualUsageService.view(this.itemId).subscribe((data: IRawManualUsageListItem) => {
+      this.manualUsageService.view(this.itemId).subscribe((data: IManualUsageListItem) => {
         this.initForm(data);
       }, (error) => {
-        this.matSnackBar.open('ERROR: could not item details');
-        console.error('ERROR: could not get item details', error);
+        this.matSnackBar.open('ERROR: could not load item details');
+        console.error('ERROR: could not load get item details', error);
       });
 
     } else {
@@ -39,25 +46,24 @@ export class AddEditDialogComponent implements OnInit {
     }
   }
 
-  initForm(data?: IRawManualUsageListItem) {
+  initForm(data?: IManualUsageListItem) {
     this.form = this.formBuilder.group({
       id: data?.id,
       name_dari: [data?.name_dari, this.formValidationService.required.validator],
       name_english: [data?.name_english, this.formValidationService.required.validator],
-      available_quantity: [data?.available_quantity, this.formValidationService.required.validator],
+      available_quantity: [data?.available_quantity || 0, this.formValidationService.required.validator],
       unit: [data?.unit, this.formValidationService.required.validator],
       status: [data?.status, this.formValidationService.required.validator],
       acceptable_limit: [data?.acceptable_limit, this.formValidationService.required.validator],
-      notes: [data?.notes, this.formValidationService.required.validator],
     });
   }
 
-  submit(formData: IRawManualUsageListItem) {
+  submit(formData: IManualUsageListItem) {
+    if (!this.isFormValid(formData)) {
+      return;
+    }
 
     if (this.isUpdating()) {
-        if (!this.isEditItemFormValid(formData)) {
-          return;
-        }
 
       this.manualUsageService.update(formData).subscribe(() => {
         this.matSnackBar.open('OK: item updated');
@@ -79,31 +85,17 @@ export class AddEditDialogComponent implements OnInit {
     }
   }
 
-  isEditItemFormValid(formData: IRawManualUsageListItem) {
+  isFormValid(formData: IManualUsageListItem) {
 
     if (!this.formValidationService.getValidNumber(formData.acceptable_limit)) {
-      this.matSnackBar.open('ERROR: Limit is not valid.');
+      this.matSnackBar.open('ERROR: Limit has an invalid format.');
       return false;
     }
 
     return true;
   }
 
-  isAddUsageFormValid(formData: IRawManualUsageListItem) {
-    if (!formData.quantity_to_update) {
-      this.matSnackBar.open('ERROR: "Quantity to update" is required.');
-      return false;
-    }
-
-    if (!this.formValidationService.getValidNumber(formData.quantity_to_update)) {
-      this.matSnackBar.open('ERROR: "Quantity to update" is not valid.');
-      return false;
-    }
-
-    return true;
-  }
-
-  private isUpdating(): boolean {
+  public isUpdating(): boolean {
     return !!this.itemId;
   }
 

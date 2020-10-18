@@ -1,6 +1,6 @@
 <form *ngIf="form" [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
   <div class="dialog-header">
-    <h1 mat-dialog-title>Add expense</h1>
+    <h1 mat-dialog-title>{{isUpdating() ? 'Edit' : 'Add'}} expense</h1>
     <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
   </div>
   <div mat-dialog-content fxLayout="row wrap">

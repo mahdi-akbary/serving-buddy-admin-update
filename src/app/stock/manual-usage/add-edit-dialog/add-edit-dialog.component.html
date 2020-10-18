@@ -1,30 +1,58 @@
-<form *ngIf="form" [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
+<form *ngIf="form" [formGroup]="form" (submit)="form.valid && submit(form.value)">
   <div class="dialog-header">
-    <h1 mat-dialog-title>Add expense</h1>
+    <h1 mat-dialog-title>{{isUpdating() ? 'Edit' : 'Add'}} tracking item</h1>
     <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
   </div>
   <div mat-dialog-content fxLayout="row wrap">
-    <mat-form-field appearance="outline" fxFlex="50">
-      <mat-label>Amount</mat-label>
-      <input matInput formControlName="amount" type="text">
-      <mat-error *ngIf="form.get('amount')?.errors?.required">
-        {{formValidationService.required.message()}}
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline" fxFlex="50">
-      <mat-label>Date time</mat-label>
-      <input matInput formControlName="datetime" type="text">
-      <mat-error *ngIf="form.get('datetime')?.errors?.required">
-        {{formValidationService.required.message()}}
-      </mat-error>
-    </mat-form-field>
+
     <mat-form-field appearance="outline" fxFlex="100">
-      <mat-label>Description</mat-label>
-      <input matInput formControlName="description" type="text">
-      <mat-error *ngIf="form.get('datetime')?.errors?.required">
+      <mat-label>Name English</mat-label>
+      <input matInput formControlName="name_english" type="text">
+      <mat-error *ngIf="form.get('name_english')?.errors?.required">
         {{formValidationService.required.message()}}
       </mat-error>
     </mat-form-field>
+
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Name Dari</mat-label>
+      <input matInput formControlName="name_dari" type="text">
+      <mat-error *ngIf="form.get('name_dari')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option *ngFor="let status of statuses" [value]="status">
+          {{status}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('status')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Acceptable limit</mat-label>
+      <input matInput formControlName="acceptable_limit" type="text">
+      <mat-error *ngIf="form.get('acceptable_limit')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Unit</mat-label>
+      <mat-select formControlName="unit">
+        <mat-option *ngFor="let unit of units" [value]="unit">
+          {{unit}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('unit')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+
   </div>
   <div mat-dialog-actions class="action wide-action">
     <button mat-stroked-button color="primary" type="submit" [disabled]="form.invalid">SAVE</button>

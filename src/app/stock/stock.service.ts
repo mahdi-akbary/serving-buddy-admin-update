@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from '../services/http.service';
-import {IRawStockItemMinimal, IRawStockListItem, IStockItemMinimal, IStockManualLog} from './stock.types';
+import {IRawStockItemMinimal, IStockListItem, IStockItemMinimal, IStockManualLog} from './stock.types';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class StockService {
   constructor(private httpService: HttpService) {
   }
 
-  list(): Observable<IRawStockListItem[]> {
+  list(): Observable<IStockListItem[]> {
     return this.httpService.get('server/stock');
   }
 

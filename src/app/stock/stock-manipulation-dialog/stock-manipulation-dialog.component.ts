@@ -28,13 +28,14 @@ export class StockManipulationDialogComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.stockService.view(this.identifier.item_id, this.identifier.usage_type).subscribe((data: IStockManualLog) => {
-      data['usage_type'] = 'Manual';
-      this.initForm(data);
-    }, (error) => {
-      this.matSnackBar.open('ERROR: could not get stock details');
-      console.error('ERROR: could not get stock details', error);
-    });
+    this.stockService.view(this.identifier.item_id, this.identifier.usage_type)
+      .subscribe((data: IStockManualLog) => {
+        data['usage_type'] = 'Manual';
+        this.initForm(data);
+      }, (error) => {
+        this.matSnackBar.open('ERROR: could not get stock details');
+        console.error('ERROR: could not get stock details', error);
+      });
 
   }
 
@@ -52,9 +53,32 @@ export class StockManipulationDialogComponent implements OnInit {
     });
   }
 
+  isFormValid(formData: IStockManualLog) {
+    let isValid: boolean;
+
+    if (this.identifier.ui_switch === 'correction') {
+      isValid = this.formValidationService.isValidNumber(formData.quantity_to_update);
+    } else {
+      isValid = this.formValidationService.isValidUnsignedNumber(formData.quantity_to_update);
+    }
+
+    if (!isValid) {
+      this.matSnackBar.open('ERROR: "Quantity" is not valid.');
+      return false;
+    }
+
+    return true;
+  }
+
+
   submit(formData: IStockManualLog) {
 
+    if (!this.isFormValid(formData)) {
+      return;
+    }
+
     switch (this.identifier.ui_switch) {
+
       case 'add-quantity':
         this.stockService.addQuantity(formData).subscribe(() => {
           this.matSnackBar.open('OK: quantity corrected');
@@ -64,6 +88,7 @@ export class StockManipulationDialogComponent implements OnInit {
           console.error('ERROR: could not correct the quantity', err);
         });
         break;
+
       case 'correction':
         this.stockService.correctQuantity(formData).subscribe(() => {
           this.matSnackBar.open('OK: quantity added');
@@ -73,6 +98,7 @@ export class StockManipulationDialogComponent implements OnInit {
           console.error('ERROR: could not add quantity', err);
         });
         break;
+
       case 'add-usage':
         this.manualUsageService.addUsage(formData).subscribe(() => {
           this.matSnackBar.open('OK: usage added');
@@ -82,6 +108,7 @@ export class StockManipulationDialogComponent implements OnInit {
           console.error('ERROR: could not add usage', err);
         });
         break;
+
       default:
         this.matSnackBar.open('ERROR: could not submit data to server');
         console.error('ERROR: could not submit data to server, invalid switch value', this.identifier);

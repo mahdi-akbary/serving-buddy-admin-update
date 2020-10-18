@@ -12,7 +12,6 @@ export class FormValidationService {
 
   private lang = localStorage.getItem('lang');
 
-
   get required(): IValidation {
     return {
       validator: Validators.required,
@@ -50,7 +49,6 @@ export class FormValidationService {
     };
   }
 
-
   get phoneNumber(): IValidation {
     return {
       validator: Validators.pattern(/^[0-9]{1,3}[0-9]{4,14}(?:x.+)?$/) || Validators.pattern(/^93[0-9]{9}$/),
@@ -60,7 +58,6 @@ export class FormValidationService {
     };
   }
 
-
   get integer(): IValidation {
     return {
       validator: Validators.pattern(/^[0-9]+$/),
@@ -69,7 +66,6 @@ export class FormValidationService {
       }
     };
   }
-
 
   get properText(): IValidation {
     return {
@@ -106,6 +102,14 @@ export class FormValidationService {
     } else {
       return n;
     }
+  }
+
+  isValidNumber (n: any) {
+    return !isNaN(n);
+  }
+
+  isValidUnsignedNumber (n: any) {
+    return !isNaN(n) && +n >= 0;
   }
 
 }

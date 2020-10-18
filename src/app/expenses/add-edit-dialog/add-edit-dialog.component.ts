@@ -75,7 +75,7 @@ export class AddEditDialogComponent implements OnInit {
 
   }
 
-  private isUpdating(): boolean {
+  public isUpdating(): boolean {
     return !!this.expenseId;
   }
 

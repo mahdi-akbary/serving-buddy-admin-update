@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {FormValidationService} from '../services/form-validation.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {StockService} from './stock.service';
-import {IRawStockListItem, IStockListItemIdentifier, IStockListItemUiSwitch} from './stock.types';
+import {IStockListItem, IStockListItemIdentifier, IStockListItemUiSwitch} from './stock.types';
 import {StockManipulationDialogComponent} from './stock-manipulation-dialog/stock-manipulation-dialog.component';
 
 @Component({
@@ -14,7 +14,7 @@ import {StockManipulationDialogComponent} from './stock-manipulation-dialog/stoc
 export class StockComponent implements OnInit {
 
   chosenRecord: IStockListItemIdentifier;
-  records: IRawStockListItem[] = [];
+  records: IStockListItem[] = [];
 
   constructor(private matDialog: MatDialog,
               public formValidationService: FormValidationService,
@@ -26,7 +26,7 @@ export class StockComponent implements OnInit {
   }
 
   list() {
-    this.stockService.list().subscribe((data: IRawStockListItem[]) => {
+    this.stockService.list().subscribe((data: IStockListItem[]) => {
       this.matSnackBar.open('OK: list stock');
       this.records = data;
     }, (error) => {
