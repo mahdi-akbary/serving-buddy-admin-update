@@ -16,6 +16,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {ViewElementComponent} from "./components/view-element/view-element.component";
 import {MatExpansionModule} from "@angular/material/expansion";
+import {JalaliDatetimePipe} from './pipes/jalali-datetime.pipe';
+import {JalaliDatePipe} from './pipes/jalali-date.pipe';
 
 const modules = [
   CommonModule,
@@ -41,10 +43,14 @@ const modules = [
   imports: modules,
   exports: [
     ...modules,
-    ViewElementComponent
+    ViewElementComponent,
+    JalaliDatetimePipe,
+    JalaliDatePipe
   ],
   declarations: [
-    ViewElementComponent
+    ViewElementComponent,
+    JalaliDatetimePipe,
+    JalaliDatePipe
   ]
 })
 export class SharedModule {

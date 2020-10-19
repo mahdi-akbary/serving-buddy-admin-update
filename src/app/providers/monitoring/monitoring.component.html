@@ -40,7 +40,7 @@
           </td>
           <td>{{i + 1}}</td>
           <td>Table {{r.table_id}}</td>
-          <td>{{r.insert_datetime}}</td>
+          <td>{{r.insert_datetime | jalaliDatetime}}</td>
           <td>{{getDuration(r.insert_datetime)}}</td>
           <td>{{r.provider_order_status}}</td>
           <td>{{r.provider_order_id}}</td>

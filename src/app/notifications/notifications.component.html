@@ -95,11 +95,11 @@
             <td class="lang-prs">{{r.the_item_name_dari}}</td>
             <td>{{r.quantity}}</td>
             <td>{{r.status}}</td>
-            <td>{{r.generation_datetime}}</td>
+            <td>{{r.generation_datetime | jalaliDatetime}}</td>
             <td>{{r.seen_by_name}}</td>
-            <td>{{r.seen_datetime}}</td>
+            <td>{{r.seen_datetime | jalaliDatetime}}</td>
             <td>{{r.resolved_by_name}}</td>
-            <td>{{r.resolved_datetime}}</td>
+            <td>{{r.resolved_datetime | jalaliDatetime}}</td>
           </tr>
 
         </table>

@@ -72,7 +72,7 @@
             <td>{{r.available_quantity | number}}</td>
             <td>{{r.unit}}</td>
             <td>{{r.last_update_by_name}}</td>
-            <td>{{r.last_update_datetime}}</td>
+            <td>{{r.last_update_datetime | jalaliDatetime}}</td>
           </tr>
         </table>
       </mat-radio-group>

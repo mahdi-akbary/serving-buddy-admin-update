@@ -90,9 +90,9 @@
             <td>{{r.id}}</td>
             <td>AFN {{r.amount | number}}</td>
             <td class="lang-prs">AFN {{r.description}}</td>
-            <td>{{r.datetime}}</td>
+            <td>{{r.datetime | jalaliDatetime}}</td>
             <td>{{r.last_update_by_name}}</td>
-            <td>{{r.last_update_datetime}}</td>
+            <td>{{r.last_update_datetime | jalaliDatetime}}</td>
           </tr>
 
           <tr class="emphasize">

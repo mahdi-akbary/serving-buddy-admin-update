@@ -41,27 +41,27 @@
 
   <app-view-element fxFlex="50">
     <div class="app-label">Generation datetime</div>
-    <div class="app-value">{{data?.generation_datetime}}</div>
+    <div class="app-value">{{data?.generation_datetime | jalaliDatetime}}</div>
   </app-view-element>
 
   <app-view-element fxFlex="50">
     <div class="app-label">Seen by</div>
-    <div class="app-value">{{data?.seen_by_name || '-'}}</div>
+    <div class="app-value">{{data?.seen_by_name}}</div>
   </app-view-element>
 
   <app-view-element fxFlex="50">
     <div class="app-label">Seen datetime</div>
-    <div class="app-value">{{data?.seen_datetime || '-'}}</div>
+    <div class="app-value">{{data?.seen_datetime | jalaliDatetime}}</div>
   </app-view-element>
 
   <app-view-element fxFlex="50">
     <div class="app-label">Resolved by</div>
-    <div class="app-value">{{data?.resolved_by_name || '-'}}</div>
+    <div class="app-value">{{data?.resolved_by_name}}</div>
   </app-view-element>
 
   <app-view-element fxFlex="50">
     <div class="app-label">Resolved datetime</div>
-    <div class="app-value">{{data?.resolved_datetime}}</div>
+    <div class="app-value">{{data?.resolved_datetime | jalaliDatetime}}</div>
   </app-view-element>
 
 </div>
