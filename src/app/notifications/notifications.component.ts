@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IRawNotification} from './notifications.types';
+import {INotification} from './notifications.types';
 import {NotificationsService} from './notifications.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -20,7 +20,7 @@ export class NotificationsComponent implements OnInit {
   public records = [];
   public formData = {};
   public generationDate;
-  private currentNotification: IRawNotification;
+  private currentNotification: INotification;
 
   constructor(private notificationService: NotificationsService,
               private matSnackBar: MatSnackBar,
@@ -63,10 +63,10 @@ export class NotificationsComponent implements OnInit {
     this.form.reset();
   }
 
-  load(notificationId: string) {
+  load(notificationId: number) {
     this.notificationService
       .getNotification(notificationId)
-      .subscribe((notification: IRawNotification) => {
+      .subscribe((notification: INotification) => {
         this.currentNotification = notification;
         this.generationDate = new Date();
       }, error => {
@@ -75,21 +75,7 @@ export class NotificationsComponent implements OnInit {
       });
   }
 
-  changeStatus(notificationId: string, status: string) {
-    this.notificationService.changeStatus(notificationId, status)
-      .subscribe(() => {
-        this.submit(this.submit(this.form.value));
-      }, error => {
-        this.matSnackBar.open('ERROR: Failed to update notification status.');
-        console.error('ERROR: Failed to update notification status.', error);
-      });
-  }
-
-  resetViewNotification() {
-    this.currentNotification = undefined;
-  }
-
-  printNotification(notificationId: string) {
+  printNotification(notificationId: number) {
     window.open(
       `${environment.baseUrl.backend}print/notification/${this.currentNotification.id}`,
       'Notification',
@@ -100,7 +86,7 @@ export class NotificationsComponent implements OnInit {
   viewDialog(notificationId: number) {
     this.matDialog
       .open(ViewDialogComponent, {
-        width: '800px',
+        width: '600px',
         disableClose: true,
         data: notificationId
       })

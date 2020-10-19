@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from '../services/http.service';
 import {Observable} from 'rxjs';
-import {INotificationsInfo, IRawNotification} from './notifications.types';
+import {INotificationsInfo, INotification} from './notifications.types';
 import {HttpParams} from '@angular/common/http';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class NotificationsService {
     return this.httpService.get('/server/notifications/new/count');
   }
 
-  search(parameters): Observable<IRawNotification[]> {
+  search(parameters): Observable<INotification[]> {
     let params = new HttpParams();
     for (let p in parameters) {
       params = params.append(p, parameters[p]);
@@ -27,11 +27,11 @@ export class NotificationsService {
     });
   }
 
-  getNotification(notificationId: string): Observable<IRawNotification> {
+  getNotification(notificationId: number): Observable<INotification> {
     return this.httpService.get(`server/notifications/${notificationId}`);
   }
 
-  changeStatus(notificationId: string, status: string): Observable<void> {
+  changeStatus(notificationId: number, status: string): Observable<void> {
     return this.httpService.post('server/notifications/status', {
       notificationId: notificationId,
       status: status

@@ -1,4 +1,4 @@
-export interface IRawNotification {
+export interface INotification {
   id: number,
   usage_type: string;
   the_item_id: number;

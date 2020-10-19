@@ -1,1 +1,90 @@
-<p>view-dialog works!</p>
+<div class="dialog-header">
+  <h1 mat-dialog-title>View notification</h1>
+  <mat-icon mat-dialog-close matTooltip="close">close</mat-icon>
+</div>
+<div mat-dialog-content fxLayout="row wrap">
+
+  <app-view-element fxFlex="50">
+    <div class="app-label">ID</div>
+    <div class="app-value">{{data?.id}}</div>
+  </app-view-element>
+
+  <app-view-element fxFlex="50">
+    <div class="app-label">Usage type</div>
+    <div class="app-value">{{data?.usage_type}}</div>
+  </app-view-element>
+
+  <app-view-element fxFlex="50">
+    <div class="app-label">Item ID</div>
+    <div class="app-value">{{data?.the_item_id}}</div>
+  </app-view-element>
+
+  <app-view-element fxFlex="50">
+    <div class="app-label">Status</div>
+    <div class="app-value">{{data?.status}}</div>
+  </app-view-element>
+
+  <app-view-element fxFlex="50">
+    <div class="app-label">Item name (English)</div>
+    <div class="app-value">{{data?.the_item_name_english}}</div>
+  </app-view-element>
+
+  <app-view-element fxFlex="50">
+    <div class="app-label">Item name (Dari)</div>
+    <div class="app-value lang-prs">{{data?.the_item_name_dari}}</div>
+  </app-view-element>
+
+  <app-view-element fxFlex="50">
+    <div class="app-label">Quantity</div>
+    <div class="app-value">{{data?.quantity | number}}</div>
+  </app-view-element>
+
+  <app-view-element fxFlex="50">
+    <div class="app-label">Generation datetime</div>
+    <div class="app-value">{{data?.generation_datetime}}</div>
+  </app-view-element>
+
+  <app-view-element fxFlex="50">
+    <div class="app-label">Seen by</div>
+    <div class="app-value">{{data?.seen_by_name || '-'}}</div>
+  </app-view-element>
+
+  <app-view-element fxFlex="50">
+    <div class="app-label">Seen datetime</div>
+    <div class="app-value">{{data?.seen_datetime || '-'}}</div>
+  </app-view-element>
+
+  <app-view-element fxFlex="50">
+    <div class="app-label">Resolved by</div>
+    <div class="app-value">{{data?.resolved_by_name || '-'}}</div>
+  </app-view-element>
+
+  <app-view-element fxFlex="50">
+    <div class="app-label">Resolved datetime</div>
+    <div class="app-value">{{data?.resolved_datetime}}</div>
+  </app-view-element>
+
+</div>
+<div mat-dialog-actions class="action wide-action">
+
+  <button
+    *ngIf="data.status==='New'"
+    mat-stroked-button
+    color="primary"
+    type="button"
+    [disabled]="!data?.id"
+    (click)="changeStatus('Seen')"
+  >MARK AS SEEN
+  </button>
+
+  <button
+    *ngIf="data.status==='Seen'"
+    mat-stroked-button
+    color="primary"
+    type="button"
+    [disabled]="!data?.id"
+    (click)="changeStatus('Resolved')"
+  >MARK AS RESOLVED
+  </button>
+
+</div>
