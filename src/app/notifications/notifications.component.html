@@ -1,1 +1,109 @@
-<p>notifications works!</p>
+<div class="page-boundary" fxLayout="column">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>General actions</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form *ngIf="form" [formGroup]="form" (ngSubmit)="form.valid && submit(form.value)">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Start date time</mat-label>
+          <input matInput formControlName="start_datetime" type="text">
+          <mat-error *ngIf="form.get('start_datetime')?.errors?.required">
+            {{formValidationService.required.message()}}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>End date time</mat-label>
+          <input matInput formControlName="end_datetime" type="text">
+          <mat-error *ngIf="form.get('end_datetime')?.errors?.required">
+            {{formValidationService.required.message()}}
+          </mat-error>
+        </mat-form-field>
+
+        <div class="action wide-action">
+          <!--          <button-->
+          <!--            class="actionButton"-->
+          <!--            mat-stroked-button-->
+          <!--            type="button"-->
+          <!--          > PRINT-->
+          <!--          </button>-->
+          <button
+            color="warn"
+            class="actionButton"
+            mat-stroked-button
+            type="button"
+            (click)="reset()"
+          > RESET
+          </button>
+          <button
+            color="primary"
+            class="actionButton"
+            mat-stroked-button
+            type="button"
+            [disabled]="!this.form.valid"
+            (click)="submit(this.form.value)"
+          > SEARCH
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="not-first-row">
+    <mat-card-content>
+
+      <button
+        color="primary"
+        mat-stroked-button
+        type="button"
+        [disabled]="!this.chosenRecord"
+        (click)="viewDialog(this.chosenRecord)"
+      > View
+      </button>
+
+      <mat-radio-group [(ngModel)]="chosenRecord">
+        <table class="the-table">
+          <tr>
+            <th>Select</th>
+            <th>#</th>
+            <th>ID</th>
+            <th>Usage type</th>
+            <th>Item ID</th>
+            <th>Item name (English)</th>
+            <th>Item name (Dari)</th>
+            <th>Quantity</th>
+            <th>Status</th>
+            <th>Generation datetime</th>
+            <th>Seen by</th>
+            <th>Seen datetime</th>
+            <th>Resolved by</th>
+            <th>Resolved datetime</th>
+          </tr>
+
+          <tr *ngFor="let r of records; let i = index;">
+            <td>
+              <mat-radio-button [value]="r.id"></mat-radio-button>
+            </td>
+            <td>{{records.length - 1}}</td>
+            <td>{{r.id}}</td>
+            <td>{{r.usage_type}}</td>
+            <td>{{r.the_item_id}}</td>
+            <td>{{r.the_item_name_english}}</td>
+            <td class="lang-prs">{{r.the_item_name_dari}}</td>
+            <td>{{r.quantity}}</td>
+            <td>{{r.status}}</td>
+            <td>{{r.generation_datetime}}</td>
+            <td>{{r.seen_by_name}}</td>
+            <td>{{r.seen_datetime}}</td>
+            <td>{{r.resolved_by_name}}</td>
+            <td>{{r.resolved_datetime}}</td>
+          </tr>
+
+        </table>
+      </mat-radio-group>
+    </mat-card-content>
+  </mat-card>
+</div>
