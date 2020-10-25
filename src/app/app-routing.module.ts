@@ -1,51 +1,62 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
+import {LayoutComponent} from './layout/layout.component';
 
 const routes: Routes = [
   {
-    path: "",
-    redirectTo: "en",
-    pathMatch: "full",
+    path: '',
+    redirectTo: 'en',
+    pathMatch: 'full',
   },
   {
-    path: ":lang",
+    path: ':lang',
+    component: LayoutComponent,
     children: [
       {
-        path: "",
-        redirectTo: "orders-bills",
+        path: '',
+        redirectTo: 'orders-bills',
         pathMatch: 'full'
       },
       {
-        path: "orders-bills",
+        path: 'orders-bills',
         loadChildren: () => import('./orders-bills/orders-bills.module').then(m => m.OrdersBillsModule),
       },
       {
-        path: "providers",
+        path: 'providers',
         loadChildren: () => import('./providers/providers.module').then(m => m.ProvidersModule),
       },
       {
-        path: "expenses",
+        path: 'expenses',
         loadChildren: () => import('./expenses/expenses.module.js').then(m => m.ExpensesModule),
       },
       {
-        path: "stock",
+        path: 'stock',
         loadChildren: () => import('./stock/stock.module').then(m => m.StockModule),
       },
       {
-        path: "employees",
+        path: 'employees',
         loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule),
       },
       {
-        path: "reports",
+        path: 'reports',
         loadChildren: () => import('./reports/reports.module').then(m => m.ReportsModule),
       },
       {
-        path: "settings",
+        path: 'settings',
         loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
       },
       {
-        path: "notifications",
+        path: 'notifications',
         loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsModule),
+      }
+    ]
+  },
+  {
+    path: ':lang',
+    children: [
+      {
+        path: 'login',
+        loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
       }
     ]
   }

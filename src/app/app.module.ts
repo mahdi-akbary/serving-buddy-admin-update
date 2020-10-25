@@ -26,7 +26,7 @@ import {StaticDataService} from './services/static-data.service';
     LayoutComponent,
     ListOptionsComponent,
     BannerComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +50,7 @@ import {StaticDataService} from './services/static-data.service';
       deps: [],
       multi: true
     },
-    StaticDataService
+    StaticDataService,
   ],
   bootstrap: [AppComponent]
 })

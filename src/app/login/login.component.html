@@ -1,0 +1,20 @@
+<div class="main" fxLayout="row" fxLayoutAlign="space-around center">
+  <form *ngIf="form" [formGroup]="form" fxLayout="column" fxFlex="20">
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" type="text">
+      <mat-error *ngIf="form.get('username')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" type="password">
+      <mat-error *ngIf="form.get('password')?.errors?.required">
+        {{formValidationService.required.message()}}
+      </mat-error>
+    </mat-form-field>
+    <button mat-stroked-button color="primary">LOGIN</button>
+  </form>
+</div>
+<h1 class="footer">Serving Buddy, Admin</h1>
